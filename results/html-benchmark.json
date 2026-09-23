@@ -1,0 +1,150 @@
+{
+  "python": "3.12.3",
+  "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.39",
+  "git": "git version 2.43.0",
+  "fixture": "Deterministic timestamps 1700000000+i; two independent 80-line file-add series, even patches exact, odd patches edited; 6 or 250 commits per side",
+  "limitations": [
+    "synthetic warm-cache workloads, not real-world or cold-cache estimates",
+    "GNU time maximum RSS of CLI or one child; not aggregate concurrent memory",
+    "browser load includes navigation overhead; DOM counts after interaction; no browser peak-memory measurement"
+  ],
+  "generation": [
+    {
+      "name": "commits-12-run-1",
+      "commits": 12,
+      "seconds": 0.5764410139527172,
+      "peak_rss_kib": 19840,
+      "html_bytes": 20355
+    },
+    {
+      "name": "commits-12-run-2",
+      "commits": 12,
+      "seconds": 0.4549911820795387,
+      "peak_rss_kib": 19712,
+      "html_bytes": 20355
+    },
+    {
+      "name": "commits-12-run-3",
+      "commits": 12,
+      "seconds": 0.4563686540350318,
+      "peak_rss_kib": 19840,
+      "html_bytes": 20355
+    },
+    {
+      "name": "commits-500-run-1",
+      "commits": 500,
+      "seconds": 10.75726915197447,
+      "peak_rss_kib": 22916,
+      "html_bytes": 273269
+    },
+    {
+      "name": "commits-500-run-2",
+      "commits": 500,
+      "seconds": 23.74016482406296,
+      "peak_rss_kib": 22824,
+      "html_bytes": 273269
+    },
+    {
+      "name": "commits-500-run-3",
+      "commits": 500,
+      "seconds": 28.84381375904195,
+      "peak_rss_kib": 22904,
+      "html_bytes": 273269
+    }
+  ],
+  "browser": {
+    "result": "passed",
+    "browser": "145.0.7632.6",
+    "network": "offline context plus non-file route blocking; zero external requests",
+    "checks": [
+      "CLI JSON embedding parity",
+      "visible ordered statuses",
+      "exact duplicate group membership",
+      "candidate score and rank parity",
+      "evidence text and omission parity",
+      "filters retain warnings",
+      "keyboard selection, evidence and navigation",
+      "360px no horizontal overflow",
+      "hostile text inert"
+    ],
+    "measurements": [
+      {
+        "name": "commits-12-run-1",
+        "observed_peak_cards": 12,
+        "observed_peak_evidence_lines": 2,
+        "observed_peak_dom_nodes": 134,
+        "html_bytes": 20355,
+        "load_ms": 337.24305700000014,
+        "commits": 12,
+        "dom_nodes": 122,
+        "mounted_cards": 12,
+        "mounted_evidence_lines": 0
+      },
+      {
+        "name": "commits-12-run-2",
+        "observed_peak_cards": 12,
+        "observed_peak_evidence_lines": 2,
+        "observed_peak_dom_nodes": 134,
+        "html_bytes": 20355,
+        "load_ms": 360.1521870000006,
+        "commits": 12,
+        "dom_nodes": 122,
+        "mounted_cards": 12,
+        "mounted_evidence_lines": 0
+      },
+      {
+        "name": "commits-12-run-3",
+        "observed_peak_cards": 12,
+        "observed_peak_evidence_lines": 2,
+        "observed_peak_dom_nodes": 134,
+        "html_bytes": 20355,
+        "load_ms": 353.55499299999974,
+        "commits": 12,
+        "dom_nodes": 122,
+        "mounted_cards": 12,
+        "mounted_evidence_lines": 0
+      },
+      {
+        "name": "commits-500-run-1",
+        "observed_peak_cards": 100,
+        "observed_peak_evidence_lines": 2,
+        "observed_peak_dom_nodes": 520,
+        "html_bytes": 273269,
+        "load_ms": 309.1804800000009,
+        "commits": 500,
+        "dom_nodes": 508,
+        "mounted_cards": 100,
+        "mounted_evidence_lines": 0
+      },
+      {
+        "name": "commits-500-run-2",
+        "observed_peak_cards": 100,
+        "observed_peak_evidence_lines": 2,
+        "observed_peak_dom_nodes": 520,
+        "html_bytes": 273269,
+        "load_ms": 222.3123790000027,
+        "commits": 500,
+        "dom_nodes": 508,
+        "mounted_cards": 100,
+        "mounted_evidence_lines": 0
+      },
+      {
+        "name": "commits-500-run-3",
+        "observed_peak_cards": 100,
+        "observed_peak_evidence_lines": 2,
+        "observed_peak_dom_nodes": 520,
+        "html_bytes": 273269,
+        "load_ms": 249.05846100000053,
+        "commits": 500,
+        "dom_nodes": 508,
+        "mounted_cards": 100,
+        "mounted_evidence_lines": 0
+      }
+    ],
+    "limitations": [
+      "Chromium only",
+      "no screen-reader audit",
+      "browser load includes Playwright navigation overhead; warm local cache"
+    ]
+  }
+}

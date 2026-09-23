@@ -3,6 +3,8 @@ test_empty_repository (test_cli.AtlasIntegrationTests.test_empty_repository) ...
 test_graph_branches_tags_unicode_and_counts (test_cli.AtlasIntegrationTests.test_graph_branches_tags_unicode_and_counts) ... ok
 test_merge_topology_is_rendered (test_cli.AtlasIntegrationTests.test_merge_topology_is_rendered) ... ok
 test_non_repository_and_invalid_options (test_cli.AtlasIntegrationTests.test_non_repository_and_invalid_options) ... ok
+test_cli_parity_limits_and_repository_preservation (test_html.HtmlTests.test_cli_parity_limits_and_repository_preservation) ... ok
+test_lossless_embedding_and_hostile_data (test_html.HtmlTests.test_lossless_embedding_and_hostile_data) ... ok
 test_100_seeded_histories_with_independent_groups_plumbing_and_cherry (test_patches.PatchTests.test_100_seeded_histories_with_independent_groups_plumbing_and_cherry) ... ok
 test_actual_subprocess_deadline (test_patches.PatchTests.test_actual_subprocess_deadline) ... ok
 test_cli_cherry_pick_rebase_and_bare_install_use_case (test_patches.PatchTests.test_cli_cherry_pick_rebase_and_bare_install_use_case) ... ok
@@ -38,6 +40,6 @@ test_ties_top_five_threshold_evidence_and_limits (test_series.SeriesTests.test_t
 test_unusual_paths_hostile_config_terminal_escaping_and_unchanged_repository (test_series.SeriesTests.test_unusual_paths_hostile_config_terminal_escaping_and_unchanged_repository) ... ok
 
 ----------------------------------------------------------------------
-Ran 38 tests in 138.160s
+Ran 40 tests in 284.551s
 
 OK

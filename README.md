@@ -295,3 +295,14 @@ makes no claim to a new ancestry algorithm. Its definitions follow Git's
 [NUL-delimited worktree porcelain](https://git-scm.com/docs/git-worktree).
 The offline process boundary uses Git's documented
 [environment controls](https://git-scm.com/docs/git).
+
+### Offline HTML series review
+
+```sh
+git-branch-atlas --repo /path/to/repo series OLD_BASE OLD_TIP NEW_BASE NEW_TIP --html > review.html
+```
+
+Open the self-contained file directly in your browser. Filter ordered commits,
+navigate duplicate patch-ID groups, and expand ranked candidate evidence. Incomplete
+searches and ambiguity remain explicit. The file embeds repository content; filters
+are not redaction. See [HTML review setup, controls, bounds and validation](docs/html-review.md).

@@ -13,6 +13,7 @@ from typing import Sequence
 from .git import GitError, run_git, safe, repository_root
 from .patches import patch_compare, format_patch_report
 from .series import series_compare, format_series_report
+from .html_report import format_series_html
 from .reports import compare, history_state, render, resolve, summary, validate_history
 
 
@@ -118,6 +119,7 @@ def parser() -> argparse.ArgumentParser:
     result.add_argument("command", nargs="?", default="graph", choices=("graph", "summary", "compare", "patches", "series"))
     result.add_argument("revisions", nargs="*", metavar="REV")
     result.add_argument("--json", action="store_true", help="versioned JSON for summary, compare, patches or series")
+    result.add_argument("--html", action="store_true", help="series: self-contained interactive HTML on stdout")
     result.add_argument("--repo", default=".", metavar="PATH", help="repository or path inside it (default: current directory)")
     result.add_argument("--all", action="store_true", help="show commits from all refs, not only HEAD history")
     result.add_argument("--max-count", type=int, default=30, metavar="N", help="maximum graph commits or commits per comparison side (default: 30)")
@@ -137,6 +139,8 @@ def parser() -> argparse.ArgumentParser:
 
 def main(argv: Sequence[str] | None = None) -> int:
     args = parser().parse_intermixed_args(argv)
+    if args.html and (args.command != "series" or args.json):
+        parser().error("--html requires series and cannot be combined with --json")
     if args.max_count < 1:
         parser().error("--max-count must be at least 1")
     if args.command in ("compare", "patches") and len(args.revisions) != 2:
@@ -155,7 +159,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             report = series_compare(Path(args.repo).expanduser().absolute(), *args.revisions,
                                     args.max_count, args.max_diff_bytes, args.timeout,
                                     args.max_comparisons, args.threshold)
-            print(format_series_report(report, args.json, args.max_output_bytes))
+            print(format_series_html(report, args.max_output_bytes) if args.html else
+                  format_series_report(report, args.json, args.max_output_bytes))
             return 0 if report["complete"] else 1
         if args.command == "patches":
             report = patch_compare(Path(args.repo).expanduser().absolute(), *args.revisions,

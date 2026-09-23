@@ -166,3 +166,10 @@ engineering choice, not calibrated probabilities or a semantic benchmark.
 
 See [series validation](series-validation.md) for reproducible checks, observed
 range-diff differences and measured workloads.
+
+## Interactive HTML
+
+`series ... --html` renders the same report as a self-contained offline HTML file.
+The JSON schema and comparison algorithm are unchanged. See
+[HTML review](html-review.md) for controls, byte/DOM limits, confidentiality and
+reproducible browser checks. `--html` and `--json` are mutually exclusive.

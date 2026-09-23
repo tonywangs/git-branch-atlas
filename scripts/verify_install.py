@@ -10,6 +10,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import shutil
 import subprocess
@@ -145,13 +146,18 @@ def main():
         assert series['left']['commits'][1]['candidates'][0]['score'] == 7333
         assert 'heuristic_candidates' in run([atlas, '--repo', repo, 'series',
                                              'old-base', 'before', 'main', 'topic'])
+        html = run([atlas, '--repo', repo, 'series', 'old-base', 'before', 'main', 'topic', '--html'])
+        embedded = re.search(r'<script id="report-data" type="application/json">(.*?)</script>', html, re.S)
+        assert embedded and json.loads(embedded[1]) == series
+        assert "default-src 'none'" in html and 'Inspect bounded evidence' in html
         print(json.dumps({'installed_version': run([atlas, '--version']),
                           'python': run([python, '--version']), 'git': git('--version'),
                           'checks': ['isolated installed import', 'console entry point', 'two branches',
                                      'two worktrees', 'locked worktree', 'upstream +1/-1',
                                      'comparison unique counts and merge base', 'legacy graph',
                                      'offline cherry-pick patch group JSON and terminal',
-                                     'offline before/after rebase series: exact group and edited candidate, JSON and terminal'],
+                                     'offline before/after rebase series: exact group and edited candidate, JSON and terminal',
+                                     'installed offline HTML embeds identical rebase JSON and bundled viewer'],
                           'result': 'passed'}, indent=2))
 
 

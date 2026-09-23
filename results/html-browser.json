@@ -1,0 +1,109 @@
+{
+  "result": "passed",
+  "browser": "145.0.7632.6",
+  "network": "offline context plus non-file route blocking; zero external requests",
+  "checks": [
+    "CLI JSON embedding parity",
+    "visible ordered statuses",
+    "exact duplicate group membership",
+    "candidate score and rank parity",
+    "evidence text and omission parity",
+    "filters retain warnings",
+    "keyboard selection, evidence and navigation",
+    "360px no horizontal overflow",
+    "hostile text inert"
+  ],
+  "measurements": [
+    {
+      "name": "review",
+      "observed_peak_cards": 8,
+      "observed_peak_evidence_lines": 4,
+      "observed_peak_dom_nodes": 126,
+      "html_bytes": 19427,
+      "load_ms": 521.2185079999999,
+      "commits": 8,
+      "dom_nodes": 106,
+      "mounted_cards": 8,
+      "mounted_evidence_lines": 0
+    },
+    {
+      "name": "exhausted",
+      "observed_peak_cards": 8,
+      "observed_peak_evidence_lines": 0,
+      "observed_peak_dom_nodes": 109,
+      "html_bytes": 16462,
+      "load_ms": 402.42232499999955,
+      "commits": 8,
+      "dom_nodes": 109,
+      "mounted_cards": 8,
+      "mounted_evidence_lines": 0
+    },
+    {
+      "name": "sampled",
+      "observed_peak_cards": 2,
+      "observed_peak_evidence_lines": 0,
+      "observed_peak_dom_nodes": 87,
+      "html_bytes": 14859,
+      "load_ms": 482.5611150000004,
+      "commits": 2,
+      "dom_nodes": 87,
+      "mounted_cards": 2,
+      "mounted_evidence_lines": 0
+    },
+    {
+      "name": "bytes",
+      "observed_peak_cards": 8,
+      "observed_peak_evidence_lines": 0,
+      "observed_peak_dom_nodes": 106,
+      "html_bytes": 15571,
+      "load_ms": 295.60589900000195,
+      "commits": 8,
+      "dom_nodes": 106,
+      "mounted_cards": 8,
+      "mounted_evidence_lines": 0
+    },
+    {
+      "name": "bounded",
+      "observed_peak_cards": 8,
+      "observed_peak_evidence_lines": 18,
+      "observed_peak_dom_nodes": 140,
+      "html_bytes": 62432,
+      "load_ms": 404.78665399999954,
+      "commits": 8,
+      "dom_nodes": 107,
+      "mounted_cards": 8,
+      "mounted_evidence_lines": 0
+    },
+    {
+      "name": "empty",
+      "observed_peak_cards": 0,
+      "observed_peak_evidence_lines": 0,
+      "observed_peak_dom_nodes": 70,
+      "html_bytes": 14275,
+      "load_ms": 310.6190969999989,
+      "commits": 0,
+      "dom_nodes": 70,
+      "mounted_cards": 0,
+      "mounted_evidence_lines": 0
+    },
+    {
+      "name": "hostile",
+      "observed_peak_cards": 8,
+      "observed_peak_evidence_lines": 4,
+      "observed_peak_dom_nodes": 126,
+      "html_bytes": 19668,
+      "load_ms": 310.8482340000046,
+      "commits": 8,
+      "dom_nodes": 106,
+      "mounted_cards": 8,
+      "mounted_evidence_lines": 0
+    }
+  ],
+  "limitations": [
+    "Chromium only",
+    "no screen-reader audit",
+    "browser load includes Playwright navigation overhead; warm local cache"
+  ],
+  "fixture": "Real Git: changed base, reordered exact patch, revert/reapply duplicate, competing edited patches, binary exclusion, exhausted comparisons/bytes/commits; extra hostile metadata serialization",
+  "repository_unchanged": true
+}
