@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import Sequence
 
 from .git import GitError, run_git, safe, repository_root
+from .patches import patch_compare, format_patch_report
 from .reports import compare, history_state, render, resolve, summary, validate_history
 
 
@@ -113,12 +114,18 @@ def parser() -> argparse.ArgumentParser:
         prog="git-branch-atlas",
         description="Visualize Git branches and commit history at a glance.",
     )
-    result.add_argument("command", nargs="?", default="graph", choices=("graph", "summary", "compare"))
+    result.add_argument("command", nargs="?", default="graph", choices=("graph", "summary", "compare", "patches"))
     result.add_argument("revisions", nargs="*", metavar="REV")
-    result.add_argument("--json", action="store_true", help="versioned JSON for summary or compare")
+    result.add_argument("--json", action="store_true", help="versioned JSON for summary, compare or patches")
     result.add_argument("--repo", default=".", metavar="PATH", help="repository or path inside it (default: current directory)")
     result.add_argument("--all", action="store_true", help="show commits from all refs, not only HEAD history")
     result.add_argument("--max-count", type=int, default=30, metavar="N", help="maximum graph commits or unique commits per comparison side (default: 30)")
+    result.add_argument("--max-diff-bytes", type=int, default=32 * 1024 * 1024,
+                        help="patches: total streamed raw diff, blob and patch bytes (default: 32 MiB)")
+    result.add_argument("--timeout", type=float, default=30,
+                        help="patches: cumulative Git runtime budget in seconds (default: 30)")
+    result.add_argument("--max-output-bytes", type=int, default=2 * 1024 * 1024,
+                        help="patches: maximum report bytes (default: 2 MiB)")
     result.add_argument("--base", metavar="REV", help="revision used for branch ahead/behind counts")
     result.add_argument("--no-color", action="store_true", help="disable colored output")
     result.add_argument("--version", action="version", version="%(prog)s 0.2.0")
@@ -129,16 +136,21 @@ def main(argv: Sequence[str] | None = None) -> int:
     args = parser().parse_intermixed_args(argv)
     if args.max_count < 1:
         parser().error("--max-count must be at least 1")
-    if args.command == "compare" and len(args.revisions) != 2:
-        parser().error("compare requires exactly two revisions")
-    if args.command != "compare" and args.revisions:
-        parser().error("revisions are only accepted by compare")
+    if args.command in ("compare", "patches") and len(args.revisions) != 2:
+        parser().error("compare/patches requires exactly two revisions")
+    if args.command not in ("compare", "patches") and args.revisions:
+        parser().error("revisions are only accepted by compare or patches")
     if args.command == "graph" and args.json:
-        parser().error("--json requires summary or compare")
+        parser().error("--json requires summary, compare or patches")
     if args.command != "graph" and (args.base or args.all):
         parser().error("--base and --all apply only to graph")
     color = not args.no_color and sys.stdout.isatty() and os.environ.get("NO_COLOR") is None
     try:
+        if args.command == "patches":
+            report = patch_compare(Path(args.repo).expanduser().absolute(), *args.revisions,
+                                   args.max_count, args.max_diff_bytes, args.timeout)
+            print(format_patch_report(report, args.json, args.max_output_bytes))
+            return 0 if report['complete'] else 1
         root = repository_root(Path(args.repo).expanduser())
         if args.command == "summary":
             report = summary(root)

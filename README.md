@@ -1,7 +1,7 @@
 # Git Branch Atlas
 
 A read-only terminal map of a local Git repository, with branch/upstream summaries,
-linked-worktree locations, and explicit two-commit ancestry comparisons. Uses
+linked-worktree locations, ancestry comparisons, and bounded stable patch-ID groups. Uses
 Python 3.10+ and Git 2.43+; no third-party runtime dependencies. Tested here on
 Python 3.12.3 and Git 2.43.0 on Linux. It does not contact remotes.
 
@@ -27,8 +27,9 @@ git-branch-atlas compare main topic --max-count 20 --json
 Without installing, replace `git-branch-atlas` with `python3 -m git_branch_atlas`
 from this checkout. Options can go before or after the command and revisions.
 `--repo` accepts a repository, an interior directory, a bare repository, or a linked
-worktree. `--all` and `--base` apply only to graph. `--json` applies to summary and
-compare. Errors go to stderr with exit status 2; successful reports exit 0.
+worktree. `--all` and `--base` apply only to graph. `--json` applies to summary,
+compare, and patches. Errors go to stderr with exit status 2; complete reports exit 0.
+Patch comparison returns exit 1 for a valid but incomplete report.
 
 ## Reading reports
 
@@ -91,7 +92,59 @@ Summary should report two worktrees, a locked topic worktree, and `topic` at
 one merge base. [The installation check](scripts/verify_install.py) executes this
 scenario using an installed console command outside the source checkout.
 
+## Offline patch comparison
+
+```console
+git-branch-atlas patches main topic
+git-branch-atlas patches main topic --json --max-count 500 --timeout 60
+```
+
+This compares stable patch IDs of nonmerge commits unique to each reference.
+Matches are groups containing all observed commit IDs on each side, so duplicates
+remain visible. Unmatched, excluded and unclassified commits are separate.
+**Matching patches do not prove semantic equivalence, current branch contents,
+safe cherry-picking or conflict-free merging.** Whitespace is normalized; reverted
+and reapplied patches can still match. Shared ancestors are outside the search.
+
+Try a real cherry-pick offline after installation:
+
+```sh
+mkdir patch-example
+cd patch-example
+git init -b main
+git config user.name 'Atlas Demo'
+git config user.email 'demo@example.invalid'
+git commit --allow-empty -m Root
+git branch topic
+printf 'useful change\n' > feature.txt
+git add feature.txt
+git commit -m Feature
+git switch topic
+git commit --allow-empty -m 'Different base'
+git cherry-pick main
+git-branch-atlas patches main topic --json
+```
+
+Expect one matching group with distinct full commit IDs and an excluded empty
+commit on the right. This console workflow is exercised by the isolated installer.
+Binary changes (NUL in either changed blob), executable-bit transitions, symlinks,
+submodules, empty commits and merges are explicitly excluded. Renames are treated
+as delete/add; regular text root commits are supported. No diff/textconv helpers
+or lazy downloads run.
+
+Defaults bound candidates to 30 per side, cumulative raw diff/blob/patch reads to
+32 MiB, Git runtime to 30 seconds, and output to 2 MiB. Use `--max-count`,
+`--max-diff-bytes`, `--timeout`, and `--max-output-bytes` to configure those limits.
+Truncation, missing objects and shallow history never produce definitive unmatched
+classifications: read `complete` and both `enumeration_complete` flags. An output
+that exceeds its cap is rejected before anything is printed. See the full
+[patch scope, deterministic settings, limits and JSON v1 contract](docs/patches-v1.md).
+The pipe implementation is currently validated on Linux/POSIX.
+
 ## Completeness, safety, and limits
+
+The following describes graph, summary and ancestry compare; patches has the
+separate bounded contract linked above.
 
 - An unborn repository has an explicit `unborn` HEAD and no local branches yet.
   Summary and graph work; comparison requires actual commits. With `--all`, graph
@@ -139,6 +192,7 @@ See [JSON v1](docs/json-v1.md) for the machine-readable contract.
 python3 -m unittest discover -s tests -v
 python3 scripts/verify_install.py
 python3 scripts/benchmark.py --commits 5000 --branches 100 --repeat 3
+python3 scripts/benchmark_patches.py --commits 250 --repeat 3
 python3 scripts/check_publication.py
 ```
 
@@ -168,6 +222,16 @@ times. It uses empty trees, a 4,901-commit linear trunk and 99 one-commit topic
 branches. It measures sequential warm-cache execution; it is not a cold-cache or
 real-world repository performance claim. Rerunning prints fresh measurements
 without replacing the recorded result unless `--output PATH` is given.
+
+Patch tests additionally cover **100 histories with seeds 0..99**, independently
+specified many-to-many groups, direct stable patch-ID plumbing and `git cherry`.
+Targeted cases exercise real cherry-pick/rebase, revert/reapply, whitespace, roots,
+renames, empty commits, merges, binary/special files, unusual byte paths, SHA-256,
+hostile configuration, missing objects, shallow history and resource exhaustion.
+[Patch measurements](results/patch-benchmark.json) record actual CLI elapsed time,
+GNU time peak RSS, output bytes and limit-exhaustion outcomes. These use a fixed
+fast-import workload and warm caches; peak RSS is the maximum for the CLI or an
+individual child, not their combined concurrent memory footprint.
 
 ## Existing foundations
 

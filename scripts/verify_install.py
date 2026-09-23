@@ -99,11 +99,27 @@ def main():
         assert len(comparison['merge_bases']) == 1
         graph = run([atlas, '--repo', repo, '--all', '--no-color'])
         assert 'Main' in graph and 'Topic' in graph
+        # Offline cherry-pick case: the console runs in an unrelated working directory.
+        (repo / 'feature.txt').write_text('useful change\n')
+        git('add', 'feature.txt')
+        git('commit', '-m', 'Feature')
+        original = git('rev-parse', 'HEAD')
+        run(['git', '-C', linked, 'cherry-pick', original])
+        copied = run(['git', '-C', linked, 'rev-parse', 'HEAD'])
+        env.update(GIT_ALLOW_PROTOCOL='', GIT_NO_LAZY_FETCH='1',
+                   http_proxy='http://127.0.0.1:9', https_proxy='http://127.0.0.1:9')
+        patches = json.loads(run([atlas, '--repo', repo, 'patches', 'main', 'topic', '--json']))
+        assert patches['complete']
+        assert len(patches['matches']) == 1
+        assert patches['matches'][0]['left'] == [original]
+        assert patches['matches'][0]['right'] == [copied]
+        assert 'Matching groups: 1' in run([atlas, '--repo', repo, 'patches', 'main', 'topic'])
         print(json.dumps({'installed_version': run([atlas, '--version']),
                           'python': run([python, '--version']), 'git': git('--version'),
                           'checks': ['isolated installed import', 'console entry point', 'two branches',
                                      'two worktrees', 'locked worktree', 'upstream +1/-1',
-                                     'comparison unique counts and merge base', 'legacy graph'],
+                                     'comparison unique counts and merge base', 'legacy graph',
+                                     'offline cherry-pick patch group JSON and terminal'],
                           'result': 'passed'}, indent=2))
 
 

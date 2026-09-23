@@ -3,6 +3,15 @@ test_empty_repository (test_cli.AtlasIntegrationTests.test_empty_repository) ...
 test_graph_branches_tags_unicode_and_counts (test_cli.AtlasIntegrationTests.test_graph_branches_tags_unicode_and_counts) ... ok
 test_merge_topology_is_rendered (test_cli.AtlasIntegrationTests.test_merge_topology_is_rendered) ... ok
 test_non_repository_and_invalid_options (test_cli.AtlasIntegrationTests.test_non_repository_and_invalid_options) ... ok
+test_100_seeded_histories_with_independent_groups_plumbing_and_cherry (test_patches.PatchTests.test_100_seeded_histories_with_independent_groups_plumbing_and_cherry) ... ok
+test_actual_subprocess_deadline (test_patches.PatchTests.test_actual_subprocess_deadline) ... ok
+test_cli_cherry_pick_rebase_and_bare_install_use_case (test_patches.PatchTests.test_cli_cherry_pick_rebase_and_bare_install_use_case) ... ok
+test_hostile_config_attributes_unusual_paths_and_preservation (test_patches.PatchTests.test_hostile_config_attributes_unusual_paths_and_preservation) ... ok
+test_limits_never_imply_unmatched (test_patches.PatchTests.test_limits_never_imply_unmatched) ... ok
+test_missing_blobs_ancestors_shallow_and_offline_transport (test_patches.PatchTests.test_missing_blobs_ancestors_shallow_and_offline_transport) ... ok
+test_revert_reapply_does_not_describe_current_contents (test_patches.PatchTests.test_revert_reapply_does_not_describe_current_contents) ... ok
+test_roots_renames_modes_binary_symlink_submodule_empty_merge (test_patches.PatchTests.test_roots_renames_modes_binary_symlink_submodule_empty_merge) ... ok
+test_sha256_and_partial_matching_groups (test_patches.PatchTests.test_sha256_and_partial_matching_groups) ... ok
 test_ambiguity_limits_controls_and_invalid_arguments (test_reports.ReportsTests.test_ambiguity_limits_controls_and_invalid_arguments) ... ok
 test_ancestry_oracle_named_topologies_and_seeded_dags (test_reports.ReportsTests.test_ancestry_oracle_named_topologies_and_seeded_dags) ... ok
 test_caller_git_environment_does_not_override_repo (test_reports.ReportsTests.test_caller_git_environment_does_not_override_repo) ... ok
@@ -19,6 +28,6 @@ test_summary_upstreams_worktrees_and_preservation (test_reports.ReportsTests.tes
 test_unborn_bare_detached_and_unrelated (test_reports.ReportsTests.test_unborn_bare_detached_and_unrelated) ... ok
 
 ----------------------------------------------------------------------
-Ran 19 tests in 12.843s
+Ran 28 tests in 64.948s
 
 OK

@@ -10,7 +10,8 @@
     "locked worktree",
     "upstream +1/-1",
     "comparison unique counts and merge base",
-    "legacy graph"
+    "legacy graph",
+    "offline cherry-pick patch group JSON and terminal"
   ],
   "result": "passed"
 }

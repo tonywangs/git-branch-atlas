@@ -69,3 +69,6 @@ contract. They contain every unique commit when `truncated` is false.
 integer. Identical tips yield zero unique counts and their own ID as the single
 merge base. Ancestor/descendant comparisons yield zero on the ancestor side.
 SHA-256 repositories use 64-character IDs; do not assume IDs are always 40 characters.
+
+The `patches` command has a separate [schema-v1 contract](patches-v1.md), identified
+by `kind: "patches"`, with explicit incomplete and excluded classifications.
