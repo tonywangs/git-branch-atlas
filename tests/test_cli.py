@@ -9,12 +9,15 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).parents[1]
+FIXTURE_ENV = {k: v for k, v in os.environ.items() if not k.startswith('GIT_')}
+FIXTURE_ENV.update(GIT_CONFIG_GLOBAL=os.devnull, GIT_CONFIG_NOSYSTEM='1')
 
 
 def git(repo: Path, *args: str) -> str:
     result = subprocess.run(
         ["git", "-C", str(repo), *args],
         check=True,
+        env=FIXTURE_ENV,
         text=True,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,

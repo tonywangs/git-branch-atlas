@@ -1,0 +1,43 @@
+{
+  "fixture": {
+    "commits": 5000,
+    "branches": 100,
+    "trunk_commits": 4901,
+    "generator": "linear trunk plus one commit per topic, fork spacing 37; empty trees",
+    "fast_import_sha256": "8c30182b3c2b75c0d1210571c8672f3ae36e9c201264f5885467b9603088664e",
+    "main_oid": "b34f9efe31be053a4ea947f172599d1068865a49"
+  },
+  "python": "3.12.3",
+  "git": "git version 2.43.0",
+  "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.39",
+  "timing": "wall-clock, full subprocess including Python startup; sequential warm-cache runs; no cache flushing",
+  "samples": {
+    "summary_json": {
+      "seconds": [
+        3.9892293959856033,
+        3.9217590470798314,
+        4.148008786141872
+      ],
+      "median_seconds": 3.9892293959856033,
+      "last_stdout_bytes": 46215
+    },
+    "compare_json": {
+      "seconds": [
+        0.33600233611650765,
+        0.34013533708639443,
+        0.33530046604573727
+      ],
+      "median_seconds": 0.33600233611650765,
+      "last_stdout_bytes": 4376
+    },
+    "graph": {
+      "seconds": [
+        3.4371576129924506,
+        3.3970393429044634,
+        3.3782813160214573
+      ],
+      "median_seconds": 3.3970393429044634,
+      "last_stdout_bytes": 7392
+    }
+  }
+}
