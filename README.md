@@ -1,7 +1,7 @@
 # Git Branch Atlas
 
 A read-only terminal map of a local Git repository, with branch/upstream summaries,
-linked-worktree locations, ancestry comparisons, and bounded stable patch-ID groups. Uses
+linked-worktree locations, ancestry comparisons, and bounded patch-series review with stable patch-ID groups and ranked edited-patch candidates. Uses
 Python 3.10+ and Git 2.43+; no third-party runtime dependencies. Tested here on
 Python 3.12.3 and Git 2.43.0 on Linux. It does not contact remotes.
 
@@ -28,8 +28,8 @@ Without installing, replace `git-branch-atlas` with `python3 -m git_branch_atlas
 from this checkout. Options can go before or after the command and revisions.
 `--repo` accepts a repository, an interior directory, a bare repository, or a linked
 worktree. `--all` and `--base` apply only to graph. `--json` applies to summary,
-compare, and patches. Errors go to stderr with exit status 2; complete reports exit 0.
-Patch comparison returns exit 1 for a valid but incomplete report.
+compare, patches, and series. Errors go to stderr with exit status 2; complete reports exit 0.
+Patch and series comparison return exit 1 for a valid but incomplete report.
 
 ## Reading reports
 
@@ -141,10 +141,60 @@ that exceeds its cap is rejected before anything is printed. See the full
 [patch scope, deterministic settings, limits and JSON v1 contract](docs/patches-v1.md).
 The pipe implementation is currently validated on Linux/POSIX.
 
+## Before/after rebase review
+
+Use four explicit endpoints to review two versions of a patch series:
+
+```console
+git-branch-atlas series old-base before main topic
+git-branch-atlas series old-base before main topic --json --max-comparisons 10000
+```
+
+Exact patch-ID groups preserve duplicates. Edited-patch candidates have integer
+scores, ranks, ambiguity flags and bounded normalized patch-difference evidence.
+No pairing is forced. Messages do not affect these scores. **Similarity does not
+establish semantic equivalence or safe cherry-picking.**
+
+A complete offline example after installation (run in a new temporary directory):
+
+```sh
+mkdir series-example
+cd series-example
+git init -b main
+git config user.name 'Atlas Demo'
+git config user.email 'demo@example.invalid'
+git commit --allow-empty -m Root
+git branch old-base
+git switch -c topic
+printf 'exact change\n' > exact.txt
+git add exact.txt
+git commit -m Exact
+printf 'alpha\nbeta\nold\n' > edited.txt
+git add edited.txt
+git commit -m Edited
+git branch before
+git switch main
+printf 'new base\n' > base.txt
+git add base.txt
+git commit -m 'Advance base'
+git rebase --onto main old-base topic
+printf 'alpha\nbeta\nnew\n' > edited.txt
+git add edited.txt
+git commit --amend --no-edit
+git-branch-atlas series old-base before main topic --json
+```
+
+Expect one exact group and one edited candidate scoring 7333/10000. The isolated
+installation check executes this workflow with network transports disabled during
+application use. See [series v1 semantics and limits](docs/series-v1.md) and
+[validation evidence](docs/series-validation.md). Splits, squashes and unsupported
+file types remain outside automatic correspondence. Incomplete searches never
+claim definitive absence; read `complete`, warnings, and commit statuses.
+
 ## Completeness, safety, and limits
 
-The following describes graph, summary and ancestry compare; patches has the
-separate bounded contract linked above.
+The following describes graph, summary and ancestry compare; patches and series have
+separate bounded contracts linked above.
 
 - An unborn repository has an explicit `unborn` HEAD and no local branches yet.
   Summary and graph work; comparison requires actual commits. With `--all`, graph
@@ -193,6 +243,8 @@ python3 -m unittest discover -s tests -v
 python3 scripts/verify_install.py
 python3 scripts/benchmark.py --commits 5000 --branches 100 --repeat 3
 python3 scripts/benchmark_patches.py --commits 250 --repeat 3
+python3 scripts/benchmark_series.py --commits 250 --repeat 3
+python3 scripts/compare_range_diff.py
 python3 scripts/check_publication.py
 ```
 

@@ -1,0 +1,159 @@
+{
+  "python": "3.12.3",
+  "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.39",
+  "git": "git version 2.43.0",
+  "commits_per_side": 250,
+  "fixture_seed": "deterministic fast-import, timestamps 1700000000+i",
+  "fixture": "two independent series adding 80-line files; even patches identical, odd patches edit one line; distinct messages",
+  "limitations": [
+    "synthetic sequential warm-cache local history",
+    "GNU time maximum RSS of CLI or an individual child, not summed concurrent process memory",
+    "no cold-cache or real-world performance claim"
+  ],
+  "measurements": [
+    {
+      "case": "complete",
+      "repetition": 1,
+      "seconds": 11.548389276955277,
+      "peak_rss_kib": 19984,
+      "stdout_bytes": 488168,
+      "stderr_bytes": 0,
+      "exit_code": 0,
+      "matching_groups": 125,
+      "inspection_bytes_read": 1232750,
+      "comparison_count": 15625
+    },
+    {
+      "case": "complete",
+      "repetition": 2,
+      "seconds": 11.894263479160145,
+      "peak_rss_kib": 20192,
+      "stdout_bytes": 488168,
+      "stderr_bytes": 0,
+      "exit_code": 0,
+      "matching_groups": 125,
+      "inspection_bytes_read": 1232750,
+      "comparison_count": 15625
+    },
+    {
+      "case": "complete",
+      "repetition": 3,
+      "seconds": 11.15404577110894,
+      "peak_rss_kib": 20196,
+      "stdout_bytes": 488168,
+      "stderr_bytes": 0,
+      "exit_code": 0,
+      "matching_groups": 125,
+      "inspection_bytes_read": 1232750,
+      "comparison_count": 15625
+    },
+    {
+      "case": "commit_limit",
+      "repetition": 1,
+      "seconds": 5.721812641015276,
+      "peak_rss_kib": 18132,
+      "stdout_bytes": 246177,
+      "stderr_bytes": 0,
+      "exit_code": 1,
+      "matching_groups": 62,
+      "inspection_bytes_read": 616384,
+      "comparison_count": 3969
+    },
+    {
+      "case": "commit_limit",
+      "repetition": 2,
+      "seconds": 5.329374541062862,
+      "peak_rss_kib": 18048,
+      "stdout_bytes": 246177,
+      "stderr_bytes": 0,
+      "exit_code": 1,
+      "matching_groups": 62,
+      "inspection_bytes_read": 616384,
+      "comparison_count": 3969
+    },
+    {
+      "case": "commit_limit",
+      "repetition": 3,
+      "seconds": 5.381678754929453,
+      "peak_rss_kib": 18176,
+      "stdout_bytes": 246177,
+      "stderr_bytes": 0,
+      "exit_code": 1,
+      "matching_groups": 62,
+      "inspection_bytes_read": 616384,
+      "comparison_count": 3969
+    },
+    {
+      "case": "byte_limit",
+      "repetition": 1,
+      "seconds": 0.29782180208712816,
+      "peak_rss_kib": 17024,
+      "stdout_bytes": 119986,
+      "stderr_bytes": 0,
+      "exit_code": 1,
+      "matching_groups": 0,
+      "inspection_bytes_read": 4097,
+      "comparison_count": 0
+    },
+    {
+      "case": "byte_limit",
+      "repetition": 2,
+      "seconds": 0.24702726094983518,
+      "peak_rss_kib": 17024,
+      "stdout_bytes": 119986,
+      "stderr_bytes": 0,
+      "exit_code": 1,
+      "matching_groups": 0,
+      "inspection_bytes_read": 4097,
+      "comparison_count": 0
+    },
+    {
+      "case": "byte_limit",
+      "repetition": 3,
+      "seconds": 0.23955923691391945,
+      "peak_rss_kib": 17152,
+      "stdout_bytes": 119986,
+      "stderr_bytes": 0,
+      "exit_code": 1,
+      "matching_groups": 0,
+      "inspection_bytes_read": 4097,
+      "comparison_count": 0
+    },
+    {
+      "case": "comparison_limit",
+      "repetition": 1,
+      "seconds": 10.700725618982688,
+      "peak_rss_kib": 17792,
+      "stdout_bytes": 207462,
+      "stderr_bytes": 0,
+      "exit_code": 1,
+      "matching_groups": 125,
+      "inspection_bytes_read": 1232750,
+      "comparison_count": 1
+    },
+    {
+      "case": "comparison_limit",
+      "repetition": 2,
+      "seconds": 11.472047087037936,
+      "peak_rss_kib": 17920,
+      "stdout_bytes": 207462,
+      "stderr_bytes": 0,
+      "exit_code": 1,
+      "matching_groups": 125,
+      "inspection_bytes_read": 1232750,
+      "comparison_count": 1
+    },
+    {
+      "case": "comparison_limit",
+      "repetition": 3,
+      "seconds": 10.550091505981982,
+      "peak_rss_kib": 18048,
+      "stdout_bytes": 207462,
+      "stderr_bytes": 0,
+      "exit_code": 1,
+      "matching_groups": 125,
+      "inspection_bytes_read": 1232750,
+      "comparison_count": 1
+    }
+  ]
+}

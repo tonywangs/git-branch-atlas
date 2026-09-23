@@ -97,6 +97,43 @@ class Budget:
                 return bytes(streams[0])
 
 
+def inspect_patch(budget, oid, max_bytes):
+    """Return exclusion or stable ID, canonical diff and raw changed paths."""
+    raw = budget.run(['diff-tree', '--root', '--no-commit-id', '-r', '--raw', '-z',
+                      '--no-renames', '--no-abbrev', '--ignore-submodules=none', oid, '--'],
+                     inspection=True, cap=max_bytes)
+    if not raw:
+        return 'empty', None, None, None
+    fields = raw.split(b'\0')
+    blobs = set()
+    reason = None
+    for header in fields[:-1:2]:
+        oldmode, newmode, old, new, status = header.split()
+        oldmode = oldmode.lstrip(b':')
+        modes = {oldmode, newmode} - {b'000000'}
+        if not modes <= {b'100644', b'100755'}:
+            reason = 'symlink, submodule, or unsupported file mode'
+        elif len(modes) > 1:
+            reason = 'executable mode change'
+        blobs.update(blob.decode('ascii') for blob in (old, new) if set(blob) != {48})
+    if reason:
+        return reason, None, None, None
+    for blob in sorted(blobs):
+        content = budget.run(['cat-file', 'blob', blob], inspection=True, cap=max_bytes)
+        if b'\0' in content:
+            reason = 'binary (NUL in a changed blob)'
+            break
+    if reason:
+        return reason, None, None, None
+    diff = budget.run(['diff-tree', '--root', '--no-commit-id', '-r', '-p', *DIFF, oid, '--'],
+                      inspection=True, cap=max_bytes)
+    value = budget.run(['patch-id', '--stable'], data=diff).split()
+    if len(value) != 2:
+        raise Incomplete('patch-id produced no single ID')
+    patch_id = value[0].decode('ascii')
+    return None, patch_id, diff, set(fields[1:-1:2])
+
+
 def patch_compare(repo: Path, left: str, right: str, max_count=30,
                   max_bytes=32 * 1024 * 1024, seconds=30.0):
     if not 1 <= max_count <= 10000 or not 1 <= max_bytes <= 256 * 1024 * 1024:
@@ -167,41 +204,10 @@ def patch_compare(repo: Path, left: str, right: str, max_count=30,
                 entry['excluded'].append(dict(oid=oid, reason='merge'))
                 continue
             try:
-                raw = budget.run(['diff-tree', '--root', '--no-commit-id', '-r', '--raw', '-z',
-                                  '--no-renames', '--no-abbrev', '--ignore-submodules=none', oid, '--'],
-                                 inspection=True, cap=max_bytes)
-                if not raw:
-                    entry['excluded'].append(dict(oid=oid, reason='empty'))
-                    continue
-                fields = raw.split(b'\0')
-                blobs = set()
-                reason = None
-                for header in fields[:-1:2]:
-                    oldmode, newmode, old, new, status = header.split()
-                    oldmode = oldmode.lstrip(b':')
-                    modes = {oldmode, newmode} - {b'000000'}
-                    if not modes <= {b'100644', b'100755'}:
-                        reason = 'symlink, submodule, or unsupported file mode'
-                    elif len(modes) > 1:
-                        reason = 'executable mode change'
-                    blobs.update(blob.decode('ascii') for blob in (old, new) if set(blob) != {48})
+                reason, patch_id, _, _ = inspect_patch(budget, oid, max_bytes)
                 if reason:
                     entry['excluded'].append(dict(oid=oid, reason=reason))
                     continue
-                for blob in sorted(blobs):
-                    content = budget.run(['cat-file', 'blob', blob], inspection=True, cap=max_bytes)
-                    if b'\0' in content:
-                        reason = 'binary (NUL in a changed blob)'
-                        break
-                if reason:
-                    entry['excluded'].append(dict(oid=oid, reason=reason))
-                    continue
-                diff = budget.run(['diff-tree', '--root', '--no-commit-id', '-r', '-p', *DIFF, oid, '--'],
-                                  inspection=True, cap=max_bytes)
-                value = budget.run(['patch-id', '--stable'], data=diff).split()
-                if len(value) != 2:
-                    raise Incomplete('patch-id produced no single ID')
-                patch_id = value[0].decode('ascii')
                 ids[side].setdefault(patch_id, []).append(oid)
             except (Incomplete, subprocess.TimeoutExpired) as exc:
                 complete = False

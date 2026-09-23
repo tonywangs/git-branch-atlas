@@ -26,8 +26,18 @@ test_sha256_object_ids (test_reports.ReportsTests.test_sha256_object_ids) ... ok
 test_shallow_and_missing_history_are_not_definitive (test_reports.ReportsTests.test_shallow_and_missing_history_are_not_definitive) ... ok
 test_summary_upstreams_worktrees_and_preservation (test_reports.ReportsTests.test_summary_upstreams_worktrees_and_preservation) ... ok
 test_unborn_bare_detached_and_unrelated (test_reports.ReportsTests.test_unborn_bare_detached_and_unrelated) ... ok
+test_100_seeded_histories_membership_patch_ids_and_independent_scores (test_series.SeriesTests.test_100_seeded_histories_membership_patch_ids_and_independent_scores) ... ok
+test_cli_rebase_and_range_diff_disagreements (test_series.SeriesTests.test_cli_rebase_and_range_diff_disagreements) ... ok
+test_context_changes_perfect_heuristic_and_no_final_newline (test_series.SeriesTests.test_context_changes_perfect_heuristic_and_no_final_newline) ... ok
+test_duplicates_revert_reapply_message_only_reorder_and_unrelated (test_series.SeriesTests.test_duplicates_revert_reapply_message_only_reorder_and_unrelated) ... ok
+test_empty_bare_sha256_revisions_and_provisional_rankings (test_series.SeriesTests.test_empty_bare_sha256_revisions_and_provisional_rankings) ... ok
+test_feature_parser_and_reference_repetitions_signs_whitespace_paths (test_series.SeriesTests.test_feature_parser_and_reference_repetitions_signs_whitespace_paths) ... ok
+test_merges_topology_and_exclusions (test_series.SeriesTests.test_merges_topology_and_exclusions) ... ok
+test_missing_objects_shallow_and_no_lazy_transport (test_series.SeriesTests.test_missing_objects_shallow_and_no_lazy_transport) ... ok
+test_ties_top_five_threshold_evidence_and_limits (test_series.SeriesTests.test_ties_top_five_threshold_evidence_and_limits) ... ok
+test_unusual_paths_hostile_config_terminal_escaping_and_unchanged_repository (test_series.SeriesTests.test_unusual_paths_hostile_config_terminal_escaping_and_unchanged_repository) ... ok
 
 ----------------------------------------------------------------------
-Ran 28 tests in 64.948s
+Ran 38 tests in 138.160s
 
 OK

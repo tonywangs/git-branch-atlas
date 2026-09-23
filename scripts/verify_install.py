@@ -114,12 +114,44 @@ def main():
         assert patches['matches'][0]['left'] == [original]
         assert patches['matches'][0]['right'] == [copied]
         assert 'Matching groups: 1' in run([atlas, '--repo', repo, 'patches', 'main', 'topic'])
+        # Documented before/after rebase review in a second, offline repository.
+        repo = base / 'series-example'
+        repo.mkdir()
+        git('init', '-b', 'main')
+        git('config', 'user.name', 'Atlas Demo')
+        git('config', 'user.email', 'demo@example.invalid')
+        git('commit', '--allow-empty', '-m', 'Root')
+        git('branch', 'old-base')
+        git('checkout', '-b', 'topic')
+        (repo / 'exact.txt').write_text('exact change\n')
+        git('add', 'exact.txt')
+        git('commit', '-m', 'Exact')
+        (repo / 'edited.txt').write_text('alpha\nbeta\nold\n')
+        git('add', 'edited.txt')
+        git('commit', '-m', 'Edited')
+        git('branch', 'before')
+        git('checkout', 'main')
+        (repo / 'base.txt').write_text('new base\n')
+        git('add', 'base.txt')
+        git('commit', '-m', 'Advance base')
+        git('rebase', '--onto', 'main', 'old-base', 'topic')
+        (repo / 'edited.txt').write_text('alpha\nbeta\nnew\n')
+        git('add', 'edited.txt')
+        git('commit', '--amend', '--no-edit')
+        series = json.loads(run([atlas, '--repo', repo, 'series',
+                                 'old-base', 'before', 'main', 'topic', '--json']))
+        assert series['complete'] and len(series['matches']) == 1
+        assert [c['status'] for c in series['left']['commits']] == ['patch_id_match', 'heuristic_candidates']
+        assert series['left']['commits'][1]['candidates'][0]['score'] == 7333
+        assert 'heuristic_candidates' in run([atlas, '--repo', repo, 'series',
+                                             'old-base', 'before', 'main', 'topic'])
         print(json.dumps({'installed_version': run([atlas, '--version']),
                           'python': run([python, '--version']), 'git': git('--version'),
                           'checks': ['isolated installed import', 'console entry point', 'two branches',
                                      'two worktrees', 'locked worktree', 'upstream +1/-1',
                                      'comparison unique counts and merge base', 'legacy graph',
-                                     'offline cherry-pick patch group JSON and terminal'],
+                                     'offline cherry-pick patch group JSON and terminal',
+                                     'offline before/after rebase series: exact group and edited candidate, JSON and terminal'],
                           'result': 'passed'}, indent=2))
 
 

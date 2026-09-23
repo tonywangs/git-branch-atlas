@@ -1,0 +1,214 @@
+{
+  "git": "git version 2.43.0",
+  "fixture_seed": "fixed bytes, messages and timestamp 1767225600",
+  "algorithm": "signed-line-dice-path-jaccard-v1",
+  "threshold": 5000,
+  "observations": [
+    {
+      "fixture": "rebase",
+      "endpoints": [
+        "c7a5a8845f4dd844cda36c2d03b20e12c2bc7c6f",
+        "78165a90188fe49c06ebcafb4acaff8f73c06cea",
+        "105767452d599ed31e436b362a960c7d9a7c5ebf",
+        "4b4950d2c8b7f5b600211a5ef5c721f2a23541dc"
+      ],
+      "matches": [
+        {
+          "patch_id": "99b77e19febe8f2598968fbff26eaaf0a43dd113",
+          "left": [
+            "78165a90188fe49c06ebcafb4acaff8f73c06cea"
+          ],
+          "right": [
+            "4b4950d2c8b7f5b600211a5ef5c721f2a23541dc"
+          ]
+        }
+      ],
+      "left": [
+        {
+          "oid": "78165a90188fe49c06ebcafb4acaff8f73c06cea",
+          "status": "patch_id_match",
+          "candidates": []
+        }
+      ],
+      "range_diff": "1:  78165a9 = 1:  4b4950d Feature"
+    },
+    {
+      "fixture": "message_only",
+      "endpoints": [
+        "c7a5a8845f4dd844cda36c2d03b20e12c2bc7c6f",
+        "78165a90188fe49c06ebcafb4acaff8f73c06cea",
+        "105767452d599ed31e436b362a960c7d9a7c5ebf",
+        "0d27aa8e4c7ef8ae671966e848a134ef83ea0cfd"
+      ],
+      "matches": [
+        {
+          "patch_id": "99b77e19febe8f2598968fbff26eaaf0a43dd113",
+          "left": [
+            "78165a90188fe49c06ebcafb4acaff8f73c06cea"
+          ],
+          "right": [
+            "0d27aa8e4c7ef8ae671966e848a134ef83ea0cfd"
+          ]
+        }
+      ],
+      "left": [
+        {
+          "oid": "78165a90188fe49c06ebcafb4acaff8f73c06cea",
+          "status": "patch_id_match",
+          "candidates": []
+        }
+      ],
+      "range_diff": "1:  78165a9 ! 1:  0d27aa8 Feature\n    @@ Metadata\n     Author: Fixture <fixture@example.invalid>\n     \n      ## Commit message ##\n    -    Feature\n    +    Different message\n     \n      ## f (new) ##\n     @@"
+    },
+    {
+      "fixture": "edited",
+      "endpoints": [
+        "c7a5a8845f4dd844cda36c2d03b20e12c2bc7c6f",
+        "78165a90188fe49c06ebcafb4acaff8f73c06cea",
+        "105767452d599ed31e436b362a960c7d9a7c5ebf",
+        "bd5b08eb00dc1c1c02f681b5a452e304cfe652a0"
+      ],
+      "matches": [],
+      "left": [
+        {
+          "oid": "78165a90188fe49c06ebcafb4acaff8f73c06cea",
+          "status": "heuristic_candidates",
+          "candidates": [
+            {
+              "oid": "bd5b08eb00dc1c1c02f681b5a452e304cfe652a0",
+              "score": 7333
+            }
+          ]
+        }
+      ],
+      "range_diff": "1:  78165a9 ! 1:  bd5b08e Feature\n    @@ f (new)\n     @@\n     +alpha\n     +beta\n    -+old\n    ++new"
+    },
+    {
+      "fixture": "unrelated",
+      "endpoints": [
+        "c7a5a8845f4dd844cda36c2d03b20e12c2bc7c6f",
+        "78165a90188fe49c06ebcafb4acaff8f73c06cea",
+        "c7a5a8845f4dd844cda36c2d03b20e12c2bc7c6f",
+        "71b03565c820ac9abaa8382a55d923d7fedff190"
+      ],
+      "matches": [],
+      "left": [
+        {
+          "oid": "78165a90188fe49c06ebcafb4acaff8f73c06cea",
+          "status": "no_candidate",
+          "candidates": []
+        }
+      ],
+      "range_diff": "1:  78165a9 < -:  ------- Feature\n-:  ------- > 1:  71b0356 Unrelated"
+    },
+    {
+      "fixture": "same_lines_other_path",
+      "endpoints": [
+        "c7a5a8845f4dd844cda36c2d03b20e12c2bc7c6f",
+        "78165a90188fe49c06ebcafb4acaff8f73c06cea",
+        "c7a5a8845f4dd844cda36c2d03b20e12c2bc7c6f",
+        "de87fe828a7ebf0251b6fc4a82e51dc89115b2df"
+      ],
+      "matches": [],
+      "left": [
+        {
+          "oid": "78165a90188fe49c06ebcafb4acaff8f73c06cea",
+          "status": "heuristic_candidates",
+          "candidates": [
+            {
+              "oid": "de87fe828a7ebf0251b6fc4a82e51dc89115b2df",
+              "score": 8000
+            }
+          ]
+        }
+      ],
+      "range_diff": "1:  78165a9 ! 1:  de87fe8 Feature\n    @@ Metadata\n     Author: Fixture <fixture@example.invalid>\n     \n      ## Commit message ##\n    -    Feature\n    +    Other file\n     \n    - ## f (new) ##\n    + ## g (new) ##\n     @@\n     +alpha\n     +beta"
+    },
+    {
+      "fixture": "duplicate_reapply",
+      "endpoints": [
+        "c7a5a8845f4dd844cda36c2d03b20e12c2bc7c6f",
+        "ac56b83c2d9ab41c8d3b6f2973e7f6feff906c0d",
+        "105767452d599ed31e436b362a960c7d9a7c5ebf",
+        "4b4950d2c8b7f5b600211a5ef5c721f2a23541dc"
+      ],
+      "matches": [
+        {
+          "patch_id": "99b77e19febe8f2598968fbff26eaaf0a43dd113",
+          "left": [
+            "78165a90188fe49c06ebcafb4acaff8f73c06cea",
+            "ac56b83c2d9ab41c8d3b6f2973e7f6feff906c0d"
+          ],
+          "right": [
+            "4b4950d2c8b7f5b600211a5ef5c721f2a23541dc"
+          ]
+        }
+      ],
+      "left": [
+        {
+          "oid": "78165a90188fe49c06ebcafb4acaff8f73c06cea",
+          "status": "patch_id_match",
+          "candidates": []
+        },
+        {
+          "oid": "37cd83bb36b69c267716d9eb813120ad84ea76ae",
+          "status": "no_candidate",
+          "candidates": []
+        },
+        {
+          "oid": "ac56b83c2d9ab41c8d3b6f2973e7f6feff906c0d",
+          "status": "patch_id_match",
+          "candidates": []
+        }
+      ],
+      "range_diff": "1:  78165a9 < -:  ------- Feature\n2:  37cd83b < -:  ------- Revert\n3:  ac56b83 ! 1:  4b4950d Reapply\n    @@ Metadata\n     Author: Fixture <fixture@example.invalid>\n     \n      ## Commit message ##\n    -    Reapply\n    +    Feature\n     \n      ## f (new) ##\n     @@"
+    },
+    {
+      "fixture": "reordered",
+      "endpoints": [
+        "c7a5a8845f4dd844cda36c2d03b20e12c2bc7c6f",
+        "d3240104373d7f102204dc09f5176fe2052fc2cc",
+        "c7a5a8845f4dd844cda36c2d03b20e12c2bc7c6f",
+        "2b5c8202ffe3d56fb72366caa5cfc8d13fbd3675"
+      ],
+      "matches": [
+        {
+          "patch_id": "0b1229a87e0c077b2b5eb18e08f99148493b96b9",
+          "left": [
+            "f2ce0316e5fdfa54eeaf8aa8e30d77a1fe319bc7"
+          ],
+          "right": [
+            "2b5c8202ffe3d56fb72366caa5cfc8d13fbd3675"
+          ]
+        },
+        {
+          "patch_id": "d8bb32af75f432d103ecbab61f8e48215a487340",
+          "left": [
+            "d3240104373d7f102204dc09f5176fe2052fc2cc"
+          ],
+          "right": [
+            "e970c3225eccda38f2c7915d2f957d7edec84a47"
+          ]
+        }
+      ],
+      "left": [
+        {
+          "oid": "f2ce0316e5fdfa54eeaf8aa8e30d77a1fe319bc7",
+          "status": "patch_id_match",
+          "candidates": []
+        },
+        {
+          "oid": "d3240104373d7f102204dc09f5176fe2052fc2cc",
+          "status": "patch_id_match",
+          "candidates": []
+        }
+      ],
+      "range_diff": "2:  d324010 = 1:  e970c32 B\n1:  f2ce031 = 2:  2b5c820 A"
+    }
+  ],
+  "limitations": [
+    "range-diff is not ground truth",
+    "small synthetic fixtures; no accuracy estimate",
+    "range-diff display and pairing may vary with Git version"
+  ]
+}
