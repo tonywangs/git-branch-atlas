@@ -158,18 +158,6 @@ def inspect_patch(budget, oid, max_bytes, *, base=None):
             break
     if reason:
         return reason, None, None, None
-    hint = getattr(budget, '_patch_batch', {}).get((oid, base))
-    if (hint is not None and time.monotonic() < budget.deadline
-            and budget.bytes < budget.max_bytes
-            and len(hint[0]) <= min(max_bytes, budget.max_bytes - budget.bytes)):
-        # Speculation never charges inspection work. Replay the original diff's
-        # logical bytes only here, after raw metadata and blobs have passed in
-        # their original order. At a boundary retain the original streaming path.
-        diff, patch_id = hint
-        budget.bytes += len(diff)
-        if time.monotonic() >= budget.deadline:
-            raise Incomplete('runtime limit')
-        return None, patch_id, diff, set(fields[1:-1:2])
     diff = budget.run(['diff-tree', '--root', '--no-commit-id', '-r', '-p', *DIFF, *endpoints, '--'],
                       inspection=True, cap=max_bytes)
     value = budget.run(['patch-id', '--stable'], data=diff).split()

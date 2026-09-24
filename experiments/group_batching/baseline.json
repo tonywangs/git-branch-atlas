@@ -1,0 +1,15 @@
+{
+  "catalog_remote_commit": "ca2e984db9ac3e65958513fe14ba86af4003e3f3",
+  "catalog_tree": "dcaab594594a69d23970d219e592e8d51966bf7a",
+  "files": {
+    "__init__.py": "122a03a85a75d8cd2a8dde9c9eea25eb9c11d46c61b88784bd7d730af09f67ae",
+    "__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "cli.py": "c8799dd30299067580a7d612e510fc3bbd738349a6946351f9fe1f41237bbea2",
+    "git.py": "3d904528589a171fe90e845057b9a7d69cf134d4e40e67ebdb7919940d85c0ef",
+    "group_compare.py": "583b71d4ec60dc4d3633ccd5f7c65942f248cf1638c10ab067d7521ca7d012b1",
+    "html_report.py": "50905f4a5468235b8bca876711627e6ef6192dc5fa53282a8ada3bbe176d6e75",
+    "patches.py": "420b77f8e39c6b3c918e650a4a7175f83e80fcf33631a8711f3aa7201dce6b88",
+    "reports.py": "57282b81c2ac24c973267d49bd38e72d3a29c229d904a07ed88be65f6cbae3bb",
+    "series.py": "7e375f1e68eb49de190be334abcee27d176dd23b08a9bd97025260ffd66d6932"
+  }
+}

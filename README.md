@@ -328,3 +328,6 @@ endpoints, bounded evidence and competing/overlapping candidates. Normalized pat
 agreement is not behavioral equivalence or proof of a historical split/squash.
 See [schema, limits and examples](docs/groups-v1.md) and
 [reproducible validation and measurements](docs/groups-validation.md).
+
+The opt-in group search uses [bounded diff and patch-ID batching](docs/group-batching.md).
+See that experiment for transport bounds, ordered fallback semantics and measured results.

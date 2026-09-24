@@ -92,19 +92,7 @@ def compare_groups(report, budget, feature_map, max_groups, max_comparisons, max
     result['windows_omitted'] = max(0, len(all_windows) - max_groups)
     if result['windows_omitted']:
         incomplete('group enumeration limit')
-    def batch_endpoints(item):
-        side, chain = item
-        # Empty-tree bases are not commits and cannot be --stdin fake parents.
-        if not chain[0]['parents']:
-            return None
-        if any(c['status'] == 'excluded' and c['reason'] != 'empty' for c in chain):
-            return None
-        if any(c['status'] != 'excluded' and (side, c['oid']) not in feature_map for c in chain):
-            return None
-        return chain[-1]['oid'], chain[0]['parents'][0]
-
-    from .batching import batches
-    for side, chain in batches(budget, all_windows[:max_groups], batch_endpoints):
+    for side, chain in all_windows[:max_groups]:
         members = [c['oid'] for c in chain]
         group = dict(id=side + ':' + members[0] + '..' + members[-1], side=side,
                      members=members, base_oid=None, base_kind=None, tip_oid=members[-1],

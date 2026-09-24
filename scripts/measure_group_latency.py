@@ -128,8 +128,10 @@ def worker(args):
 
 
 def main():
+    global BASELINE
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--repeat', type=int, default=6)
+    parser.add_argument('--baseline', type=Path, default=BASELINE)
     parser.add_argument('--profile-only', action='store_true')
     parser.add_argument('--output', type=Path)
     parser.add_argument('--worker', action='store_true')
@@ -138,6 +140,7 @@ def main():
     parser.add_argument('--scenario', choices=SCENARIOS)
     parser.add_argument('--report', type=Path)
     args = parser.parse_args()
+    BASELINE = args.baseline.resolve()
     if args.worker:
         worker(args)
         return
@@ -189,7 +192,7 @@ def main():
             summary[scenario]['paired_speedups'] = [a/b for a,b in zip(values['baseline'],values['current'])]
     output = dict(python=platform.python_version(), platform=platform.platform(),
                   git=subprocess.check_output(['git','--version'],text=True).strip(),
-                  baseline_tree='2ca8e13f793267ea5fc9b20ad3704d3598af93ec',
+                  baseline_tree=json.loads((BASELINE.parent/'baseline.json').read_text())['catalog_tree'],
                   source_sha256={kind:source_hashes(path) for kind,path in [('baseline',BASELINE),('current',ROOT)]},
                   fixtures=fixtures, scenarios=SCENARIOS, options={s:options(s) for s in SCENARIOS},
                   limitations=['Synthetic warm-cache measurements; host not machine-isolated.',

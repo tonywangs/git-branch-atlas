@@ -1,3 +1,10 @@
+test_batch_generator_bounds_and_closes_hints (test_batching.BatchingTests.test_batch_generator_bounds_and_closes_hints) ... ok
+test_ordered_accounting_deadline_and_near_limit_fallback (test_batching.BatchingTests.test_ordered_accounting_deadline_and_near_limit_fallback) ... ok
+test_request_and_payload_caps_disable_speculation (test_batching.BatchingTests.test_request_and_payload_caps_disable_speculation) ... ok
+test_root_empty_merge_repeated_endpoints_and_unusual_filenames (test_batching.BatchingTests.test_root_empty_merge_repeated_endpoints_and_unusual_filenames) ... ok
+test_sha256_repository (test_batching.BatchingTests.test_sha256_repository) ... ok
+test_streaming_failures_timeout_cancellation_and_child_cleanup (test_batching.BatchingTests.test_streaming_failures_timeout_cancellation_and_child_cleanup) ... ok
+test_truncated_wrong_duplicate_and_missing_patch_ids_discard_batch (test_batching.BatchingTests.test_truncated_wrong_duplicate_and_missing_patch_ids_discard_batch) ... ok
 test_byte_and_output_boundaries_match_uncached_stream (test_blob_reuse.BlobReuseTests.test_byte_and_output_boundaries_match_uncached_stream) ... ok
 test_hits_charge_bytes_and_avoid_git_but_check_deadline (test_blob_reuse.BlobReuseTests.test_hits_charge_bytes_and_avoid_git_but_check_deadline) ... ok
 test_lru_entry_payload_and_admission_bounds (test_blob_reuse.BlobReuseTests.test_lru_entry_payload_and_admission_bounds) ... ok
@@ -53,6 +60,6 @@ test_ties_top_five_threshold_evidence_and_limits (test_series.SeriesTests.test_t
 test_unusual_paths_hostile_config_terminal_escaping_and_unchanged_repository (test_series.SeriesTests.test_unusual_paths_hostile_config_terminal_escaping_and_unchanged_repository) ... ok
 
 ----------------------------------------------------------------------
-Ran 53 tests in 547.305s
+Ran 60 tests in 473.705s
 
 OK

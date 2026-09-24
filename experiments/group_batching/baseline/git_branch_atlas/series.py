@@ -148,12 +148,7 @@ def series_compare(repo: Path, left_base: str, left_tip: str, right_base: str, r
             if len(rows) > max_count:
                 report['warnings'].append(side + ': commit limit; newest topological sample only')
             report['complete'] &= entry['enumeration_complete']
-            inspections = ordered(rows[:max_count])
-            if include_groups and not history_error:
-                from .batching import batches
-                inspections = batches(budget, inspections,
-                                      lambda row: (row[0], None) if len(row[1]) <= 1 else None)
-            for oid, parents in inspections:
+            for oid, parents in ordered(rows[:max_count]):
                 item = dict(oid=oid, parents=parents, status='unclassified')
                 entry['commits'].append(item)
                 commits[side, oid] = item

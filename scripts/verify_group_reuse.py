@@ -18,8 +18,8 @@ from test_patches import PatchTests
 from git_branch_atlas.series import series_compare
 
 
-def baseline():
-    path = ROOT/'experiments/group_latency/baseline/git_branch_atlas'
+def baseline(directory):
+    path = directory/'git_branch_atlas'
     manifest = json.loads((path.parents[1]/'baseline.json').read_text())['files']
     assert {p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in path.glob('*.py')} == manifest, 'frozen source changed'
     spec = importlib.util.spec_from_file_location('frozen_atlas', path/'__init__.py', submodule_search_locations=[str(path)])
@@ -42,9 +42,10 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--seeds', type=int, default=200)
     parser.add_argument('--output', type=Path)
+    parser.add_argument('--baseline', type=Path, default=ROOT/'experiments/group_latency/baseline')
     args = parser.parse_args()
     assert 1 <= args.seeds <= 10000
-    old_compare = baseline()
+    old_compare = baseline(args.baseline.resolve())
     # Fixture commit IDs and timestamps reproducible across machines and runs.
     test_patches.ENV.update(GIT_AUTHOR_DATE='1700000000 +0000', GIT_COMMITTER_DATE='1700000000 +0000')
     rows = []

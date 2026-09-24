@@ -1,5 +1,9 @@
 # Measured split/squash blob reuse
 
+This page preserves the blob-reuse experiment. The subsequent
+[bounded batching experiment](group-batching.md) uses this implementation as its
+baseline and reports the additional change separately.
+
 On the reproducible complete 500-commit workload, bounded blob reuse reduced
 median runtime from **54.76 to 35.28 seconds** while preserving identical reports.
 The improvement was **1.55×; the 2× target was missed**.
