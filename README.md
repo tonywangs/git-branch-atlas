@@ -309,6 +309,10 @@ are not redaction. See [HTML review setup, controls, bounds and validation](docs
 
 ## Review possible splits and squashes
 
+Group searches reuse blobs within a bounded 4 MiB cache while preserving
+inspection-byte limits. [Performance and reproducibility](docs/group-latency.md)
+describe the frozen-baseline experiment and measured tradeoffs.
+
 Add `--groups` to a series comparison to compare a single commit with every
 eligible contiguous group of two to four commits in the searched ranges:
 

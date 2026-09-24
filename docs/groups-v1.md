@@ -214,3 +214,8 @@ Neither Git's pairing nor this tool proves historical provenance or behavior.
 No private repositories, hosted inference, GPUs or paid data are required.
 Validation uses synthetic local Git histories. See [group validation](groups-validation.md)
 for independent oracles, negative cases, measured bounds and remaining limitations.
+
+The group search uses a bounded per-comparison blob cache. It preserves logical
+inspection-byte accounting and the existing search limits. See
+[measured blob reuse](group-latency.md) for its bounds, frozen-baseline comparison,
+reproduction commands and performance tradeoffs.

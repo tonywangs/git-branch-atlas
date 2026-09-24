@@ -1,0 +1,329 @@
+{
+  "python": "3.12.3",
+  "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.39",
+  "git": "git version 2.43.0",
+  "baseline_tree": "2ca8e13f793267ea5fc9b20ad3704d3598af93ec",
+  "source_sha256": {
+    "baseline": {
+      "__init__.py": "122a03a85a75d8cd2a8dde9c9eea25eb9c11d46c61b88784bd7d730af09f67ae",
+      "__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+      "cli.py": "c8799dd30299067580a7d612e510fc3bbd738349a6946351f9fe1f41237bbea2",
+      "git.py": "3d904528589a171fe90e845057b9a7d69cf134d4e40e67ebdb7919940d85c0ef",
+      "group_compare.py": "583b71d4ec60dc4d3633ccd5f7c65942f248cf1638c10ab067d7521ca7d012b1",
+      "html_report.py": "50905f4a5468235b8bca876711627e6ef6192dc5fa53282a8ada3bbe176d6e75",
+      "patches.py": "73fe8f4b660273ce9587c30798ca2d8dd32a9585017dfbca58fd362d44fdc37b",
+      "reports.py": "57282b81c2ac24c973267d49bd38e72d3a29c229d904a07ed88be65f6cbae3bb",
+      "series.py": "38c8b09aca7adeebdfb613861c6f5e306a15e79b6169b6e70884361d74dcb2d8"
+    },
+    "current": {
+      "__init__.py": "122a03a85a75d8cd2a8dde9c9eea25eb9c11d46c61b88784bd7d730af09f67ae",
+      "__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+      "cli.py": "c8799dd30299067580a7d612e510fc3bbd738349a6946351f9fe1f41237bbea2",
+      "git.py": "3d904528589a171fe90e845057b9a7d69cf134d4e40e67ebdb7919940d85c0ef",
+      "group_compare.py": "583b71d4ec60dc4d3633ccd5f7c65942f248cf1638c10ab067d7521ca7d012b1",
+      "html_report.py": "50905f4a5468235b8bca876711627e6ef6192dc5fa53282a8ada3bbe176d6e75",
+      "patches.py": "73fe8f4b660273ce9587c30798ca2d8dd32a9585017dfbca58fd362d44fdc37b",
+      "reports.py": "57282b81c2ac24c973267d49bd38e72d3a29c229d904a07ed88be65f6cbae3bb",
+      "series.py": "38c8b09aca7adeebdfb613861c6f5e306a15e79b6169b6e70884361d74dcb2d8"
+    }
+  },
+  "fixtures": {
+    "small": {
+      "root": "180dba51d3c1efd3297c02aeb12977726d855b6d",
+      "left": "02a85bb19fbcf6856f017c2899d5d9dffce7bcb5",
+      "right": "e876a7fcdb739127c70907f7e8307600bf889daa"
+    },
+    "complete-500": {
+      "root": "180dba51d3c1efd3297c02aeb12977726d855b6d",
+      "left": "7959c603164c690fceab112335ea6033e38cfc32",
+      "right": "b9f5559e0efaa12e7cd122fbd14dd931f5b9b3e9"
+    },
+    "balanced-500-limited": {
+      "root": "180dba51d3c1efd3297c02aeb12977726d855b6d",
+      "left": "09e82dd1e1fc125da1e2a9817ba081031b0bcdba",
+      "right": "8364f3327cf5a94fb2d438c8e113c39159f4f45d"
+    }
+  },
+  "scenarios": {
+    "small": [
+      6,
+      6
+    ],
+    "complete-500": [
+      20,
+      480
+    ],
+    "balanced-500-limited": [
+      250,
+      250
+    ]
+  },
+  "options": {
+    "small": {
+      "max_count": 6,
+      "max_bytes": 268435456,
+      "seconds": 600,
+      "max_comparisons": 100000,
+      "include_groups": true,
+      "max_groups": 1600,
+      "max_group_comparisons": 100000,
+      "max_group_candidates": 2000
+    },
+    "complete-500": {
+      "max_count": 480,
+      "max_bytes": 268435456,
+      "seconds": 600,
+      "max_comparisons": 100000,
+      "include_groups": true,
+      "max_groups": 1600,
+      "max_group_comparisons": 100000,
+      "max_group_candidates": 2000
+    },
+    "balanced-500-limited": {
+      "max_count": 250,
+      "max_bytes": 268435456,
+      "seconds": 600,
+      "max_comparisons": 100000,
+      "include_groups": true,
+      "max_groups": 1600,
+      "max_group_comparisons": 1000,
+      "max_group_candidates": 2000
+    }
+  },
+  "limitations": [
+    "Synthetic warm-cache measurements; host not machine-isolated.",
+    "GNU time peak RSS is maximum individual process, not summed process-tree memory.",
+    "Stage wrappers add instrumentation overhead; total stages include their sub-stages.",
+    "Balanced 500 case exhausts comparisons; complete 500 uses 20/480 within unchanged 100000 cap."
+  ],
+  "summary": {
+    "small": {
+      "baseline_median_seconds": 2.2910156780853868
+    },
+    "complete-500": {
+      "baseline_median_seconds": 131.7551661338657
+    },
+    "balanced-500-limited": {
+      "baseline_median_seconds": 133.2687302539125
+    }
+  },
+  "measurements": [
+    {
+      "seconds": 1.9934569168835878,
+      "stages_seconds": {
+        "individual:git:rev-parse": 0.025619370862841606,
+        "individual:git:rev-list": 0.06372585613280535,
+        "individual:git:diff-tree:raw": 0.046175397699698806,
+        "individual:git:cat-file": 0.041418024338781834,
+        "individual:git:diff-tree:patch": 0.15867583290673792,
+        "individual:git:patch-id": 0.14400396263226867,
+        "individual:features": 0.0028194671031087637,
+        "individual:score": 6.539491005241871e-05,
+        "individual:evidence": 0.00023121782578527927,
+        "groups:git:diff-tree:raw": 0.11876049148850143,
+        "groups:git:cat-file": 0.827951266663149,
+        "groups:git:diff-tree:patch": 0.27370361262001097,
+        "groups:git:patch-id": 0.2608388524968177,
+        "groups:features": 0.014847243903204799,
+        "groups:score": 0.0009694292675703764,
+        "groups:evidence": 0.0006861155852675438,
+        "groups:total": 1.5028601810336113,
+        "serialization": 0.00545584294013679,
+        "individual:total": 0.48513043601997197
+      },
+      "calls": {
+        "individual:git:rev-parse": 7,
+        "individual:git:rev-list": 3,
+        "individual:git:diff-tree:raw": 12,
+        "individual:git:cat-file": 12,
+        "individual:git:diff-tree:patch": 12,
+        "individual:git:patch-id": 12,
+        "individual:features": 12,
+        "individual:score": 9,
+        "individual:evidence": 6,
+        "groups:git:diff-tree:raw": 24,
+        "groups:git:cat-file": 68,
+        "groups:git:diff-tree:patch": 24,
+        "groups:git:patch-id": 24,
+        "groups:features": 24,
+        "groups:score": 144,
+        "groups:evidence": 20
+      },
+      "git_subprocesses": 198,
+      "sha256": "4a990f307d49799a4ea85ca855012a544ca8a77866345c149bd9dd9f537dc597",
+      "output_bytes": 63329,
+      "complete": true,
+      "structural_windows": 24,
+      "inspected_groups": 24,
+      "comparison_count": 144,
+      "comparisons_possible": 144,
+      "candidate_count": 20,
+      "candidates_omitted": 0,
+      "inspection_bytes_read": 197240,
+      "scenario": "small",
+      "pair": 1,
+      "implementation": "baseline",
+      "order": [
+        "baseline"
+      ],
+      "wall_seconds": 2.2910156780853868,
+      "peak_rss_kib": 21248,
+      "command": [
+        "/usr/bin/python3",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/scripts/measure_group_latency.py",
+        "--worker",
+        "--implementation",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/experiments/group_latency/baseline",
+        "--repo",
+        "/tmp/atlas-latency-rz2y37ai/small",
+        "--scenario",
+        "small"
+      ]
+    },
+    {
+      "seconds": 131.310249625938,
+      "stages_seconds": {
+        "individual:git:rev-parse": 0.0424121031537652,
+        "individual:git:rev-list": 0.08451840793713927,
+        "individual:git:diff-tree:raw": 8.158957997104153,
+        "individual:git:cat-file": 6.8181488970294595,
+        "individual:git:diff-tree:patch": 8.266559478128329,
+        "individual:git:patch-id": 7.009598292177543,
+        "individual:features": 0.18369798478670418,
+        "individual:score": 0.015406981343403459,
+        "individual:evidence": 0.0006056451238691807,
+        "groups:git:diff-tree:raw": 18.859750374918804,
+        "groups:git:cat-file": 45.24107833229937,
+        "groups:git:diff-tree:patch": 18.23958827345632,
+        "groups:git:patch-id": 14.964402124518529,
+        "groups:features": 1.876796516124159,
+        "groups:score": 0.46041093161329627,
+        "groups:evidence": 0.004799473099410534,
+        "groups:total": 100.20233881403692,
+        "serialization": 0.1878224320244044,
+        "individual:total": 30.920074897818267
+      },
+      "calls": {
+        "individual:git:rev-parse": 7,
+        "individual:git:rev-list": 3,
+        "individual:git:diff-tree:raw": 500,
+        "individual:git:cat-file": 500,
+        "individual:git:diff-tree:patch": 500,
+        "individual:git:patch-id": 500,
+        "individual:features": 500,
+        "individual:score": 4700,
+        "individual:evidence": 20,
+        "groups:git:diff-tree:raw": 1488,
+        "groups:git:cat-file": 4460,
+        "groups:git:diff-tree:patch": 1488,
+        "groups:git:patch-id": 1488,
+        "groups:features": 1488,
+        "groups:score": 54600,
+        "groups:evidence": 77
+      },
+      "git_subprocesses": 10934,
+      "sha256": "70405db123f496e5d2c51275f5ffe5486bd2e18d302c8eb085db37bb2e9a6ed0",
+      "output_bytes": 1499844,
+      "complete": true,
+      "structural_windows": 1488,
+      "inspected_groups": 1488,
+      "comparison_count": 54600,
+      "comparisons_possible": 54600,
+      "candidate_count": 77,
+      "candidates_omitted": 0,
+      "inspection_bytes_read": 12231180,
+      "scenario": "complete-500",
+      "pair": 1,
+      "implementation": "baseline",
+      "order": [
+        "baseline"
+      ],
+      "wall_seconds": 131.7551661338657,
+      "peak_rss_kib": 30744,
+      "command": [
+        "/usr/bin/python3",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/scripts/measure_group_latency.py",
+        "--worker",
+        "--implementation",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/experiments/group_latency/baseline",
+        "--repo",
+        "/tmp/atlas-latency-rz2y37ai/complete-500",
+        "--scenario",
+        "complete-500"
+      ]
+    },
+    {
+      "seconds": 132.88327793916687,
+      "stages_seconds": {
+        "individual:git:rev-parse": 0.0845655098091811,
+        "individual:git:rev-list": 0.019940661964938045,
+        "individual:git:diff-tree:raw": 4.091598578495905,
+        "individual:git:cat-file": 4.822726111859083,
+        "individual:git:diff-tree:patch": 5.206609262851998,
+        "individual:git:patch-id": 3.8916009461972862,
+        "individual:features": 0.12034108489751816,
+        "individual:score": 0.1550146962981671,
+        "individual:evidence": 0.008204387966543436,
+        "groups:git:diff-tree:raw": 20.23860085522756,
+        "groups:git:cat-file": 54.4308005864732,
+        "groups:git:diff-tree:patch": 20.351571479579434,
+        "groups:git:patch-id": 16.379366769921035,
+        "groups:features": 1.9710509944707155,
+        "groups:score": 0.0028902851045131683,
+        "groups:evidence": 0.0003535777796059847,
+        "groups:total": 113.98498379113153,
+        "serialization": 0.4002323967870325,
+        "individual:total": 18.498046467080712
+      },
+      "calls": {
+        "individual:git:rev-parse": 7,
+        "individual:git:rev-list": 3,
+        "individual:git:diff-tree:raw": 500,
+        "individual:git:cat-file": 500,
+        "individual:git:diff-tree:patch": 500,
+        "individual:git:patch-id": 500,
+        "individual:features": 500,
+        "individual:score": 15625,
+        "individual:evidence": 250,
+        "groups:git:diff-tree:raw": 1488,
+        "groups:git:cat-file": 4460,
+        "groups:git:diff-tree:patch": 1488,
+        "groups:git:patch-id": 1488,
+        "groups:features": 1488,
+        "groups:score": 1000,
+        "groups:evidence": 6
+      },
+      "git_subprocesses": 10934,
+      "sha256": "2be4c15f5ef7aecf16d78697a4d0189d2fc8e0734e8a28519c1343a78e2ed057",
+      "output_bytes": 1642949,
+      "complete": false,
+      "structural_windows": 1488,
+      "inspected_groups": 1488,
+      "comparison_count": 1000,
+      "comparisons_possible": 372000,
+      "candidate_count": 6,
+      "candidates_omitted": 0,
+      "inspection_bytes_read": 12228880,
+      "scenario": "balanced-500-limited",
+      "pair": 1,
+      "implementation": "baseline",
+      "order": [
+        "baseline"
+      ],
+      "wall_seconds": 133.2687302539125,
+      "peak_rss_kib": 30944,
+      "command": [
+        "/usr/bin/python3",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/scripts/measure_group_latency.py",
+        "--worker",
+        "--implementation",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/experiments/group_latency/baseline",
+        "--repo",
+        "/tmp/atlas-latency-rz2y37ai/balanced-500-limited",
+        "--scenario",
+        "balanced-500-limited"
+      ]
+    }
+  ],
+  "collection_context": "Initial profiling overlapped baseline regression validation and browser setup. Use later alternating-order paired measurements, not these wall times, to estimate speedup."
+}

@@ -1,7 +1,6 @@
 """Bounded, offline stable patch-ID comparison. No repository writes."""
 from __future__ import annotations
 
-from collections import OrderedDict
 import json
 import math
 import os
@@ -32,20 +31,11 @@ class Incomplete(GitError):
 
 class Budget:
     """Stream bounded pipes; enforce one deadline across all Git subprocesses."""
-    BLOB_CACHE_BYTES = 4 * 1024 * 1024
-    BLOB_CACHE_ENTRIES = 1024
-    BLOB_CACHE_ITEM_BYTES = 256 * 1024
-
-    def __init__(self, repo: Path, seconds: float, max_bytes: int, *, cache_blobs=False):
+    def __init__(self, repo: Path, seconds: float, max_bytes: int):
         self.repo = repo
         self.deadline = time.monotonic() + seconds
         self.max_bytes = max_bytes
         self.bytes = 0
-        # Only immutable, successfully read full-OID blobs, local to this budget.
-        # No failures, refs, diffs, attributes or patch IDs are memoized.
-        self._cache_blobs = cache_blobs
-        self._blob_cache = OrderedDict()
-        self._blob_cache_bytes = 0
         self.env = {k: v for k, v in os.environ.items() if not k.startswith('GIT_')}
         self.env.update(GIT_PAGER='cat', GIT_TERMINAL_PROMPT='0', GIT_OPTIONAL_LOCKS='0',
                         GIT_NO_LAZY_FETCH='1', GIT_ALLOW_PROTOCOL='', GIT_NO_REPLACE_OBJECTS='1',
@@ -57,17 +47,6 @@ class Budget:
             raise Incomplete('inspection byte limit')
         if time.monotonic() >= self.deadline:
             raise Incomplete('runtime limit')
-        blob = (args[2] if self._cache_blobs and inspection and data is None
-                and len(args) == 3 and args[:2] == ['cat-file', 'blob']
-                and re.fullmatch(r'[0-9a-f]{40}|[0-9a-f]{64}', args[2]) else None)
-        cached = self._blob_cache.get(blob)
-        if cached is not None and len(cached) <= cap and self.bytes + len(cached) <= self.max_bytes:
-            # Replay logical inspection work, including repeated reads. Near a
-            # byte/output boundary use the original streaming path so its exact
-            # failure precedence and partial-byte accounting remain unchanged.
-            self.bytes += len(cached)
-            self._blob_cache.move_to_end(blob)
-            return cached
         argv = ['git', '--no-pager', '-C', str(self.repo),
                 '-c', 'core.hooksPath=' + os.devnull, '-c', 'core.commitGraph=false',
                 '-c', 'core.attributesFile=' + os.devnull, '-c', 'diff.orderFile=' + os.devnull,
@@ -115,18 +94,7 @@ class Budget:
                 if process.returncode or (strict and streams[1]):
                     # Do not echo potentially huge/untrusted Git diagnostics.
                     raise Incomplete('Git failed (missing object, invalid revision, or repository error)')
-                output = bytes(streams[0])
-                if (blob is not None and not streams[1]
-                        and len(output) <= min(self.BLOB_CACHE_ITEM_BYTES, self.BLOB_CACHE_BYTES)):
-                    old = self._blob_cache.pop(blob, b'')
-                    self._blob_cache_bytes -= len(old)
-                    while self._blob_cache and (len(self._blob_cache) >= self.BLOB_CACHE_ENTRIES
-                            or self._blob_cache_bytes + len(output) > self.BLOB_CACHE_BYTES):
-                        _, evicted = self._blob_cache.popitem(last=False)
-                        self._blob_cache_bytes -= len(evicted)
-                    self._blob_cache[blob] = output
-                    self._blob_cache_bytes += len(output)
-                return output
+                return bytes(streams[0])
 
 
 def inspect_patch(budget, oid, max_bytes, *, base=None):

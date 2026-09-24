@@ -1,3 +1,9 @@
+test_byte_and_output_boundaries_match_uncached_stream (test_blob_reuse.BlobReuseTests.test_byte_and_output_boundaries_match_uncached_stream) ... ok
+test_hits_charge_bytes_and_avoid_git_but_check_deadline (test_blob_reuse.BlobReuseTests.test_hits_charge_bytes_and_avoid_git_but_check_deadline) ... ok
+test_lru_entry_payload_and_admission_bounds (test_blob_reuse.BlobReuseTests.test_lru_entry_payload_and_admission_bounds) ... ok
+test_missing_blob_and_partial_failed_output_never_cached (test_blob_reuse.BlobReuseTests.test_missing_blob_and_partial_failed_output_never_cached) ... ok
+test_non_object_arguments_and_disabled_budget_are_not_cached (test_blob_reuse.BlobReuseTests.test_non_object_arguments_and_disabled_budget_are_not_cached) ... ok
+test_oversized_patch_and_stderr_timeout_children_reaped (test_blob_reuse.BlobReuseTests.test_oversized_patch_and_stderr_timeout_children_reaped) ... ok
 test_detached_head_and_max_count (test_cli.AtlasIntegrationTests.test_detached_head_and_max_count) ... ok
 test_empty_repository (test_cli.AtlasIntegrationTests.test_empty_repository) ... ok
 test_graph_branches_tags_unicode_and_counts (test_cli.AtlasIntegrationTests.test_graph_branches_tags_unicode_and_counts) ... ok
@@ -47,6 +53,6 @@ test_ties_top_five_threshold_evidence_and_limits (test_series.SeriesTests.test_t
 test_unusual_paths_hostile_config_terminal_escaping_and_unchanged_repository (test_series.SeriesTests.test_unusual_paths_hostile_config_terminal_escaping_and_unchanged_repository) ... ok
 
 ----------------------------------------------------------------------
-Ran 47 tests in 678.522s
+Ran 53 tests in 547.305s
 
 OK

@@ -106,7 +106,7 @@ def series_compare(repo: Path, left_base: str, left_tip: str, right_base: str, r
         raise GitError('series requires 0..100000 comparisons and threshold 1..10000')
     if not 0 <= max_groups <= 6000 or not 0 <= max_group_comparisons <= 100000 or not 0 <= max_group_candidates <= 2000:
         raise GitError('group limits require 0..6000 groups, 0..100000 comparisons and 0..2000 candidates')
-    budget = Budget(repo, seconds, max_bytes, cache_blobs=include_groups)
+    budget = Budget(repo, seconds, max_bytes)
     budget.run(['rev-parse', '--git-dir'])
     graft = os.fsdecode(budget.run(['rev-parse', '--git-path', 'info/grafts']).rstrip(b'\n'))
     graft = Path(graft) if Path(graft).is_absolute() else repo / graft
