@@ -1,0 +1,32 @@
+{
+  "regressions": {
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-v"
+    ],
+    "exit_code": 0,
+    "tests": 60,
+    "seconds": 371.324
+  },
+  "candidate_failure_contract": {
+    "command": [
+      "python3",
+      "scripts/verify_batching_candidate.py"
+    ],
+    "exit_code": 0,
+    "tests": 5,
+    "seconds": 6.192
+  },
+  "harness_initial_failure": {
+    "reason": "Packed fixture retained unreachable calibration commits; zero-loose assertion failed. Fixed temporary-fixture preparation with prune --expire=now.",
+    "preserved_rows": "batching-limits-profile-attempt.rows.jsonl"
+  },
+  "installation_initial_invocation_failure": {
+    "reason": "verify_install.py does not accept --output (exit 2); reran successfully with stdout redirected to batching-limits-installation.json."
+  }
+}

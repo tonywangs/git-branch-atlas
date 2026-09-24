@@ -42,6 +42,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--seeds', type=int, default=200)
     parser.add_argument('--output', type=Path)
+    parser.add_argument('--stress', action='store_true', help='Seeded larger payloads and alternating packed/loose objects')
     parser.add_argument('--baseline', type=Path, default=ROOT/'experiments/group_latency/baseline')
     args = parser.parse_args()
     assert 1 <= args.seeds <= 10000
@@ -58,6 +59,11 @@ def main():
             path = rng.choice(['plain', 'tab\tname', 'line\nname', 'space name', 'quote"name', '東京', 'invalid-\udcff'])
             a = (f'alpha {seed}\n'*rng.randint(1,3)).encode()
             b = (f'beta {seed}\n'*rng.randint(1,3)).encode()
+            if args.stress:
+                # Bounded varied payloads, including batch-overflow-sized histories.
+                line = ''.join(rng.choices('abcdef0123456789', k=127)).encode()+b'\n'
+                a += line * (2048 if seed%20 == 0 else rng.randint(1,256))
+                b += line * rng.randint(1,64)
             left = f.node({path:a+b}, (root,))
             # A split, its revert and duplicate, overlapping 2/4-member candidates.
             r1 = f.node({path:a}, (root,))
@@ -86,6 +92,13 @@ def main():
             f.git('update-ref', 'refs/heads/main', left)
             f.git('read-tree', left) # Populate index; comparison must preserve it.
             (f.repo/'untracked').write_text('leave this alone\n')
+            storage = 'loose'
+            if args.stress and seed%2:
+                f.git('update-ref', 'refs/heads/right', right)
+                f.git('repack', '-ad')
+                f.git('prune-packed')
+                storage = 'packed'
+                assert b'packs: 0' not in f.git('count-objects','-v')
             before = snapshot(f.repo)
             common = dict(include_groups=True, seconds=600, max_groups=100, max_group_candidates=2000,
                           threshold=rng.choice([3000,5000,10000]))
@@ -112,7 +125,7 @@ def main():
             limited_new = series_compare(*argv, **limited)
             assert limited_old == limited_new, (seed,'limited',limited)
             assert snapshot(f.repo)==before, (seed,'repository changed')
-            rows.append(dict(seed=seed,case=['binary','symlink','mode','merge','edited','empty'][case],
+            rows.append(dict(seed=seed,storage=storage,case=['binary','symlink','mode','merge','edited','empty'][case],
                              path=path,full_sha256=digest(actual),limited_sha256=digest(limited_new),
                              limit=limits[seed%len(limits)],endpoint_sha256=endpoint_hashes,
                              candidates=actual['group_comparison']['candidate_count']))
@@ -120,7 +133,7 @@ def main():
             f.doCleanups()
         if seed%20==19:
             print(f'{seed+1} histories verified',file=sys.stderr,flush=True)
-    evidence = dict(seeds=args.seeds, result='passed', exact_report_equality=True,
+    evidence = dict(seeds=args.seeds, stress=args.stress, result='passed', exact_report_equality=True,
                     repository_contents_index_refs_configuration_unchanged=True,
                     oracle='Independent git diff endpoint patches -> git patch-id --stable', rows=rows)
     text = json.dumps(evidence,indent=2)+'\n'

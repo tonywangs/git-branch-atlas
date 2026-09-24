@@ -1,0 +1,2334 @@
+{
+  "python": "3.12.3",
+  "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.39",
+  "git": "git version 2.43.0",
+  "source_sha256": {
+    "unbatched": {
+      "__init__.py": "122a03a85a75d8cd2a8dde9c9eea25eb9c11d46c61b88784bd7d730af09f67ae",
+      "__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+      "cli.py": "c8799dd30299067580a7d612e510fc3bbd738349a6946351f9fe1f41237bbea2",
+      "git.py": "3d904528589a171fe90e845057b9a7d69cf134d4e40e67ebdb7919940d85c0ef",
+      "group_compare.py": "583b71d4ec60dc4d3633ccd5f7c65942f248cf1638c10ab067d7521ca7d012b1",
+      "html_report.py": "50905f4a5468235b8bca876711627e6ef6192dc5fa53282a8ada3bbe176d6e75",
+      "patches.py": "420b77f8e39c6b3c918e650a4a7175f83e80fcf33631a8711f3aa7201dce6b88",
+      "reports.py": "57282b81c2ac24c973267d49bd38e72d3a29c229d904a07ed88be65f6cbae3bb",
+      "series.py": "7e375f1e68eb49de190be334abcee27d176dd23b08a9bd97025260ffd66d6932"
+    },
+    "batched": {
+      "__init__.py": "122a03a85a75d8cd2a8dde9c9eea25eb9c11d46c61b88784bd7d730af09f67ae",
+      "__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+      "batching.py": "f4e4f5f7d9eec438a9d51d94ad9a5a1430c3fd876d45b7b538640fc9f125f13f",
+      "cli.py": "c8799dd30299067580a7d612e510fc3bbd738349a6946351f9fe1f41237bbea2",
+      "git.py": "3d904528589a171fe90e845057b9a7d69cf134d4e40e67ebdb7919940d85c0ef",
+      "group_compare.py": "856b58c1ed771c4fc8dc9f2b853462a646e3b4b338e8015eb2972112b0046ea7",
+      "html_report.py": "50905f4a5468235b8bca876711627e6ef6192dc5fa53282a8ada3bbe176d6e75",
+      "patches.py": "d34c130ceb0af4da2e0849173c3df882708c6557700f7d27ed94f2ff8d0d37b4",
+      "reports.py": "57282b81c2ac24c973267d49bd38e72d3a29c229d904a07ed88be65f6cbae3bb",
+      "series.py": "57ae0da1ff9df7ed1f790c1cb5b10c7045cc5a40f84aa55e995a55329095eb34"
+    },
+    "quarter": {
+      "__init__.py": "122a03a85a75d8cd2a8dde9c9eea25eb9c11d46c61b88784bd7d730af09f67ae",
+      "__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+      "batching.py": "f4e4f5f7d9eec438a9d51d94ad9a5a1430c3fd876d45b7b538640fc9f125f13f",
+      "cli.py": "c8799dd30299067580a7d612e510fc3bbd738349a6946351f9fe1f41237bbea2",
+      "git.py": "3d904528589a171fe90e845057b9a7d69cf134d4e40e67ebdb7919940d85c0ef",
+      "group_compare.py": "856b58c1ed771c4fc8dc9f2b853462a646e3b4b338e8015eb2972112b0046ea7",
+      "html_report.py": "50905f4a5468235b8bca876711627e6ef6192dc5fa53282a8ada3bbe176d6e75",
+      "patches.py": "d34c130ceb0af4da2e0849173c3df882708c6557700f7d27ed94f2ff8d0d37b4",
+      "reports.py": "57282b81c2ac24c973267d49bd38e72d3a29c229d904a07ed88be65f6cbae3bb",
+      "series.py": "57ae0da1ff9df7ed1f790c1cb5b10c7045cc5a40f84aa55e995a55329095eb34"
+    }
+  },
+  "harness_sha256": "77796236279f488b7d9dfa77b730a10b36c7a39724b3687273b553ea0049eb9a",
+  "candidate": "Frozen batching source with REQUESTS=4; no production modification",
+  "cache": "Fresh Python/Git processes. Fixture creation, calibration, packing and file snapshots warm filesystem caches. No cache eviction, host-wide settings or discarded warmups.",
+  "rss_scope": "GNU time maximum individual process KiB, including waited-for children; not summed process-tree memory.",
+  "protocol": "All six permutations of three implementations; byte-identical full JSON required within each block; no dropped rows; 600s nonbinding comparison deadline.",
+  "options": {
+    "small": {
+      "max_count": 32,
+      "max_bytes": 268435456,
+      "seconds": 600,
+      "max_comparisons": 100000,
+      "include_groups": true,
+      "max_groups": 1600,
+      "max_group_comparisons": 100000,
+      "max_group_candidates": 2000
+    },
+    "many-files": {
+      "max_count": 32,
+      "max_bytes": 268435456,
+      "seconds": 600,
+      "max_comparisons": 100000,
+      "include_groups": true,
+      "max_groups": 1600,
+      "max_group_comparisons": 100000,
+      "max_group_candidates": 2000
+    },
+    "below-cap": {
+      "max_count": 32,
+      "max_bytes": 268435456,
+      "seconds": 600,
+      "max_comparisons": 100000,
+      "include_groups": true,
+      "max_groups": 1600,
+      "max_group_comparisons": 100000,
+      "max_group_candidates": 2000
+    },
+    "above-cap": {
+      "max_count": 32,
+      "max_bytes": 268435456,
+      "seconds": 600,
+      "max_comparisons": 100000,
+      "include_groups": true,
+      "max_groups": 1600,
+      "max_group_comparisons": 100000,
+      "max_group_candidates": 2000
+    },
+    "batch-overflow": {
+      "max_count": 32,
+      "max_bytes": 268435456,
+      "seconds": 600,
+      "max_comparisons": 100000,
+      "include_groups": true,
+      "max_groups": 1600,
+      "max_group_comparisons": 100000,
+      "max_group_candidates": 2000
+    },
+    "mixed": {
+      "max_count": 32,
+      "max_bytes": 268435456,
+      "seconds": 600,
+      "max_comparisons": 100000,
+      "include_groups": true,
+      "max_groups": 1600,
+      "max_group_comparisons": 100000,
+      "max_group_candidates": 2000
+    },
+    "repeated": {
+      "max_count": 32,
+      "max_bytes": 268435456,
+      "seconds": 600,
+      "max_comparisons": 100000,
+      "include_groups": true,
+      "max_groups": 1600,
+      "max_group_comparisons": 100000,
+      "max_group_candidates": 2000
+    },
+    "limited": {
+      "max_count": 32,
+      "max_bytes": 268435456,
+      "seconds": 600,
+      "max_comparisons": 100000,
+      "include_groups": true,
+      "max_groups": 1600,
+      "max_group_comparisons": 0,
+      "max_group_candidates": 2000
+    }
+  },
+  "fixtures": {
+    "small/loose": {
+      "refs": {
+        "root": "5a7f06e0a7a31e78a4eccaf450843849b1e3a4a0",
+        "left": "9472866e3e546250403f34c3020500c97423d514",
+        "right": "d1c793045569eacab6d7ae252b3d2ddf13844c74"
+      },
+      "seed": 23000,
+      "commits_per_side": 6,
+      "calibration": null,
+      "storage": "loose",
+      "object_counts": {
+        "count": "28",
+        "size": "112",
+        "in-pack": "0",
+        "packs": "0",
+        "size-pack": "0",
+        "prune-packable": "0",
+        "garbage": "0",
+        "size-garbage": "0"
+      },
+      "packing_commands": []
+    },
+    "small/packed": {
+      "refs": {
+        "root": "5a7f06e0a7a31e78a4eccaf450843849b1e3a4a0",
+        "left": "9472866e3e546250403f34c3020500c97423d514",
+        "right": "d1c793045569eacab6d7ae252b3d2ddf13844c74"
+      },
+      "seed": 23000,
+      "commits_per_side": 6,
+      "calibration": null,
+      "storage": "packed",
+      "object_counts": {
+        "count": "0",
+        "size": "0",
+        "in-pack": "28",
+        "packs": "1",
+        "size-pack": "3",
+        "prune-packable": "0",
+        "garbage": "0",
+        "size-garbage": "0"
+      },
+      "packing_commands": [
+        [
+          "git",
+          "-C",
+          "/tmp/atlas-patches-dmh3635q/repo",
+          "repack",
+          "-ad"
+        ],
+        [
+          "git",
+          "-C",
+          "/tmp/atlas-patches-dmh3635q/repo",
+          "prune-packed"
+        ],
+        [
+          "git",
+          "-C",
+          "/tmp/atlas-patches-dmh3635q/repo",
+          "prune",
+          "--expire=now"
+        ]
+      ]
+    },
+    "many-files/loose": {
+      "refs": {
+        "root": "5a7f06e0a7a31e78a4eccaf450843849b1e3a4a0",
+        "left": "647e89cdcb8a2e22ab2050acf0b865c29c8e280d",
+        "right": "0221b0d260e9e104940cb29d7290f23845eaf13b"
+      },
+      "seed": 23001,
+      "commits_per_side": 6,
+      "calibration": null,
+      "storage": "loose",
+      "object_counts": {
+        "count": "214",
+        "size": "864",
+        "in-pack": "0",
+        "packs": "0",
+        "size-pack": "0",
+        "prune-packable": "0",
+        "garbage": "0",
+        "size-garbage": "0"
+      },
+      "packing_commands": []
+    },
+    "many-files/packed": {
+      "refs": {
+        "root": "5a7f06e0a7a31e78a4eccaf450843849b1e3a4a0",
+        "left": "647e89cdcb8a2e22ab2050acf0b865c29c8e280d",
+        "right": "0221b0d260e9e104940cb29d7290f23845eaf13b"
+      },
+      "seed": 23001,
+      "commits_per_side": 6,
+      "calibration": null,
+      "storage": "packed",
+      "object_counts": {
+        "count": "0",
+        "size": "0",
+        "in-pack": "214",
+        "packs": "1",
+        "size-pack": "21",
+        "prune-packable": "0",
+        "garbage": "0",
+        "size-garbage": "0"
+      },
+      "packing_commands": [
+        [
+          "git",
+          "-C",
+          "/tmp/atlas-patches-n_96h2yq/repo",
+          "repack",
+          "-ad"
+        ],
+        [
+          "git",
+          "-C",
+          "/tmp/atlas-patches-n_96h2yq/repo",
+          "prune-packed"
+        ],
+        [
+          "git",
+          "-C",
+          "/tmp/atlas-patches-n_96h2yq/repo",
+          "prune",
+          "--expire=now"
+        ]
+      ]
+    },
+    "below-cap/loose": {
+      "refs": {
+        "root": "5a7f06e0a7a31e78a4eccaf450843849b1e3a4a0",
+        "left": "d672ad3e8b2b5c09ebeb500f488e18d96454f3b9",
+        "right": "47980428f0546780104174e7117b734528693709"
+      },
+      "seed": 23002,
+      "commits_per_side": 1,
+      "calibration": {
+        "target_framed_bytes": 1048575,
+        "marker_bytes": 34
+      },
+      "storage": "loose",
+      "object_counts": {
+        "count": "10",
+        "size": "44",
+        "in-pack": "0",
+        "packs": "0",
+        "size-pack": "0",
+        "prune-packable": "0",
+        "garbage": "0",
+        "size-garbage": "0"
+      },
+      "packing_commands": []
+    },
+    "below-cap/packed": {
+      "refs": {
+        "root": "5a7f06e0a7a31e78a4eccaf450843849b1e3a4a0",
+        "left": "d672ad3e8b2b5c09ebeb500f488e18d96454f3b9",
+        "right": "47980428f0546780104174e7117b734528693709"
+      },
+      "seed": 23002,
+      "commits_per_side": 1,
+      "calibration": {
+        "target_framed_bytes": 1048575,
+        "marker_bytes": 34
+      },
+      "storage": "packed",
+      "object_counts": {
+        "count": "0",
+        "size": "0",
+        "in-pack": "6",
+        "packs": "1",
+        "size-pack": "2",
+        "prune-packable": "0",
+        "garbage": "0",
+        "size-garbage": "0"
+      },
+      "packing_commands": [
+        [
+          "git",
+          "-C",
+          "/tmp/atlas-patches-pe1fcba6/repo",
+          "repack",
+          "-ad"
+        ],
+        [
+          "git",
+          "-C",
+          "/tmp/atlas-patches-pe1fcba6/repo",
+          "prune-packed"
+        ],
+        [
+          "git",
+          "-C",
+          "/tmp/atlas-patches-pe1fcba6/repo",
+          "prune",
+          "--expire=now"
+        ]
+      ]
+    },
+    "above-cap/loose": {
+      "refs": {
+        "root": "5a7f06e0a7a31e78a4eccaf450843849b1e3a4a0",
+        "left": "0f07a85a4eafcbecea1d36a9ee57b8a14829d01c",
+        "right": "178bb8353479af7bbb40af91fdf629095a08f836"
+      },
+      "seed": 23003,
+      "commits_per_side": 1,
+      "calibration": {
+        "target_framed_bytes": 1048577,
+        "marker_bytes": 34
+      },
+      "storage": "loose",
+      "object_counts": {
+        "count": "10",
+        "size": "44",
+        "in-pack": "0",
+        "packs": "0",
+        "size-pack": "0",
+        "prune-packable": "0",
+        "garbage": "0",
+        "size-garbage": "0"
+      },
+      "packing_commands": []
+    },
+    "above-cap/packed": {
+      "refs": {
+        "root": "5a7f06e0a7a31e78a4eccaf450843849b1e3a4a0",
+        "left": "0f07a85a4eafcbecea1d36a9ee57b8a14829d01c",
+        "right": "178bb8353479af7bbb40af91fdf629095a08f836"
+      },
+      "seed": 23003,
+      "commits_per_side": 1,
+      "calibration": {
+        "target_framed_bytes": 1048577,
+        "marker_bytes": 34
+      },
+      "storage": "packed",
+      "object_counts": {
+        "count": "0",
+        "size": "0",
+        "in-pack": "6",
+        "packs": "1",
+        "size-pack": "2",
+        "prune-packable": "0",
+        "garbage": "0",
+        "size-garbage": "0"
+      },
+      "packing_commands": [
+        [
+          "git",
+          "-C",
+          "/tmp/atlas-patches-1vfalw9_/repo",
+          "repack",
+          "-ad"
+        ],
+        [
+          "git",
+          "-C",
+          "/tmp/atlas-patches-1vfalw9_/repo",
+          "prune-packed"
+        ],
+        [
+          "git",
+          "-C",
+          "/tmp/atlas-patches-1vfalw9_/repo",
+          "prune",
+          "--expire=now"
+        ]
+      ]
+    },
+    "batch-overflow/loose": {
+      "refs": {
+        "root": "5a7f06e0a7a31e78a4eccaf450843849b1e3a4a0",
+        "left": "6558d40a83d51210c3e4a2ae2ed4eb20e5edb3be",
+        "right": "e0b11e327fcdd10f1176e3c22e6538a1ab4ec0ff"
+      },
+      "seed": 23004,
+      "commits_per_side": 6,
+      "calibration": null,
+      "storage": "loose",
+      "object_counts": {
+        "count": "23",
+        "size": "92",
+        "in-pack": "0",
+        "packs": "0",
+        "size-pack": "0",
+        "prune-packable": "0",
+        "garbage": "0",
+        "size-garbage": "0"
+      },
+      "packing_commands": []
+    },
+    "batch-overflow/packed": {
+      "refs": {
+        "root": "5a7f06e0a7a31e78a4eccaf450843849b1e3a4a0",
+        "left": "6558d40a83d51210c3e4a2ae2ed4eb20e5edb3be",
+        "right": "e0b11e327fcdd10f1176e3c22e6538a1ab4ec0ff"
+      },
+      "seed": 23004,
+      "commits_per_side": 6,
+      "calibration": null,
+      "storage": "packed",
+      "object_counts": {
+        "count": "0",
+        "size": "0",
+        "in-pack": "23",
+        "packs": "1",
+        "size-pack": "4",
+        "prune-packable": "0",
+        "garbage": "0",
+        "size-garbage": "0"
+      },
+      "packing_commands": [
+        [
+          "git",
+          "-C",
+          "/tmp/atlas-patches-hvcj8mku/repo",
+          "repack",
+          "-ad"
+        ],
+        [
+          "git",
+          "-C",
+          "/tmp/atlas-patches-hvcj8mku/repo",
+          "prune-packed"
+        ],
+        [
+          "git",
+          "-C",
+          "/tmp/atlas-patches-hvcj8mku/repo",
+          "prune",
+          "--expire=now"
+        ]
+      ]
+    },
+    "mixed/loose": {
+      "refs": {
+        "root": "5a7f06e0a7a31e78a4eccaf450843849b1e3a4a0",
+        "left": "af5e0c40f12406f054d689ec4abe43f98c9a03fc",
+        "right": "c0fbefc1e4147f31581dc50d764ae19569ee5ca0"
+      },
+      "seed": 23005,
+      "commits_per_side": 6,
+      "calibration": null,
+      "storage": "loose",
+      "object_counts": {
+        "count": "30",
+        "size": "120",
+        "in-pack": "0",
+        "packs": "0",
+        "size-pack": "0",
+        "prune-packable": "0",
+        "garbage": "0",
+        "size-garbage": "0"
+      },
+      "packing_commands": []
+    },
+    "mixed/packed": {
+      "refs": {
+        "root": "5a7f06e0a7a31e78a4eccaf450843849b1e3a4a0",
+        "left": "af5e0c40f12406f054d689ec4abe43f98c9a03fc",
+        "right": "c0fbefc1e4147f31581dc50d764ae19569ee5ca0"
+      },
+      "seed": 23005,
+      "commits_per_side": 6,
+      "calibration": null,
+      "storage": "packed",
+      "object_counts": {
+        "count": "0",
+        "size": "0",
+        "in-pack": "30",
+        "packs": "1",
+        "size-pack": "4",
+        "prune-packable": "0",
+        "garbage": "0",
+        "size-garbage": "0"
+      },
+      "packing_commands": [
+        [
+          "git",
+          "-C",
+          "/tmp/atlas-patches-dyuf9l_4/repo",
+          "repack",
+          "-ad"
+        ],
+        [
+          "git",
+          "-C",
+          "/tmp/atlas-patches-dyuf9l_4/repo",
+          "prune-packed"
+        ],
+        [
+          "git",
+          "-C",
+          "/tmp/atlas-patches-dyuf9l_4/repo",
+          "prune",
+          "--expire=now"
+        ]
+      ]
+    },
+    "repeated/loose": {
+      "refs": {
+        "root": "5a7f06e0a7a31e78a4eccaf450843849b1e3a4a0",
+        "left": "d95929665dd13908a3bbea56c440e65ba8d648bb",
+        "right": "d95929665dd13908a3bbea56c440e65ba8d648bb"
+      },
+      "seed": 23006,
+      "commits_per_side": 6,
+      "calibration": null,
+      "storage": "loose",
+      "object_counts": {
+        "count": "20",
+        "size": "80",
+        "in-pack": "0",
+        "packs": "0",
+        "size-pack": "0",
+        "prune-packable": "0",
+        "garbage": "0",
+        "size-garbage": "0"
+      },
+      "packing_commands": []
+    },
+    "repeated/packed": {
+      "refs": {
+        "root": "5a7f06e0a7a31e78a4eccaf450843849b1e3a4a0",
+        "left": "d95929665dd13908a3bbea56c440e65ba8d648bb",
+        "right": "d95929665dd13908a3bbea56c440e65ba8d648bb"
+      },
+      "seed": 23006,
+      "commits_per_side": 6,
+      "calibration": null,
+      "storage": "packed",
+      "object_counts": {
+        "count": "0",
+        "size": "0",
+        "in-pack": "12",
+        "packs": "1",
+        "size-pack": "2",
+        "prune-packable": "0",
+        "garbage": "0",
+        "size-garbage": "0"
+      },
+      "packing_commands": [
+        [
+          "git",
+          "-C",
+          "/tmp/atlas-patches-ek6jv5av/repo",
+          "repack",
+          "-ad"
+        ],
+        [
+          "git",
+          "-C",
+          "/tmp/atlas-patches-ek6jv5av/repo",
+          "prune-packed"
+        ],
+        [
+          "git",
+          "-C",
+          "/tmp/atlas-patches-ek6jv5av/repo",
+          "prune",
+          "--expire=now"
+        ]
+      ]
+    },
+    "limited/loose": {
+      "refs": {
+        "root": "5a7f06e0a7a31e78a4eccaf450843849b1e3a4a0",
+        "left": "29ef3665c19d41b6f770dc44b5cf140b1553271d",
+        "right": "5433d57781845b57287b6d4d5ff490cda277da77"
+      },
+      "seed": 23007,
+      "commits_per_side": 6,
+      "calibration": null,
+      "storage": "loose",
+      "object_counts": {
+        "count": "28",
+        "size": "112",
+        "in-pack": "0",
+        "packs": "0",
+        "size-pack": "0",
+        "prune-packable": "0",
+        "garbage": "0",
+        "size-garbage": "0"
+      },
+      "packing_commands": []
+    },
+    "limited/packed": {
+      "refs": {
+        "root": "5a7f06e0a7a31e78a4eccaf450843849b1e3a4a0",
+        "left": "29ef3665c19d41b6f770dc44b5cf140b1553271d",
+        "right": "5433d57781845b57287b6d4d5ff490cda277da77"
+      },
+      "seed": 23007,
+      "commits_per_side": 6,
+      "calibration": null,
+      "storage": "packed",
+      "object_counts": {
+        "count": "0",
+        "size": "0",
+        "in-pack": "28",
+        "packs": "1",
+        "size-pack": "3",
+        "prune-packable": "0",
+        "garbage": "0",
+        "size-garbage": "0"
+      },
+      "packing_commands": [
+        [
+          "git",
+          "-C",
+          "/tmp/atlas-patches-l3hw28ou/repo",
+          "repack",
+          "-ad"
+        ],
+        [
+          "git",
+          "-C",
+          "/tmp/atlas-patches-l3hw28ou/repo",
+          "prune-packed"
+        ],
+        [
+          "git",
+          "-C",
+          "/tmp/atlas-patches-l3hw28ou/repo",
+          "prune",
+          "--expire=now"
+        ]
+      ]
+    }
+  },
+  "summary": {
+    "small/loose": {
+      "batched": {
+        "median_seconds": 1.9072164609096944,
+        "max_peak_rss_kib": 21376,
+        "subprocesses": [
+          61
+        ],
+        "fallback_transitions": [
+          0
+        ]
+      }
+    },
+    "small/packed": {
+      "batched": {
+        "median_seconds": 2.4977432729210705,
+        "max_peak_rss_kib": 21376,
+        "subprocesses": [
+          61
+        ],
+        "fallback_transitions": [
+          0
+        ]
+      }
+    },
+    "many-files/loose": {
+      "batched": {
+        "median_seconds": 6.891073314938694,
+        "max_peak_rss_kib": 22280,
+        "subprocesses": [
+          247
+        ],
+        "fallback_transitions": [
+          0
+        ]
+      }
+    },
+    "many-files/packed": {
+      "batched": {
+        "median_seconds": 6.2886916000861675,
+        "max_peak_rss_kib": 22684,
+        "subprocesses": [
+          247
+        ],
+        "fallback_transitions": [
+          0
+        ]
+      }
+    },
+    "below-cap/loose": {
+      "batched": {
+        "median_seconds": 1.5773486769758165,
+        "max_peak_rss_kib": 28428,
+        "subprocesses": [
+          18
+        ],
+        "fallback_transitions": [
+          0
+        ]
+      }
+    },
+    "below-cap/packed": {
+      "batched": {
+        "median_seconds": 1.5031098630279303,
+        "max_peak_rss_kib": 28296,
+        "subprocesses": [
+          18
+        ],
+        "fallback_transitions": [
+          0
+        ]
+      }
+    },
+    "above-cap/loose": {
+      "batched": {
+        "median_seconds": 1.62458017305471,
+        "max_peak_rss_kib": 27368,
+        "subprocesses": [
+          19
+        ],
+        "fallback_transitions": [
+          1
+        ]
+      }
+    },
+    "above-cap/packed": {
+      "batched": {
+        "median_seconds": 1.4062358881346881,
+        "max_peak_rss_kib": 26380,
+        "subprocesses": [
+          19
+        ],
+        "fallback_transitions": [
+          1
+        ]
+      }
+    },
+    "batch-overflow/loose": {
+      "batched": {
+        "median_seconds": 6.503025508020073,
+        "max_peak_rss_kib": 25992,
+        "subprocesses": [
+          121
+        ],
+        "fallback_transitions": [
+          1
+        ]
+      }
+    },
+    "batch-overflow/packed": {
+      "batched": {
+        "median_seconds": 6.916370874969289,
+        "max_peak_rss_kib": 26044,
+        "subprocesses": [
+          121
+        ],
+        "fallback_transitions": [
+          1
+        ]
+      }
+    },
+    "mixed/loose": {
+      "batched": {
+        "median_seconds": 1.3000715300440788,
+        "max_peak_rss_kib": 21376,
+        "subprocesses": [
+          28
+        ],
+        "fallback_transitions": [
+          0
+        ]
+      }
+    },
+    "mixed/packed": {
+      "batched": {
+        "median_seconds": 1.4050916978158057,
+        "max_peak_rss_kib": 21248,
+        "subprocesses": [
+          28
+        ],
+        "fallback_transitions": [
+          0
+        ]
+      }
+    },
+    "repeated/loose": {
+      "batched": {
+        "median_seconds": 1.8994230749085546,
+        "max_peak_rss_kib": 21376,
+        "subprocesses": [
+          56
+        ],
+        "fallback_transitions": [
+          0
+        ]
+      }
+    },
+    "repeated/packed": {
+      "batched": {
+        "median_seconds": 1.7113679379690439,
+        "max_peak_rss_kib": 21376,
+        "subprocesses": [
+          56
+        ],
+        "fallback_transitions": [
+          0
+        ]
+      }
+    },
+    "limited/loose": {
+      "batched": {
+        "median_seconds": 1.816944100894034,
+        "max_peak_rss_kib": 21376,
+        "subprocesses": [
+          61
+        ],
+        "fallback_transitions": [
+          0
+        ]
+      }
+    },
+    "limited/packed": {
+      "batched": {
+        "median_seconds": 1.8017486720345914,
+        "max_peak_rss_kib": 21248,
+        "subprocesses": [
+          61
+        ],
+        "fallback_transitions": [
+          0
+        ]
+      }
+    }
+  },
+  "measurements": [
+    {
+      "seconds": 1.3871185760945082,
+      "stages_seconds": {
+        "individual:git:rev-parse": 0.10143489157781005,
+        "individual:git:rev-list": 0.08583325007930398,
+        "individual:git:diff-tree:patch": 0.021837689680978656,
+        "individual:git:patch-id": 0.008198188850656152,
+        "individual:git:diff-tree:raw": 0.36418490787036717,
+        "individual:git:cat-file": 0.10404860181733966,
+        "individual:features": 0.0004974240437150002,
+        "individual:score": 1.846998929977417e-05,
+        "individual:evidence": 0.00012925872579216957,
+        "groups:git:diff-tree:patch": 0.09902070206589997,
+        "groups:git:patch-id": 0.012214901158586144,
+        "groups:git:diff-tree:raw": 0.5709519991651177,
+        "groups:git:cat-file": 0.001170055940747261,
+        "groups:features": 0.0014771702699363232,
+        "groups:score": 0.000762926647439599,
+        "groups:evidence": 0.0007030991837382317,
+        "groups:total": 0.6926187758799642,
+        "serialization": 0.004338514059782028,
+        "individual:total": 0.6897489801049232
+      },
+      "calls": {
+        "individual:git:rev-parse": 7,
+        "individual:git:rev-list": 3,
+        "individual:git:diff-tree:patch": 2,
+        "individual:git:patch-id": 2,
+        "individual:git:diff-tree:raw": 12,
+        "individual:git:cat-file": 13,
+        "individual:features": 12,
+        "individual:score": 1,
+        "individual:evidence": 2,
+        "groups:git:diff-tree:patch": 2,
+        "groups:git:patch-id": 2,
+        "groups:git:diff-tree:raw": 24,
+        "groups:git:cat-file": 71,
+        "groups:features": 24,
+        "groups:score": 144,
+        "groups:evidence": 20
+      },
+      "git_subprocesses": 61,
+      "subprocesses_by_stage": {
+        "individual:git:rev-parse": 7,
+        "individual:git:rev-list": 3,
+        "individual:git:diff-tree:patch": 2,
+        "individual:git:patch-id": 2,
+        "individual:git:diff-tree:raw": 12,
+        "individual:git:cat-file": 7,
+        "groups:git:diff-tree:patch": 2,
+        "groups:git:patch-id": 2,
+        "groups:git:diff-tree:raw": 24
+      },
+      "sha256": "971d45753133806772ff20a95774f5bb40216e6fdc37006458e0361ef8f48d31",
+      "output_bytes": 60213,
+      "complete": true,
+      "structural_windows": 24,
+      "inspected_groups": 24,
+      "comparison_count": 144,
+      "comparisons_possible": 144,
+      "candidate_count": 20,
+      "candidates_omitted": 0,
+      "inspection_bytes_read": 66156,
+      "batch_calls": 4,
+      "batch_disabled_transitions": 0,
+      "batch_empty_returns": 0,
+      "batch_requests": 36,
+      "repeated_requests": 0,
+      "hints_returned": 36,
+      "batch_seconds": 0.14488469483330846,
+      "standalone_patch_calls": 0,
+      "workload": "small/loose",
+      "seed": 23000,
+      "pair": 1,
+      "kind": "batched",
+      "order": [
+        "batched"
+      ],
+      "command": [
+        "/usr/bin/time",
+        "-f",
+        "%M",
+        "-o",
+        "/tmp/atlas-limits-dhbily0b/rss",
+        "/usr/bin/python3",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/scripts/measure_batching_limits.py",
+        "--worker",
+        "--implementation",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/experiments/batching_limits/baseline",
+        "--repo",
+        "/tmp/atlas-patches-dmh3635q/repo",
+        "--scenario",
+        "small",
+        "--kind",
+        "batched",
+        "--report",
+        "/tmp/atlas-limits-dhbily0b/report.json"
+      ],
+      "wall_seconds": 1.9072164609096944,
+      "peak_rss_kib": 21376
+    },
+    {
+      "seconds": 1.7070664030034095,
+      "stages_seconds": {
+        "individual:git:rev-parse": 0.10133060230873525,
+        "individual:git:rev-list": 0.029780962970107794,
+        "individual:git:diff-tree:patch": 0.0987002388574183,
+        "individual:git:patch-id": 0.16353115695528686,
+        "individual:git:diff-tree:raw": 0.3100263432133943,
+        "individual:git:cat-file": 0.19527843361720443,
+        "individual:features": 0.0005715542938560247,
+        "individual:score": 2.4070963263511658e-05,
+        "individual:evidence": 0.00015612109564244747,
+        "groups:git:diff-tree:patch": 0.02634235192090273,
+        "groups:git:patch-id": 0.14384076022543013,
+        "groups:git:diff-tree:raw": 0.6124198522884399,
+        "groups:git:cat-file": 0.0012494756374508142,
+        "groups:features": 0.004405834013596177,
+        "groups:score": 0.0006894518155604601,
+        "groups:evidence": 0.0009483308531343937,
+        "groups:total": 0.7954185009002686,
+        "serialization": 0.007189718075096607,
+        "individual:total": 0.9032998350448906
+      },
+      "calls": {
+        "individual:git:rev-parse": 7,
+        "individual:git:rev-list": 3,
+        "individual:git:diff-tree:patch": 2,
+        "individual:git:patch-id": 2,
+        "individual:git:diff-tree:raw": 12,
+        "individual:git:cat-file": 13,
+        "individual:features": 12,
+        "individual:score": 1,
+        "individual:evidence": 2,
+        "groups:git:diff-tree:patch": 2,
+        "groups:git:patch-id": 2,
+        "groups:git:diff-tree:raw": 24,
+        "groups:git:cat-file": 71,
+        "groups:features": 24,
+        "groups:score": 144,
+        "groups:evidence": 20
+      },
+      "git_subprocesses": 61,
+      "subprocesses_by_stage": {
+        "individual:git:rev-parse": 7,
+        "individual:git:rev-list": 3,
+        "individual:git:diff-tree:patch": 2,
+        "individual:git:patch-id": 2,
+        "individual:git:diff-tree:raw": 12,
+        "individual:git:cat-file": 7,
+        "groups:git:diff-tree:patch": 2,
+        "groups:git:patch-id": 2,
+        "groups:git:diff-tree:raw": 24
+      },
+      "sha256": "971d45753133806772ff20a95774f5bb40216e6fdc37006458e0361ef8f48d31",
+      "output_bytes": 60213,
+      "complete": true,
+      "structural_windows": 24,
+      "inspected_groups": 24,
+      "comparison_count": 144,
+      "comparisons_possible": 144,
+      "candidate_count": 20,
+      "candidates_omitted": 0,
+      "inspection_bytes_read": 66156,
+      "batch_calls": 4,
+      "batch_disabled_transitions": 0,
+      "batch_empty_returns": 0,
+      "batch_requests": 36,
+      "repeated_requests": 0,
+      "hints_returned": 36,
+      "batch_seconds": 0.4352788859978318,
+      "standalone_patch_calls": 0,
+      "workload": "small/packed",
+      "seed": 23000,
+      "pair": 1,
+      "kind": "batched",
+      "order": [
+        "batched"
+      ],
+      "command": [
+        "/usr/bin/time",
+        "-f",
+        "%M",
+        "-o",
+        "/tmp/atlas-limits-dhbily0b/rss",
+        "/usr/bin/python3",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/scripts/measure_batching_limits.py",
+        "--worker",
+        "--implementation",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/experiments/batching_limits/baseline",
+        "--repo",
+        "/tmp/atlas-patches-dmh3635q/repo",
+        "--scenario",
+        "small",
+        "--kind",
+        "batched",
+        "--report",
+        "/tmp/atlas-limits-dhbily0b/report.json"
+      ],
+      "wall_seconds": 2.4977432729210705,
+      "peak_rss_kib": 21376
+    },
+    {
+      "seconds": 6.099121416918933,
+      "stages_seconds": {
+        "individual:git:rev-parse": 0.035749012837186456,
+        "individual:git:rev-list": 0.08307565073482692,
+        "individual:git:diff-tree:patch": 0.11209244607016444,
+        "individual:git:patch-id": 0.15983979287557304,
+        "individual:git:diff-tree:raw": 0.29392686183564365,
+        "individual:git:cat-file": 3.6356018157675862,
+        "individual:features": 0.005012927344068885,
+        "individual:score": 8.2401093095541e-05,
+        "individual:evidence": 0.0002154849935323,
+        "groups:git:diff-tree:patch": 0.6705804010853171,
+        "groups:git:patch-id": 0.09210570412687957,
+        "groups:git:diff-tree:raw": 0.36067912983708084,
+        "groups:git:cat-file": 0.014620540430769324,
+        "groups:features": 0.18093336187303066,
+        "groups:score": 0.006567145697772503,
+        "groups:evidence": 0.07490653893910348,
+        "groups:total": 1.6841086999047548,
+        "serialization": 0.006693006958812475,
+        "individual:total": 4.407846421003342
+      },
+      "calls": {
+        "individual:git:rev-parse": 7,
+        "individual:git:rev-list": 3,
+        "individual:git:diff-tree:patch": 2,
+        "individual:git:patch-id": 2,
+        "individual:git:diff-tree:raw": 12,
+        "individual:git:cat-file": 385,
+        "individual:features": 12,
+        "individual:score": 1,
+        "individual:evidence": 2,
+        "groups:git:diff-tree:patch": 2,
+        "groups:git:patch-id": 2,
+        "groups:git:diff-tree:raw": 24,
+        "groups:git:cat-file": 2179,
+        "groups:features": 24,
+        "groups:score": 144,
+        "groups:evidence": 20
+      },
+      "git_subprocesses": 247,
+      "subprocesses_by_stage": {
+        "individual:git:rev-parse": 7,
+        "individual:git:rev-list": 3,
+        "individual:git:diff-tree:patch": 2,
+        "individual:git:patch-id": 2,
+        "individual:git:diff-tree:raw": 12,
+        "individual:git:cat-file": 193,
+        "groups:git:diff-tree:patch": 2,
+        "groups:git:patch-id": 2,
+        "groups:git:diff-tree:raw": 24
+      },
+      "sha256": "e95ed10535d5b9fd7c36ece40f5e1c81ee6c9f2f03f9e759ad02d542bf3c18b1",
+      "output_bytes": 99565,
+      "complete": true,
+      "structural_windows": 24,
+      "inspected_groups": 24,
+      "comparison_count": 144,
+      "comparisons_possible": 144,
+      "candidate_count": 20,
+      "candidates_omitted": 0,
+      "inspection_bytes_read": 2083436,
+      "batch_calls": 4,
+      "batch_disabled_transitions": 0,
+      "batch_empty_returns": 0,
+      "batch_requests": 36,
+      "repeated_requests": 0,
+      "hints_returned": 36,
+      "batch_seconds": 1.156383358174935,
+      "standalone_patch_calls": 0,
+      "workload": "many-files/loose",
+      "seed": 23001,
+      "pair": 1,
+      "kind": "batched",
+      "order": [
+        "batched"
+      ],
+      "command": [
+        "/usr/bin/time",
+        "-f",
+        "%M",
+        "-o",
+        "/tmp/atlas-limits-dhbily0b/rss",
+        "/usr/bin/python3",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/scripts/measure_batching_limits.py",
+        "--worker",
+        "--implementation",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/experiments/batching_limits/baseline",
+        "--repo",
+        "/tmp/atlas-patches-n_96h2yq/repo",
+        "--scenario",
+        "many-files",
+        "--kind",
+        "batched",
+        "--report",
+        "/tmp/atlas-limits-dhbily0b/report.json"
+      ],
+      "wall_seconds": 6.891073314938694,
+      "peak_rss_kib": 22280
+    },
+    {
+      "seconds": 5.608538636006415,
+      "stages_seconds": {
+        "individual:git:rev-parse": 0.10428691003471613,
+        "individual:git:rev-list": 0.16061041597276926,
+        "individual:git:diff-tree:patch": 0.02028771792538464,
+        "individual:git:patch-id": 0.01210632803849876,
+        "individual:git:diff-tree:raw": 0.21015655505470932,
+        "individual:git:cat-file": 3.7761039631441236,
+        "individual:features": 0.005186364986002445,
+        "individual:score": 5.610194057226181e-05,
+        "individual:evidence": 0.0001980219967663288,
+        "groups:git:diff-tree:patch": 0.2007844301406294,
+        "groups:git:patch-id": 0.021945794811472297,
+        "groups:git:diff-tree:raw": 0.811629047151655,
+        "groups:git:cat-file": 0.014242593897506595,
+        "groups:features": 0.026588299544528127,
+        "groups:score": 0.005205924157053232,
+        "groups:evidence": 0.0033042191062122583,
+        "groups:total": 1.2912819948978722,
+        "serialization": 0.007791957817971706,
+        "individual:total": 4.308851955225691
+      },
+      "calls": {
+        "individual:git:rev-parse": 7,
+        "individual:git:rev-list": 3,
+        "individual:git:diff-tree:patch": 2,
+        "individual:git:patch-id": 2,
+        "individual:git:diff-tree:raw": 12,
+        "individual:git:cat-file": 385,
+        "individual:features": 12,
+        "individual:score": 1,
+        "individual:evidence": 2,
+        "groups:git:diff-tree:patch": 2,
+        "groups:git:patch-id": 2,
+        "groups:git:diff-tree:raw": 24,
+        "groups:git:cat-file": 2179,
+        "groups:features": 24,
+        "groups:score": 144,
+        "groups:evidence": 20
+      },
+      "git_subprocesses": 247,
+      "subprocesses_by_stage": {
+        "individual:git:rev-parse": 7,
+        "individual:git:rev-list": 3,
+        "individual:git:diff-tree:patch": 2,
+        "individual:git:patch-id": 2,
+        "individual:git:diff-tree:raw": 12,
+        "individual:git:cat-file": 193,
+        "groups:git:diff-tree:patch": 2,
+        "groups:git:patch-id": 2,
+        "groups:git:diff-tree:raw": 24
+      },
+      "sha256": "e95ed10535d5b9fd7c36ece40f5e1c81ee6c9f2f03f9e759ad02d542bf3c18b1",
+      "output_bytes": 99565,
+      "complete": true,
+      "structural_windows": 24,
+      "inspected_groups": 24,
+      "comparison_count": 144,
+      "comparisons_possible": 144,
+      "candidate_count": 20,
+      "candidates_omitted": 0,
+      "inspection_bytes_read": 2083436,
+      "batch_calls": 4,
+      "batch_disabled_transitions": 0,
+      "batch_empty_returns": 0,
+      "batch_requests": 36,
+      "repeated_requests": 0,
+      "hints_returned": 36,
+      "batch_seconds": 0.4451203760690987,
+      "standalone_patch_calls": 0,
+      "workload": "many-files/packed",
+      "seed": 23001,
+      "pair": 1,
+      "kind": "batched",
+      "order": [
+        "batched"
+      ],
+      "command": [
+        "/usr/bin/time",
+        "-f",
+        "%M",
+        "-o",
+        "/tmp/atlas-limits-dhbily0b/rss",
+        "/usr/bin/python3",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/scripts/measure_batching_limits.py",
+        "--worker",
+        "--implementation",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/experiments/batching_limits/baseline",
+        "--repo",
+        "/tmp/atlas-patches-n_96h2yq/repo",
+        "--scenario",
+        "many-files",
+        "--kind",
+        "batched",
+        "--report",
+        "/tmp/atlas-limits-dhbily0b/report.json"
+      ],
+      "wall_seconds": 6.2886916000861675,
+      "peak_rss_kib": 22684
+    },
+    {
+      "seconds": 0.8937822110019624,
+      "stages_seconds": {
+        "individual:git:rev-parse": 0.10460318787954748,
+        "individual:git:rev-list": 0.15980119397863746,
+        "individual:git:diff-tree:patch": 0.03429313492961228,
+        "individual:git:patch-id": 0.1775678510311991,
+        "individual:git:diff-tree:raw": 0.011574358912184834,
+        "individual:git:cat-file": 0.09037405787967145,
+        "individual:features": 0.011106400052085519,
+        "groups:total": 6.958888843655586e-05,
+        "serialization": 0.0004000789485871792,
+        "individual:total": 0.89300363115035
+      },
+      "calls": {
+        "individual:git:rev-parse": 7,
+        "individual:git:rev-list": 3,
+        "individual:git:diff-tree:patch": 2,
+        "individual:git:patch-id": 2,
+        "individual:git:diff-tree:raw": 2,
+        "individual:git:cat-file": 2,
+        "individual:features": 2
+      },
+      "git_subprocesses": 18,
+      "subprocesses_by_stage": {
+        "individual:git:rev-parse": 7,
+        "individual:git:rev-list": 3,
+        "individual:git:diff-tree:patch": 2,
+        "individual:git:patch-id": 2,
+        "individual:git:diff-tree:raw": 2,
+        "individual:git:cat-file": 2
+      },
+      "sha256": "50397518108e01fb9f6434967e6dab7fab2295521db6a1d53922cca944e6bc55",
+      "output_bytes": 4554,
+      "complete": true,
+      "structural_windows": 0,
+      "inspected_groups": 0,
+      "comparison_count": 0,
+      "comparisons_possible": 0,
+      "candidate_count": 0,
+      "candidates_omitted": 0,
+      "inspection_bytes_read": 4194034,
+      "batch_calls": 2,
+      "batch_disabled_transitions": 0,
+      "batch_empty_returns": 0,
+      "batch_requests": 2,
+      "repeated_requests": 0,
+      "hints_returned": 2,
+      "batch_seconds": 0.5130044049583375,
+      "standalone_patch_calls": 0,
+      "workload": "below-cap/loose",
+      "seed": 23002,
+      "pair": 1,
+      "kind": "batched",
+      "order": [
+        "batched"
+      ],
+      "command": [
+        "/usr/bin/time",
+        "-f",
+        "%M",
+        "-o",
+        "/tmp/atlas-limits-dhbily0b/rss",
+        "/usr/bin/python3",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/scripts/measure_batching_limits.py",
+        "--worker",
+        "--implementation",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/experiments/batching_limits/baseline",
+        "--repo",
+        "/tmp/atlas-patches-pe1fcba6/repo",
+        "--scenario",
+        "below-cap",
+        "--kind",
+        "batched",
+        "--report",
+        "/tmp/atlas-limits-dhbily0b/report.json"
+      ],
+      "wall_seconds": 1.5773486769758165,
+      "peak_rss_kib": 28428
+    },
+    {
+      "seconds": 0.98544792807661,
+      "stages_seconds": {
+        "individual:git:rev-parse": 0.10502124717459083,
+        "individual:git:rev-list": 0.16652058204635978,
+        "individual:git:diff-tree:patch": 0.040416233940050006,
+        "individual:git:patch-id": 0.17270530597306788,
+        "individual:git:diff-tree:raw": 0.008436569944024086,
+        "individual:git:cat-file": 0.023275617975741625,
+        "individual:features": 0.012687130132690072,
+        "groups:total": 0.00018080789595842361,
+        "serialization": 0.00043588108383119106,
+        "individual:total": 0.9844680861569941
+      },
+      "calls": {
+        "individual:git:rev-parse": 7,
+        "individual:git:rev-list": 3,
+        "individual:git:diff-tree:patch": 2,
+        "individual:git:patch-id": 2,
+        "individual:git:diff-tree:raw": 2,
+        "individual:git:cat-file": 2,
+        "individual:features": 2
+      },
+      "git_subprocesses": 18,
+      "subprocesses_by_stage": {
+        "individual:git:rev-parse": 7,
+        "individual:git:rev-list": 3,
+        "individual:git:diff-tree:patch": 2,
+        "individual:git:patch-id": 2,
+        "individual:git:diff-tree:raw": 2,
+        "individual:git:cat-file": 2
+      },
+      "sha256": "50397518108e01fb9f6434967e6dab7fab2295521db6a1d53922cca944e6bc55",
+      "output_bytes": 4554,
+      "complete": true,
+      "structural_windows": 0,
+      "inspected_groups": 0,
+      "comparison_count": 0,
+      "comparisons_possible": 0,
+      "candidate_count": 0,
+      "candidates_omitted": 0,
+      "inspection_bytes_read": 4194034,
+      "batch_calls": 2,
+      "batch_disabled_transitions": 0,
+      "batch_empty_returns": 0,
+      "batch_requests": 2,
+      "repeated_requests": 0,
+      "hints_returned": 2,
+      "batch_seconds": 0.5949537297710776,
+      "standalone_patch_calls": 0,
+      "workload": "below-cap/packed",
+      "seed": 23002,
+      "pair": 1,
+      "kind": "batched",
+      "order": [
+        "batched"
+      ],
+      "command": [
+        "/usr/bin/time",
+        "-f",
+        "%M",
+        "-o",
+        "/tmp/atlas-limits-dhbily0b/rss",
+        "/usr/bin/python3",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/scripts/measure_batching_limits.py",
+        "--worker",
+        "--implementation",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/experiments/batching_limits/baseline",
+        "--repo",
+        "/tmp/atlas-patches-pe1fcba6/repo",
+        "--scenario",
+        "below-cap",
+        "--kind",
+        "batched",
+        "--report",
+        "/tmp/atlas-limits-dhbily0b/report.json"
+      ],
+      "wall_seconds": 1.5031098630279303,
+      "peak_rss_kib": 28296
+    },
+    {
+      "seconds": 0.8992999480105937,
+      "stages_seconds": {
+        "individual:git:rev-parse": 0.20324976509436965,
+        "individual:git:rev-list": 0.09440545993857086,
+        "individual:git:diff-tree:patch": 0.22458771080709994,
+        "individual:git:diff-tree:raw": 0.010990766109898686,
+        "individual:git:cat-file": 0.16891304193995893,
+        "individual:git:patch-id": 0.10607416019774973,
+        "individual:features": 0.08743231906555593,
+        "groups:total": 9.568408131599426e-05,
+        "serialization": 0.00041155400685966015,
+        "individual:total": 0.8984096338972449
+      },
+      "calls": {
+        "individual:git:rev-parse": 7,
+        "individual:git:rev-list": 3,
+        "individual:git:diff-tree:patch": 3,
+        "individual:git:diff-tree:raw": 2,
+        "individual:git:cat-file": 2,
+        "individual:git:patch-id": 2,
+        "individual:features": 2
+      },
+      "git_subprocesses": 19,
+      "subprocesses_by_stage": {
+        "individual:git:rev-parse": 7,
+        "individual:git:rev-list": 3,
+        "individual:git:diff-tree:patch": 3,
+        "individual:git:diff-tree:raw": 2,
+        "individual:git:cat-file": 2,
+        "individual:git:patch-id": 2
+      },
+      "sha256": "8cf31995aaf81cdea56317e814273daeb680780164b08b2578b6c93197079600",
+      "output_bytes": 4554,
+      "complete": true,
+      "structural_windows": 0,
+      "inspected_groups": 0,
+      "comparison_count": 0,
+      "comparisons_possible": 0,
+      "candidate_count": 0,
+      "candidates_omitted": 0,
+      "inspection_bytes_read": 4194042,
+      "batch_calls": 2,
+      "batch_disabled_transitions": 1,
+      "batch_empty_returns": 2,
+      "batch_requests": 2,
+      "repeated_requests": 0,
+      "hints_returned": 0,
+      "batch_seconds": 0.11721818707883358,
+      "standalone_patch_calls": 2,
+      "workload": "above-cap/loose",
+      "seed": 23003,
+      "pair": 1,
+      "kind": "batched",
+      "order": [
+        "batched"
+      ],
+      "command": [
+        "/usr/bin/time",
+        "-f",
+        "%M",
+        "-o",
+        "/tmp/atlas-limits-dhbily0b/rss",
+        "/usr/bin/python3",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/scripts/measure_batching_limits.py",
+        "--worker",
+        "--implementation",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/experiments/batching_limits/baseline",
+        "--repo",
+        "/tmp/atlas-patches-1vfalw9_/repo",
+        "--scenario",
+        "above-cap",
+        "--kind",
+        "batched",
+        "--report",
+        "/tmp/atlas-limits-dhbily0b/report.json"
+      ],
+      "wall_seconds": 1.62458017305471,
+      "peak_rss_kib": 27368
+    },
+    {
+      "seconds": 0.7181369489990175,
+      "stages_seconds": {
+        "individual:git:rev-parse": 0.10610827431082726,
+        "individual:git:rev-list": 0.017796049127355218,
+        "individual:git:diff-tree:patch": 0.21417166478931904,
+        "individual:git:diff-tree:raw": 0.08131375699304044,
+        "individual:git:cat-file": 0.10185432783327997,
+        "individual:git:patch-id": 0.1804727700073272,
+        "individual:features": 0.01360407192260027,
+        "groups:total": 7.218099199235439e-05,
+        "serialization": 0.00037181610241532326,
+        "individual:total": 0.7174062868580222
+      },
+      "calls": {
+        "individual:git:rev-parse": 7,
+        "individual:git:rev-list": 3,
+        "individual:git:diff-tree:patch": 3,
+        "individual:git:diff-tree:raw": 2,
+        "individual:git:cat-file": 2,
+        "individual:git:patch-id": 2,
+        "individual:features": 2
+      },
+      "git_subprocesses": 19,
+      "subprocesses_by_stage": {
+        "individual:git:rev-parse": 7,
+        "individual:git:rev-list": 3,
+        "individual:git:diff-tree:patch": 3,
+        "individual:git:diff-tree:raw": 2,
+        "individual:git:cat-file": 2,
+        "individual:git:patch-id": 2
+      },
+      "sha256": "8cf31995aaf81cdea56317e814273daeb680780164b08b2578b6c93197079600",
+      "output_bytes": 4554,
+      "complete": true,
+      "structural_windows": 0,
+      "inspected_groups": 0,
+      "comparison_count": 0,
+      "comparisons_possible": 0,
+      "candidate_count": 0,
+      "candidates_omitted": 0,
+      "inspection_bytes_read": 4194042,
+      "batch_calls": 2,
+      "batch_disabled_transitions": 1,
+      "batch_empty_returns": 2,
+      "batch_requests": 2,
+      "repeated_requests": 0,
+      "hints_returned": 0,
+      "batch_seconds": 0.1046454671304673,
+      "standalone_patch_calls": 2,
+      "workload": "above-cap/packed",
+      "seed": 23003,
+      "pair": 1,
+      "kind": "batched",
+      "order": [
+        "batched"
+      ],
+      "command": [
+        "/usr/bin/time",
+        "-f",
+        "%M",
+        "-o",
+        "/tmp/atlas-limits-dhbily0b/rss",
+        "/usr/bin/python3",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/scripts/measure_batching_limits.py",
+        "--worker",
+        "--implementation",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/experiments/batching_limits/baseline",
+        "--repo",
+        "/tmp/atlas-patches-1vfalw9_/repo",
+        "--scenario",
+        "above-cap",
+        "--kind",
+        "batched",
+        "--report",
+        "/tmp/atlas-limits-dhbily0b/report.json"
+      ],
+      "wall_seconds": 1.4062358881346881,
+      "peak_rss_kib": 26380
+    },
+    {
+      "seconds": 5.709295795997605,
+      "stages_seconds": {
+        "individual:git:rev-parse": 0.1153855191078037,
+        "individual:git:rev-list": 0.08972794003784657,
+        "individual:git:diff-tree:patch": 0.7892805901356041,
+        "individual:git:diff-tree:raw": 0.13945527467876673,
+        "individual:git:cat-file": 0.009260335471481085,
+        "individual:git:patch-id": 0.31840231944806874,
+        "individual:features": 0.043975173495709896,
+        "individual:score": 2.7299858629703522e-05,
+        "individual:evidence": 0.00013190926983952522,
+        "groups:git:diff-tree:raw": 0.4351525432430208,
+        "groups:git:cat-file": 0.0007551538292318583,
+        "groups:git:diff-tree:patch": 1.4817179071251303,
+        "groups:git:patch-id": 0.9737717958632857,
+        "groups:features": 1.2909282073378563,
+        "groups:score": 0.0006524480413645506,
+        "groups:evidence": 0.0017956860829144716,
+        "groups:total": 4.191854782169685,
+        "serialization": 0.00796957197599113,
+        "individual:total": 1.5089868558570743
+      },
+      "calls": {
+        "individual:git:rev-parse": 7,
+        "individual:git:rev-list": 3,
+        "individual:git:diff-tree:patch": 13,
+        "individual:git:diff-tree:raw": 12,
+        "individual:git:cat-file": 13,
+        "individual:git:patch-id": 12,
+        "individual:features": 12,
+        "individual:score": 1,
+        "individual:evidence": 2,
+        "groups:git:diff-tree:raw": 24,
+        "groups:git:cat-file": 27,
+        "groups:git:diff-tree:patch": 24,
+        "groups:git:patch-id": 24,
+        "groups:features": 24,
+        "groups:score": 144,
+        "groups:evidence": 60
+      },
+      "git_subprocesses": 121,
+      "subprocesses_by_stage": {
+        "individual:git:rev-parse": 7,
+        "individual:git:rev-list": 3,
+        "individual:git:diff-tree:patch": 13,
+        "individual:git:diff-tree:raw": 12,
+        "individual:git:cat-file": 2,
+        "individual:git:patch-id": 12,
+        "groups:git:diff-tree:raw": 24,
+        "groups:git:diff-tree:patch": 24,
+        "groups:git:patch-id": 24
+      },
+      "sha256": "43e3cf1c73900b5039b0ff24da24ba2321ea813d687c4064641567276956c245",
+      "output_bytes": 125287,
+      "complete": true,
+      "structural_windows": 24,
+      "inspected_groups": 24,
+      "comparison_count": 144,
+      "comparisons_possible": 144,
+      "candidate_count": 60,
+      "candidates_omitted": 0,
+      "inspection_bytes_read": 26927196,
+      "batch_calls": 4,
+      "batch_disabled_transitions": 1,
+      "batch_empty_returns": 4,
+      "batch_requests": 36,
+      "repeated_requests": 0,
+      "hints_returned": 0,
+      "batch_seconds": 0.09798636008054018,
+      "standalone_patch_calls": 36,
+      "workload": "batch-overflow/loose",
+      "seed": 23004,
+      "pair": 1,
+      "kind": "batched",
+      "order": [
+        "batched"
+      ],
+      "command": [
+        "/usr/bin/time",
+        "-f",
+        "%M",
+        "-o",
+        "/tmp/atlas-limits-dhbily0b/rss",
+        "/usr/bin/python3",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/scripts/measure_batching_limits.py",
+        "--worker",
+        "--implementation",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/experiments/batching_limits/baseline",
+        "--repo",
+        "/tmp/atlas-patches-hvcj8mku/repo",
+        "--scenario",
+        "batch-overflow",
+        "--kind",
+        "batched",
+        "--report",
+        "/tmp/atlas-limits-dhbily0b/report.json"
+      ],
+      "wall_seconds": 6.503025508020073,
+      "peak_rss_kib": 25992
+    },
+    {
+      "seconds": 6.29640429187566,
+      "stages_seconds": {
+        "individual:git:rev-parse": 0.11255223164334893,
+        "individual:git:rev-list": 0.015380020951852202,
+        "individual:git:diff-tree:patch": 0.5765982319135219,
+        "individual:git:diff-tree:raw": 0.14356071199290454,
+        "individual:git:cat-file": 0.09215477132238448,
+        "individual:git:patch-id": 0.5499721539672464,
+        "individual:features": 0.11706025758758187,
+        "individual:score": 2.680579200387001e-05,
+        "individual:evidence": 0.00017330097034573555,
+        "groups:git:diff-tree:raw": 0.5539370619226247,
+        "groups:git:cat-file": 0.0008938445243984461,
+        "groups:git:diff-tree:patch": 1.672813862329349,
+        "groups:git:patch-id": 1.1701004679780453,
+        "groups:features": 1.196708686184138,
+        "groups:score": 0.0007279734127223492,
+        "groups:evidence": 0.0018196103628724813,
+        "groups:total": 4.604935534996912,
+        "serialization": 0.08003682806156576,
+        "individual:total": 1.6108851879835129
+      },
+      "calls": {
+        "individual:git:rev-parse": 7,
+        "individual:git:rev-list": 3,
+        "individual:git:diff-tree:patch": 13,
+        "individual:git:diff-tree:raw": 12,
+        "individual:git:cat-file": 13,
+        "individual:git:patch-id": 12,
+        "individual:features": 12,
+        "individual:score": 1,
+        "individual:evidence": 2,
+        "groups:git:diff-tree:raw": 24,
+        "groups:git:cat-file": 27,
+        "groups:git:diff-tree:patch": 24,
+        "groups:git:patch-id": 24,
+        "groups:features": 24,
+        "groups:score": 144,
+        "groups:evidence": 60
+      },
+      "git_subprocesses": 121,
+      "subprocesses_by_stage": {
+        "individual:git:rev-parse": 7,
+        "individual:git:rev-list": 3,
+        "individual:git:diff-tree:patch": 13,
+        "individual:git:diff-tree:raw": 12,
+        "individual:git:cat-file": 2,
+        "individual:git:patch-id": 12,
+        "groups:git:diff-tree:raw": 24,
+        "groups:git:diff-tree:patch": 24,
+        "groups:git:patch-id": 24
+      },
+      "sha256": "43e3cf1c73900b5039b0ff24da24ba2321ea813d687c4064641567276956c245",
+      "output_bytes": 125287,
+      "complete": true,
+      "structural_windows": 24,
+      "inspected_groups": 24,
+      "comparison_count": 144,
+      "comparisons_possible": 144,
+      "candidate_count": 60,
+      "candidates_omitted": 0,
+      "inspection_bytes_read": 26927196,
+      "batch_calls": 4,
+      "batch_disabled_transitions": 1,
+      "batch_empty_returns": 4,
+      "batch_requests": 36,
+      "repeated_requests": 0,
+      "hints_returned": 0,
+      "batch_seconds": 0.08909649262204766,
+      "standalone_patch_calls": 36,
+      "workload": "batch-overflow/packed",
+      "seed": 23004,
+      "pair": 1,
+      "kind": "batched",
+      "order": [
+        "batched"
+      ],
+      "command": [
+        "/usr/bin/time",
+        "-f",
+        "%M",
+        "-o",
+        "/tmp/atlas-limits-dhbily0b/rss",
+        "/usr/bin/python3",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/scripts/measure_batching_limits.py",
+        "--worker",
+        "--implementation",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/experiments/batching_limits/baseline",
+        "--repo",
+        "/tmp/atlas-patches-hvcj8mku/repo",
+        "--scenario",
+        "batch-overflow",
+        "--kind",
+        "batched",
+        "--report",
+        "/tmp/atlas-limits-dhbily0b/report.json"
+      ],
+      "wall_seconds": 6.916370874969289,
+      "peak_rss_kib": 26044
+    },
+    {
+      "seconds": 0.5995122971944511,
+      "stages_seconds": {
+        "individual:git:rev-parse": 0.18685961700975895,
+        "individual:git:rev-list": 0.09559475909918547,
+        "individual:git:diff-tree:patch": 0.015028301859274507,
+        "individual:git:patch-id": 0.01058217603713274,
+        "individual:git:diff-tree:raw": 0.27596345776692033,
+        "individual:git:cat-file": 0.009405602235347033,
+        "individual:features": 0.00018155202269554138,
+        "groups:total": 0.0003622600343078375,
+        "serialization": 0.0011780159547924995,
+        "individual:total": 0.597591427154839
+      },
+      "calls": {
+        "individual:git:rev-parse": 7,
+        "individual:git:rev-list": 3,
+        "individual:git:diff-tree:patch": 2,
+        "individual:git:patch-id": 2,
+        "individual:git:diff-tree:raw": 12,
+        "individual:git:cat-file": 4,
+        "individual:features": 4
+      },
+      "git_subprocesses": 28,
+      "subprocesses_by_stage": {
+        "individual:git:rev-parse": 7,
+        "individual:git:rev-list": 3,
+        "individual:git:diff-tree:patch": 2,
+        "individual:git:patch-id": 2,
+        "individual:git:diff-tree:raw": 12,
+        "individual:git:cat-file": 2
+      },
+      "sha256": "4d42381e862b244356f5ded6c50a8c7ef818f19844b405bff1291ecfb757a3bc",
+      "output_bytes": 28044,
+      "complete": true,
+      "structural_windows": 24,
+      "inspected_groups": 24,
+      "comparison_count": 0,
+      "comparisons_possible": 0,
+      "candidate_count": 0,
+      "candidates_omitted": 0,
+      "inspection_bytes_read": 5882,
+      "batch_calls": 4,
+      "batch_disabled_transitions": 0,
+      "batch_empty_returns": 2,
+      "batch_requests": 12,
+      "repeated_requests": 0,
+      "hints_returned": 12,
+      "batch_seconds": 0.026906060054898262,
+      "standalone_patch_calls": 0,
+      "workload": "mixed/loose",
+      "seed": 23005,
+      "pair": 1,
+      "kind": "batched",
+      "order": [
+        "batched"
+      ],
+      "command": [
+        "/usr/bin/time",
+        "-f",
+        "%M",
+        "-o",
+        "/tmp/atlas-limits-dhbily0b/rss",
+        "/usr/bin/python3",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/scripts/measure_batching_limits.py",
+        "--worker",
+        "--implementation",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/experiments/batching_limits/baseline",
+        "--repo",
+        "/tmp/atlas-patches-dyuf9l_4/repo",
+        "--scenario",
+        "mixed",
+        "--kind",
+        "batched",
+        "--report",
+        "/tmp/atlas-limits-dhbily0b/report.json"
+      ],
+      "wall_seconds": 1.3000715300440788,
+      "peak_rss_kib": 21376
+    },
+    {
+      "seconds": 0.703944053966552,
+      "stages_seconds": {
+        "individual:git:rev-parse": 0.11628587497398257,
+        "individual:git:rev-list": 0.16456597321666777,
+        "individual:git:diff-tree:patch": 0.018144596135243773,
+        "individual:git:patch-id": 0.01203532493673265,
+        "individual:git:diff-tree:raw": 0.21842362941242754,
+        "individual:git:cat-file": 0.16779219126328826,
+        "individual:features": 0.00020760716870427132,
+        "groups:total": 0.00034710601903498173,
+        "serialization": 0.002002045977860689,
+        "individual:total": 0.7011699420399964
+      },
+      "calls": {
+        "individual:git:rev-parse": 7,
+        "individual:git:rev-list": 3,
+        "individual:git:diff-tree:patch": 2,
+        "individual:git:patch-id": 2,
+        "individual:git:diff-tree:raw": 12,
+        "individual:git:cat-file": 4,
+        "individual:features": 4
+      },
+      "git_subprocesses": 28,
+      "subprocesses_by_stage": {
+        "individual:git:rev-parse": 7,
+        "individual:git:rev-list": 3,
+        "individual:git:diff-tree:patch": 2,
+        "individual:git:patch-id": 2,
+        "individual:git:diff-tree:raw": 12,
+        "individual:git:cat-file": 2
+      },
+      "sha256": "4d42381e862b244356f5ded6c50a8c7ef818f19844b405bff1291ecfb757a3bc",
+      "output_bytes": 28044,
+      "complete": true,
+      "structural_windows": 24,
+      "inspected_groups": 24,
+      "comparison_count": 0,
+      "comparisons_possible": 0,
+      "candidate_count": 0,
+      "candidates_omitted": 0,
+      "inspection_bytes_read": 5882,
+      "batch_calls": 4,
+      "batch_disabled_transitions": 0,
+      "batch_empty_returns": 2,
+      "batch_requests": 12,
+      "repeated_requests": 0,
+      "hints_returned": 12,
+      "batch_seconds": 0.03158823284320533,
+      "standalone_patch_calls": 0,
+      "workload": "mixed/packed",
+      "seed": 23005,
+      "pair": 1,
+      "kind": "batched",
+      "order": [
+        "batched"
+      ],
+      "command": [
+        "/usr/bin/time",
+        "-f",
+        "%M",
+        "-o",
+        "/tmp/atlas-limits-dhbily0b/rss",
+        "/usr/bin/python3",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/scripts/measure_batching_limits.py",
+        "--worker",
+        "--implementation",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/experiments/batching_limits/baseline",
+        "--repo",
+        "/tmp/atlas-patches-dyuf9l_4/repo",
+        "--scenario",
+        "mixed",
+        "--kind",
+        "batched",
+        "--report",
+        "/tmp/atlas-limits-dhbily0b/report.json"
+      ],
+      "wall_seconds": 1.4050916978158057,
+      "peak_rss_kib": 21248
+    },
+    {
+      "seconds": 1.2906447728164494,
+      "stages_seconds": {
+        "individual:git:rev-parse": 0.18152434192597866,
+        "individual:git:rev-list": 0.017667129868641496,
+        "individual:git:diff-tree:patch": 0.08913323888555169,
+        "individual:git:patch-id": 0.08937610196880996,
+        "individual:git:diff-tree:raw": 0.2856749016791582,
+        "individual:git:cat-file": 0.011363893747329712,
+        "individual:features": 0.0004358687438070774,
+        "groups:git:diff-tree:patch": 0.08939876384101808,
+        "groups:git:patch-id": 0.010142053943127394,
+        "groups:git:diff-tree:raw": 0.5028673084452748,
+        "groups:git:cat-file": 0.0004594349302351475,
+        "groups:features": 0.0004439381882548332,
+        "groups:score": 0.0002968497574329376,
+        "groups:evidence": 0.0007119993679225445,
+        "groups:total": 0.6072922900784761,
+        "serialization": 0.004478921880945563,
+        "individual:total": 0.6785168319474906
+      },
+      "calls": {
+        "individual:git:rev-parse": 7,
+        "individual:git:rev-list": 3,
+        "individual:git:diff-tree:patch": 2,
+        "individual:git:patch-id": 2,
+        "individual:git:diff-tree:raw": 12,
+        "individual:git:cat-file": 22,
+        "individual:features": 12,
+        "groups:git:diff-tree:patch": 2,
+        "groups:git:patch-id": 2,
+        "groups:git:diff-tree:raw": 24,
+        "groups:git:cat-file": 18,
+        "groups:features": 12,
+        "groups:score": 72,
+        "groups:evidence": 28
+      },
+      "git_subprocesses": 56,
+      "subprocesses_by_stage": {
+        "individual:git:rev-parse": 7,
+        "individual:git:rev-list": 3,
+        "individual:git:diff-tree:patch": 2,
+        "individual:git:patch-id": 2,
+        "individual:git:diff-tree:raw": 12,
+        "individual:git:cat-file": 2,
+        "groups:git:diff-tree:patch": 2,
+        "groups:git:patch-id": 2,
+        "groups:git:diff-tree:raw": 24
+      },
+      "sha256": "4e9b9f9e9db71370a5d40018e0f79f33e08cf1ba6c5841f51812f41b570a2ed2",
+      "output_bytes": 52141,
+      "complete": true,
+      "structural_windows": 24,
+      "inspected_groups": 24,
+      "comparison_count": 72,
+      "comparisons_possible": 72,
+      "candidate_count": 28,
+      "candidates_omitted": 0,
+      "inspection_bytes_read": 22804,
+      "batch_calls": 4,
+      "batch_disabled_transitions": 0,
+      "batch_empty_returns": 0,
+      "batch_requests": 36,
+      "repeated_requests": 4,
+      "hints_returned": 22,
+      "batch_seconds": 0.28002696693874896,
+      "standalone_patch_calls": 0,
+      "workload": "repeated/loose",
+      "seed": 23006,
+      "pair": 1,
+      "kind": "batched",
+      "order": [
+        "batched"
+      ],
+      "command": [
+        "/usr/bin/time",
+        "-f",
+        "%M",
+        "-o",
+        "/tmp/atlas-limits-dhbily0b/rss",
+        "/usr/bin/python3",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/scripts/measure_batching_limits.py",
+        "--worker",
+        "--implementation",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/experiments/batching_limits/baseline",
+        "--repo",
+        "/tmp/atlas-patches-ek6jv5av/repo",
+        "--scenario",
+        "repeated",
+        "--kind",
+        "batched",
+        "--report",
+        "/tmp/atlas-limits-dhbily0b/report.json"
+      ],
+      "wall_seconds": 1.8994230749085546,
+      "peak_rss_kib": 21376
+    },
+    {
+      "seconds": 1.0966072229202837,
+      "stages_seconds": {
+        "individual:git:rev-parse": 0.032569668255746365,
+        "individual:git:rev-list": 0.09272560616955161,
+        "individual:git:diff-tree:patch": 0.08195395884104073,
+        "individual:git:patch-id": 0.011009447043761611,
+        "individual:git:diff-tree:raw": 0.28288424806669354,
+        "individual:git:cat-file": 0.010514812543988228,
+        "individual:features": 0.0005462791305035353,
+        "groups:git:diff-tree:patch": 0.011366801103577018,
+        "groups:git:patch-id": 0.00871151895262301,
+        "groups:git:diff-tree:raw": 0.47994904057122767,
+        "groups:git:cat-file": 0.00041667954064905643,
+        "groups:features": 0.00045698974281549454,
+        "groups:score": 0.0003238469362258911,
+        "groups:evidence": 0.0007834953721612692,
+        "groups:total": 0.5047900010831654,
+        "serialization": 0.003427864983677864,
+        "individual:total": 0.5880237768869847
+      },
+      "calls": {
+        "individual:git:rev-parse": 7,
+        "individual:git:rev-list": 3,
+        "individual:git:diff-tree:patch": 2,
+        "individual:git:patch-id": 2,
+        "individual:git:diff-tree:raw": 12,
+        "individual:git:cat-file": 22,
+        "individual:features": 12,
+        "groups:git:diff-tree:patch": 2,
+        "groups:git:patch-id": 2,
+        "groups:git:diff-tree:raw": 24,
+        "groups:git:cat-file": 18,
+        "groups:features": 12,
+        "groups:score": 72,
+        "groups:evidence": 28
+      },
+      "git_subprocesses": 56,
+      "subprocesses_by_stage": {
+        "individual:git:rev-parse": 7,
+        "individual:git:rev-list": 3,
+        "individual:git:diff-tree:patch": 2,
+        "individual:git:patch-id": 2,
+        "individual:git:diff-tree:raw": 12,
+        "individual:git:cat-file": 2,
+        "groups:git:diff-tree:patch": 2,
+        "groups:git:patch-id": 2,
+        "groups:git:diff-tree:raw": 24
+      },
+      "sha256": "4e9b9f9e9db71370a5d40018e0f79f33e08cf1ba6c5841f51812f41b570a2ed2",
+      "output_bytes": 52141,
+      "complete": true,
+      "structural_windows": 24,
+      "inspected_groups": 24,
+      "comparison_count": 72,
+      "comparisons_possible": 72,
+      "candidate_count": 28,
+      "candidates_omitted": 0,
+      "inspection_bytes_read": 22804,
+      "batch_calls": 4,
+      "batch_disabled_transitions": 0,
+      "batch_empty_returns": 0,
+      "batch_requests": 36,
+      "repeated_requests": 4,
+      "hints_returned": 22,
+      "batch_seconds": 0.11504858243279159,
+      "standalone_patch_calls": 0,
+      "workload": "repeated/packed",
+      "seed": 23006,
+      "pair": 1,
+      "kind": "batched",
+      "order": [
+        "batched"
+      ],
+      "command": [
+        "/usr/bin/time",
+        "-f",
+        "%M",
+        "-o",
+        "/tmp/atlas-limits-dhbily0b/rss",
+        "/usr/bin/python3",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/scripts/measure_batching_limits.py",
+        "--worker",
+        "--implementation",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/experiments/batching_limits/baseline",
+        "--repo",
+        "/tmp/atlas-patches-ek6jv5av/repo",
+        "--scenario",
+        "repeated",
+        "--kind",
+        "batched",
+        "--report",
+        "/tmp/atlas-limits-dhbily0b/report.json"
+      ],
+      "wall_seconds": 1.7113679379690439,
+      "peak_rss_kib": 21376
+    },
+    {
+      "seconds": 1.1997783090919256,
+      "stages_seconds": {
+        "individual:git:rev-parse": 0.10506486403755844,
+        "individual:git:rev-list": 0.08549632504582405,
+        "individual:git:diff-tree:patch": 0.08696614624932408,
+        "individual:git:patch-id": 0.009184828959405422,
+        "individual:git:diff-tree:raw": 0.2921162007842213,
+        "individual:git:cat-file": 0.10850986349396408,
+        "individual:features": 0.0005510731134563684,
+        "individual:score": 1.8897932022809982e-05,
+        "individual:evidence": 0.0001310599036514759,
+        "groups:git:diff-tree:patch": 0.09021912887692451,
+        "groups:git:patch-id": 0.07807051506824791,
+        "groups:git:diff-tree:raw": 0.3302700659260154,
+        "groups:git:cat-file": 0.001016572117805481,
+        "groups:features": 0.0014589536003768444,
+        "groups:total": 0.5060163449961692,
+        "serialization": 0.001840428914874792,
+        "individual:total": 0.6915977271273732
+      },
+      "calls": {
+        "individual:git:rev-parse": 7,
+        "individual:git:rev-list": 3,
+        "individual:git:diff-tree:patch": 2,
+        "individual:git:patch-id": 2,
+        "individual:git:diff-tree:raw": 12,
+        "individual:git:cat-file": 13,
+        "individual:features": 12,
+        "individual:score": 1,
+        "individual:evidence": 2,
+        "groups:git:diff-tree:patch": 2,
+        "groups:git:patch-id": 2,
+        "groups:git:diff-tree:raw": 24,
+        "groups:git:cat-file": 71,
+        "groups:features": 24
+      },
+      "git_subprocesses": 61,
+      "subprocesses_by_stage": {
+        "individual:git:rev-parse": 7,
+        "individual:git:rev-list": 3,
+        "individual:git:diff-tree:patch": 2,
+        "individual:git:patch-id": 2,
+        "individual:git:diff-tree:raw": 12,
+        "individual:git:cat-file": 7,
+        "groups:git:diff-tree:patch": 2,
+        "groups:git:patch-id": 2,
+        "groups:git:diff-tree:raw": 24
+      },
+      "sha256": "013a60bfec0d38f6dbc05229fa5a86b1a72e594a259bfa21cf739ebbcc02c08c",
+      "output_bytes": 29569,
+      "complete": false,
+      "structural_windows": 24,
+      "inspected_groups": 24,
+      "comparison_count": 0,
+      "comparisons_possible": 144,
+      "candidate_count": 0,
+      "candidates_omitted": 0,
+      "inspection_bytes_read": 66156,
+      "batch_calls": 4,
+      "batch_disabled_transitions": 0,
+      "batch_empty_returns": 0,
+      "batch_requests": 36,
+      "repeated_requests": 0,
+      "hints_returned": 36,
+      "batch_seconds": 0.268045294797048,
+      "standalone_patch_calls": 0,
+      "workload": "limited/loose",
+      "seed": 23007,
+      "pair": 1,
+      "kind": "batched",
+      "order": [
+        "batched"
+      ],
+      "command": [
+        "/usr/bin/time",
+        "-f",
+        "%M",
+        "-o",
+        "/tmp/atlas-limits-dhbily0b/rss",
+        "/usr/bin/python3",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/scripts/measure_batching_limits.py",
+        "--worker",
+        "--implementation",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/experiments/batching_limits/baseline",
+        "--repo",
+        "/tmp/atlas-patches-l3hw28ou/repo",
+        "--scenario",
+        "limited",
+        "--kind",
+        "batched",
+        "--report",
+        "/tmp/atlas-limits-dhbily0b/report.json"
+      ],
+      "wall_seconds": 1.816944100894034,
+      "peak_rss_kib": 21376
+    },
+    {
+      "seconds": 1.1158738129306585,
+      "stages_seconds": {
+        "individual:git:rev-parse": 0.1163940466940403,
+        "individual:git:rev-list": 0.1612690871115774,
+        "individual:git:diff-tree:patch": 0.011837769765406847,
+        "individual:git:patch-id": 0.007323502097278833,
+        "individual:git:diff-tree:raw": 0.2762984251603484,
+        "individual:git:cat-file": 0.03754024673253298,
+        "individual:features": 0.0005144898314028978,
+        "individual:score": 1.922203227877617e-05,
+        "individual:evidence": 0.00013300799764692783,
+        "groups:git:diff-tree:patch": 0.08606918412260711,
+        "groups:git:patch-id": 0.0099828050006181,
+        "groups:git:diff-tree:raw": 0.395601334515959,
+        "groups:git:cat-file": 0.0014748196117579937,
+        "groups:features": 0.0014678176958113909,
+        "groups:total": 0.4993003299459815,
+        "serialization": 0.001535929972305894,
+        "individual:total": 0.6146818150300533
+      },
+      "calls": {
+        "individual:git:rev-parse": 7,
+        "individual:git:rev-list": 3,
+        "individual:git:diff-tree:patch": 2,
+        "individual:git:patch-id": 2,
+        "individual:git:diff-tree:raw": 12,
+        "individual:git:cat-file": 13,
+        "individual:features": 12,
+        "individual:score": 1,
+        "individual:evidence": 2,
+        "groups:git:diff-tree:patch": 2,
+        "groups:git:patch-id": 2,
+        "groups:git:diff-tree:raw": 24,
+        "groups:git:cat-file": 71,
+        "groups:features": 24
+      },
+      "git_subprocesses": 61,
+      "subprocesses_by_stage": {
+        "individual:git:rev-parse": 7,
+        "individual:git:rev-list": 3,
+        "individual:git:diff-tree:patch": 2,
+        "individual:git:patch-id": 2,
+        "individual:git:diff-tree:raw": 12,
+        "individual:git:cat-file": 7,
+        "groups:git:diff-tree:patch": 2,
+        "groups:git:patch-id": 2,
+        "groups:git:diff-tree:raw": 24
+      },
+      "sha256": "013a60bfec0d38f6dbc05229fa5a86b1a72e594a259bfa21cf739ebbcc02c08c",
+      "output_bytes": 29569,
+      "complete": false,
+      "structural_windows": 24,
+      "inspected_groups": 24,
+      "comparison_count": 0,
+      "comparisons_possible": 144,
+      "candidate_count": 0,
+      "candidates_omitted": 0,
+      "inspection_bytes_read": 66156,
+      "batch_calls": 4,
+      "batch_disabled_transitions": 0,
+      "batch_empty_returns": 0,
+      "batch_requests": 36,
+      "repeated_requests": 0,
+      "hints_returned": 36,
+      "batch_seconds": 0.11801259103231132,
+      "standalone_patch_calls": 0,
+      "workload": "limited/packed",
+      "seed": 23007,
+      "pair": 1,
+      "kind": "batched",
+      "order": [
+        "batched"
+      ],
+      "command": [
+        "/usr/bin/time",
+        "-f",
+        "%M",
+        "-o",
+        "/tmp/atlas-limits-dhbily0b/rss",
+        "/usr/bin/python3",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/scripts/measure_batching_limits.py",
+        "--worker",
+        "--implementation",
+        "/var/lib/dailybuilder/projects/git-branch-atlas/experiments/batching_limits/baseline",
+        "--repo",
+        "/tmp/atlas-patches-l3hw28ou/repo",
+        "--scenario",
+        "limited",
+        "--kind",
+        "batched",
+        "--report",
+        "/tmp/atlas-limits-dhbily0b/report.json"
+      ],
+      "wall_seconds": 1.8017486720345914,
+      "peak_rss_kib": 21248
+    }
+  ],
+  "repository_contents_index_refs_configuration_unchanged": true
+}

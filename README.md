@@ -5,6 +5,9 @@ linked-worktree locations, ancestry comparisons, and bounded patch-series review
 Python 3.10+ and Git 2.43+; no third-party runtime dependencies. Tested here on
 Python 3.12.3 and Git 2.43.0 on Linux. It does not contact remotes.
 
+The [large-patch and packed-object experiment](docs/batching-limits.md) documents
+batching limits, reproducible workloads, and the measured tradeoffs.
+
 ## Install and use
 
 ```console
