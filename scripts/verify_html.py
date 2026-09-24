@@ -51,18 +51,37 @@ def main():
         for i in range(7):
             bounded_files['f'+str(i)] = long_right
             bounded_right = fixture.node(bounded_files, (bounded_right,))
+        split_a = fixture.node({'split': b'alpha\n'}, (root,))
+        split_b = fixture.node({'split': b'alpha\nbeta\n'}, (split_a,))
+        split_undo = fixture.node({'split': b'alpha\n'}, (split_b,))
+        split_again = fixture.node({'split': b'alpha\nbeta\n'}, (split_undo,))
+        squash = fixture.node({'split': b'alpha\nbeta\n'}, (root,))
+        group_edited = fixture.node({'split': b'alpha\nbeta\ngamma\n'}, (split_a,))
+        # Hostile, long evidence with both byte and item omissions for groups.
+        group_long_a = fixture.node({'f': common}, (root,))
+        group_long_b = fixture.node({'f': long_right + hostile.encode()}, (group_long_a,))
         before = snapshot()
         with tempfile.TemporaryDirectory(prefix='atlas-html-') as tmp:
             directory = Path(tmp)
             reports = []
             for name, extra in [('review', []), ('exhausted', ['--max-comparisons','0']),
-                                ('sampled', ['--max-count','1']), ('bytes', ['--max-diff-bytes','1']), ('bounded', []), ('empty', [])]:
+                                ('sampled', ['--max-count','1']), ('bytes', ['--max-diff-bytes','1']), ('bounded', []), ('empty', []),
+                                ('split', ['--groups']), ('squash', ['--groups']),
+                                ('group-edited', ['--groups']), ('group-bounded', ['--groups']),
+                                ('group-exhausted', ['--groups','--max-group-comparisons','0']),
+                                ('group-omitted', ['--groups','--max-group-candidates','1']),
+                                ('group-sampled', ['--groups','--max-groups','1'])]:
                 revisions = [root, bounded_left, root, bounded_right] if name == 'bounded' else ([root]*4 if name == 'empty' else [root, excluded, base2, r3])
+                if name in ('split','group-exhausted','group-omitted','group-sampled'):
+                    revisions = [root,squash,root,split_again]
+                elif name == 'squash': revisions = [root,split_again,root,squash]
+                elif name == 'group-edited': revisions = [root,squash,root,group_edited]
+                elif name == 'group-bounded': revisions = [root,bounded_left,root,group_long_b]
                 command = [sys.executable, '-m', 'git_branch_atlas', '--repo', str(fixture.repo),
                            'series', *revisions, '--threshold', '3000', *extra]
                 j = subprocess.run([*command, '--json'], cwd=ROOT, capture_output=True)
                 h = subprocess.run([*command, '--html'], cwd=ROOT, capture_output=True)
-                assert j.returncode == h.returncode == (0 if name in ('review', 'bounded', 'empty') else 1), (j.stderr,h.stderr)
+                assert j.returncode == h.returncode == (0 if name in ('review', 'bounded', 'empty', 'split', 'squash', 'group-edited', 'group-bounded') else 1), (j.stderr,h.stderr)
                 report = json.loads(j.stdout)
                 (directory / (name+'.json')).write_bytes(j.stdout)
                 (directory / (name+'.html')).write_bytes(h.stdout)
@@ -80,7 +99,7 @@ def main():
             if result.returncode:
                 raise RuntimeError(result.stderr)
             evidence = json.loads(result.stdout)
-            evidence['fixture'] = 'Real Git: changed base, reordered exact patch, revert/reapply duplicate, competing edited patches, binary exclusion, exhausted comparisons/bytes/commits; extra hostile metadata serialization'
+            evidence['fixture'] = 'Real Git: changed base, reordered exact patch, revert/reapply duplicate, competing edited patches, binary exclusion, exhausted comparisons/bytes/commits; extra hostile metadata serialization; split/squash, overlap, edited aggregate, group evidence bounds and exhausted group limits'
             evidence['repository_unchanged'] = True
             text = json.dumps(evidence, indent=2)+'\n'
             if args.output:

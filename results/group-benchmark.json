@@ -1,0 +1,427 @@
+{
+  "python": "3.12.3",
+  "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.39",
+  "git": "git version 2.43.0",
+  "fixture": "Deterministic timestamps 1700000000+i; two independent 80-line file-add series, even patches exact, odd patches edited; 6 or 250 commits per side",
+  "limitations": [
+    "synthetic warm-cache workloads, not real-world or cold-cache estimates",
+    "GNU time maximum RSS of CLI or one child; not aggregate concurrent memory",
+    "500-commit group workloads deliberately exhaust enumeration/output/comparison limits; no full-search timing claim",
+    "browser load includes navigation overhead; DOM counts after interaction; no browser peak-memory measurement"
+  ],
+  "generation": [
+    {
+      "name": "commits-12-complete-run-1",
+      "commits": 12,
+      "seconds": 4.880699326982722,
+      "peak_rss_kib": 20096,
+      "html_bytes": 57341,
+      "json_bytes": 63327,
+      "complete": true,
+      "structural_windows": 24,
+      "windows_omitted": 0,
+      "inspected_groups": 24,
+      "comparison_count": 144,
+      "comparisons_unsearched": 0,
+      "candidate_count": 20,
+      "candidates_omitted": 0,
+      "inspection_bytes_read": 197240,
+      "group_limits": {
+        "groups": 600,
+        "comparisons": 20000,
+        "candidates": 500,
+        "group_lengths": [
+          2,
+          3,
+          4
+        ],
+        "changed_lines_per_patch": 20000,
+        "evidence_keys_per_category": 8,
+        "evidence_bytes_per_key": 160
+      }
+    },
+    {
+      "name": "commits-12-complete-run-2",
+      "commits": 12,
+      "seconds": 5.12634237180464,
+      "peak_rss_kib": 20096,
+      "html_bytes": 57341,
+      "json_bytes": 63327,
+      "complete": true,
+      "structural_windows": 24,
+      "windows_omitted": 0,
+      "inspected_groups": 24,
+      "comparison_count": 144,
+      "comparisons_unsearched": 0,
+      "candidate_count": 20,
+      "candidates_omitted": 0,
+      "inspection_bytes_read": 197240,
+      "group_limits": {
+        "groups": 600,
+        "comparisons": 20000,
+        "candidates": 500,
+        "group_lengths": [
+          2,
+          3,
+          4
+        ],
+        "changed_lines_per_patch": 20000,
+        "evidence_keys_per_category": 8,
+        "evidence_bytes_per_key": 160
+      }
+    },
+    {
+      "name": "commits-12-complete-run-3",
+      "commits": 12,
+      "seconds": 4.88112480007112,
+      "peak_rss_kib": 19968,
+      "html_bytes": 57341,
+      "json_bytes": 63327,
+      "complete": true,
+      "structural_windows": 24,
+      "windows_omitted": 0,
+      "inspected_groups": 24,
+      "comparison_count": 144,
+      "comparisons_unsearched": 0,
+      "candidate_count": 20,
+      "candidates_omitted": 0,
+      "inspection_bytes_read": 197240,
+      "group_limits": {
+        "groups": 600,
+        "comparisons": 20000,
+        "candidates": 500,
+        "group_lengths": [
+          2,
+          3,
+          4
+        ],
+        "changed_lines_per_patch": 20000,
+        "evidence_keys_per_category": 8,
+        "evidence_bytes_per_key": 160
+      }
+    },
+    {
+      "name": "commits-500-enumeration-output-exhausted-run-1",
+      "commits": 500,
+      "seconds": 33.68686946015805,
+      "peak_rss_kib": 24320,
+      "html_bytes": 445655,
+      "json_bytes": 707978,
+      "complete": false,
+      "structural_windows": 1488,
+      "windows_omitted": 1428,
+      "inspected_groups": 60,
+      "comparison_count": 4000,
+      "comparisons_unsearched": 11000,
+      "candidate_count": 14,
+      "candidates_omitted": 12,
+      "inspection_bytes_read": 1671520,
+      "group_limits": {
+        "groups": 60,
+        "comparisons": 4000,
+        "candidates": 2,
+        "group_lengths": [
+          2,
+          3,
+          4
+        ],
+        "changed_lines_per_patch": 20000,
+        "evidence_keys_per_category": 8,
+        "evidence_bytes_per_key": 160
+      }
+    },
+    {
+      "name": "commits-500-enumeration-output-exhausted-run-2",
+      "commits": 500,
+      "seconds": 31.500869137002155,
+      "peak_rss_kib": 24492,
+      "html_bytes": 445655,
+      "json_bytes": 707978,
+      "complete": false,
+      "structural_windows": 1488,
+      "windows_omitted": 1428,
+      "inspected_groups": 60,
+      "comparison_count": 4000,
+      "comparisons_unsearched": 11000,
+      "candidate_count": 14,
+      "candidates_omitted": 12,
+      "inspection_bytes_read": 1671520,
+      "group_limits": {
+        "groups": 60,
+        "comparisons": 4000,
+        "candidates": 2,
+        "group_lengths": [
+          2,
+          3,
+          4
+        ],
+        "changed_lines_per_patch": 20000,
+        "evidence_keys_per_category": 8,
+        "evidence_bytes_per_key": 160
+      }
+    },
+    {
+      "name": "commits-500-enumeration-output-exhausted-run-3",
+      "commits": 500,
+      "seconds": 31.114395909011364,
+      "peak_rss_kib": 24424,
+      "html_bytes": 445655,
+      "json_bytes": 707978,
+      "complete": false,
+      "structural_windows": 1488,
+      "windows_omitted": 1428,
+      "inspected_groups": 60,
+      "comparison_count": 4000,
+      "comparisons_unsearched": 11000,
+      "candidate_count": 14,
+      "candidates_omitted": 12,
+      "inspection_bytes_read": 1671520,
+      "group_limits": {
+        "groups": 60,
+        "comparisons": 4000,
+        "candidates": 2,
+        "group_lengths": [
+          2,
+          3,
+          4
+        ],
+        "changed_lines_per_patch": 20000,
+        "evidence_keys_per_category": 8,
+        "evidence_bytes_per_key": 160
+      }
+    },
+    {
+      "name": "commits-500-comparison-exhausted-run-1",
+      "commits": 500,
+      "seconds": 130.81021787808277,
+      "peak_rss_kib": 30964,
+      "html_bytes": 1155140,
+      "json_bytes": 1642949,
+      "complete": false,
+      "structural_windows": 1488,
+      "windows_omitted": 0,
+      "inspected_groups": 1488,
+      "comparison_count": 1000,
+      "comparisons_unsearched": 371000,
+      "candidate_count": 6,
+      "candidates_omitted": 0,
+      "inspection_bytes_read": 12228880,
+      "group_limits": {
+        "groups": 1600,
+        "comparisons": 1000,
+        "candidates": 500,
+        "group_lengths": [
+          2,
+          3,
+          4
+        ],
+        "changed_lines_per_patch": 20000,
+        "evidence_keys_per_category": 8,
+        "evidence_bytes_per_key": 160
+      }
+    },
+    {
+      "name": "commits-500-comparison-exhausted-run-2",
+      "commits": 500,
+      "seconds": 99.80703043099493,
+      "peak_rss_kib": 31196,
+      "html_bytes": 1155140,
+      "json_bytes": 1642949,
+      "complete": false,
+      "structural_windows": 1488,
+      "windows_omitted": 0,
+      "inspected_groups": 1488,
+      "comparison_count": 1000,
+      "comparisons_unsearched": 371000,
+      "candidate_count": 6,
+      "candidates_omitted": 0,
+      "inspection_bytes_read": 12228880,
+      "group_limits": {
+        "groups": 1600,
+        "comparisons": 1000,
+        "candidates": 500,
+        "group_lengths": [
+          2,
+          3,
+          4
+        ],
+        "changed_lines_per_patch": 20000,
+        "evidence_keys_per_category": 8,
+        "evidence_bytes_per_key": 160
+      }
+    },
+    {
+      "name": "commits-500-comparison-exhausted-run-3",
+      "commits": 500,
+      "seconds": 89.82671878300607,
+      "peak_rss_kib": 30792,
+      "html_bytes": 1155140,
+      "json_bytes": 1642949,
+      "complete": false,
+      "structural_windows": 1488,
+      "windows_omitted": 0,
+      "inspected_groups": 1488,
+      "comparison_count": 1000,
+      "comparisons_unsearched": 371000,
+      "candidate_count": 6,
+      "candidates_omitted": 0,
+      "inspection_bytes_read": 12228880,
+      "group_limits": {
+        "groups": 1600,
+        "comparisons": 1000,
+        "candidates": 500,
+        "group_lengths": [
+          2,
+          3,
+          4
+        ],
+        "changed_lines_per_patch": 20000,
+        "evidence_keys_per_category": 8,
+        "evidence_bytes_per_key": 160
+      }
+    }
+  ],
+  "browser": {
+    "result": "passed",
+    "browser": "145.0.7632.6",
+    "network": "offline context plus non-file route blocking; zero external requests",
+    "checks": [
+      "CLI JSON embedding parity",
+      "visible ordered statuses",
+      "exact duplicate group membership",
+      "candidate score and rank parity",
+      "evidence text and omission parity",
+      "filters retain warnings",
+      "keyboard selection, evidence and navigation",
+      "360px no horizontal overflow",
+      "hostile text inert",
+      "group candidates, endpoints, ordered members, ambiguity and evidence match CLI JSON",
+      "all group exclusions inspectable; group filters retain notices",
+      "group evidence shares global 32-line bound"
+    ],
+    "measurements": [
+      {
+        "name": "commits-12-complete-run-1",
+        "observed_peak_cards": 12,
+        "observed_peak_group_rows": 20,
+        "observed_peak_evidence_lines": 4,
+        "observed_peak_dom_nodes": 212,
+        "html_bytes": 57341,
+        "load_ms": 338.01127599999995,
+        "commits": 12,
+        "dom_nodes": 199,
+        "mounted_cards": 12,
+        "mounted_evidence_lines": 0
+      },
+      {
+        "name": "commits-12-complete-run-2",
+        "observed_peak_cards": 12,
+        "observed_peak_group_rows": 20,
+        "observed_peak_evidence_lines": 4,
+        "observed_peak_dom_nodes": 212,
+        "html_bytes": 57341,
+        "load_ms": 137.29235100000005,
+        "commits": 12,
+        "dom_nodes": 199,
+        "mounted_cards": 12,
+        "mounted_evidence_lines": 0
+      },
+      {
+        "name": "commits-12-complete-run-3",
+        "observed_peak_cards": 12,
+        "observed_peak_group_rows": 20,
+        "observed_peak_evidence_lines": 4,
+        "observed_peak_dom_nodes": 212,
+        "html_bytes": 57341,
+        "load_ms": 185.10445600000094,
+        "commits": 12,
+        "dom_nodes": 199,
+        "mounted_cards": 12,
+        "mounted_evidence_lines": 0
+      },
+      {
+        "name": "commits-500-enumeration-output-exhausted-run-1",
+        "observed_peak_cards": 100,
+        "observed_peak_group_rows": 20,
+        "observed_peak_evidence_lines": 4,
+        "observed_peak_dom_nodes": 604,
+        "html_bytes": 445655,
+        "load_ms": 321.10651099999814,
+        "commits": 500,
+        "dom_nodes": 604,
+        "mounted_cards": 100,
+        "mounted_evidence_lines": 4
+      },
+      {
+        "name": "commits-500-enumeration-output-exhausted-run-2",
+        "observed_peak_cards": 100,
+        "observed_peak_group_rows": 20,
+        "observed_peak_evidence_lines": 4,
+        "observed_peak_dom_nodes": 604,
+        "html_bytes": 445655,
+        "load_ms": 255.0549039999969,
+        "commits": 500,
+        "dom_nodes": 604,
+        "mounted_cards": 100,
+        "mounted_evidence_lines": 4
+      },
+      {
+        "name": "commits-500-enumeration-output-exhausted-run-3",
+        "observed_peak_cards": 100,
+        "observed_peak_group_rows": 20,
+        "observed_peak_evidence_lines": 4,
+        "observed_peak_dom_nodes": 604,
+        "html_bytes": 445655,
+        "load_ms": 206.89362300000357,
+        "commits": 500,
+        "dom_nodes": 604,
+        "mounted_cards": 100,
+        "mounted_evidence_lines": 4
+      },
+      {
+        "name": "commits-500-comparison-exhausted-run-1",
+        "observed_peak_cards": 100,
+        "observed_peak_group_rows": 20,
+        "observed_peak_evidence_lines": 4,
+        "observed_peak_dom_nodes": 604,
+        "html_bytes": 1155140,
+        "load_ms": 236.86141700000007,
+        "commits": 500,
+        "dom_nodes": 604,
+        "mounted_cards": 100,
+        "mounted_evidence_lines": 4
+      },
+      {
+        "name": "commits-500-comparison-exhausted-run-2",
+        "observed_peak_cards": 100,
+        "observed_peak_group_rows": 20,
+        "observed_peak_evidence_lines": 4,
+        "observed_peak_dom_nodes": 604,
+        "html_bytes": 1155140,
+        "load_ms": 259.37706599999365,
+        "commits": 500,
+        "dom_nodes": 604,
+        "mounted_cards": 100,
+        "mounted_evidence_lines": 4
+      },
+      {
+        "name": "commits-500-comparison-exhausted-run-3",
+        "observed_peak_cards": 100,
+        "observed_peak_group_rows": 20,
+        "observed_peak_evidence_lines": 4,
+        "observed_peak_dom_nodes": 604,
+        "html_bytes": 1155140,
+        "load_ms": 272.2197559999986,
+        "commits": 500,
+        "dom_nodes": 604,
+        "mounted_cards": 100,
+        "mounted_evidence_lines": 4
+      }
+    ],
+    "limitations": [
+      "Chromium only",
+      "no screen-reader audit",
+      "browser load includes Playwright navigation overhead; warm local cache"
+    ]
+  }
+}

@@ -11,8 +11,9 @@ const visible = s => String(s).replace(/[\u0000-\u001f\u007f-\u009f\u2028-\u202e
  const requests=[],errors=[];
  await context.route('**/*',route=>{if(!route.request().url().startsWith('file:')){requests.push(route.request().url());return route.abort();}return route.continue();});
  await context.addInitScript(()=>{
-  globalThis.atlasPeaks={cards:0,evidence:0,nodes:0};
+  globalThis.atlasPeaks={cards:0,groupRows:0,evidence:0,nodes:0};
   new MutationObserver(()=>{
+   atlasPeaks.groupRows=Math.max(atlasPeaks.groupRows,document.querySelectorAll('#group-rows .group-row').length);
    atlasPeaks.cards=Math.max(atlasPeaks.cards,document.querySelectorAll('#cards article').length);
    atlasPeaks.evidence=Math.max(atlasPeaks.evidence,document.querySelectorAll('.evidence-line').length);
    atlasPeaks.nodes=Math.max(atlasPeaks.nodes,document.querySelectorAll('*').length);
@@ -74,6 +75,69 @@ const visible = s => String(s).replace(/[\u0000-\u001f\u007f-\u009f\u2028-\u202e
     assert.deepEqual(lines,wanted);assert.ok(await page.locator('.evidence-line').count()<=32);
    }
   }
+  if(report.group_comparison) {
+   const gc=report.group_comparison;
+   assert.ok(await page.locator('#group-review').isVisible());
+   const bounds=await page.locator('#group-bounds').innerText();
+   for(const value of [`${gc.windows_omitted} windows omitted`,`${gc.comparison_count}/${gc.comparisons_possible} eligible comparisons`,`${gc.candidates_omitted} omitted`])assert.ok(bounds.includes(value));
+   if(!gc.complete)assert.ok(bounds.includes('INCOMPLETE'));
+   const observed=[];
+   do {
+    observed.push(...await page.locator('#group-rows .group-row').evaluateAll(ns=>ns.map(n=>Number(n.dataset.candidateIndex))));
+    assert.ok(await page.locator('#group-rows .group-row').count()<=20);
+    if(await page.locator('#group-next').isDisabled())break;
+    await page.locator('#group-next').click();
+   }while(true);
+   assert.deepEqual(observed,gc.candidates.map((c,i)=>i));
+   const inspect=expected.length>40?gc.candidates.slice(0,2):gc.candidates;
+   for(const c of inspect) {
+    // Searching the singleton can leave several candidates; identify by index.
+    const i=gc.candidates.indexOf(c),g=gc.groups.find(g=>g.id===c.group_id);
+    await page.locator('#group-search').fill(c.single_oid);
+    while(!await page.locator(`#group-rows [data-candidate-index="${i}"]`).count())await page.locator('#group-next').click();
+    const b=page.locator(`#group-rows [data-candidate-index="${i}"] button`);
+    await b.focus();await page.keyboard.press('Enter');
+    const box=page.locator('#group-detail');
+    assert.equal(await box.evaluate(n=>document.activeElement===n),true);
+    assert.equal(await box.getAttribute('data-group-id'),g.id);
+    const t=await box.innerText();
+    assert.ok(t.includes(`score ${c.score}/${report.score_scale}`));
+    assert.ok(t.includes(`normalized patch agreement: ${c.normalized_patch_agreement}`));
+    if(c.ambiguous)assert.ok(t.includes('Ambiguous'));
+    const single=gc.singles.find(s=>s.side===c.single_side&&s.oid===c.single_oid);
+    for(const value of [single.base_oid,single.tip_oid,g.base_oid,g.tip_oid])assert.ok(t.includes(value));
+    assert.deepEqual(await box.locator('ol').nth(1).locator('li').allTextContents(),g.members.map(o=>g.side+' '+o));
+    await box.locator('summary').focus();await page.keyboard.press('Enter');await box.locator('.evidence').waitFor();
+    const wanted=[];
+    for(const category of ['source_only','counterpart_only','paths_source_only','paths_counterpart_only']) {
+     const sample=c.evidence[category];
+     for(const item of sample.items)wanted.push(visible(`${item.count} × ${item.text} [${item.bytes} bytes${item.truncated?'; TRUNCATED':''}]`));
+     assert.ok((await box.innerText()).includes(`${sample.items.length} shown; ${sample.omitted_items} distinct keys omitted`));
+    }
+    assert.deepEqual(await box.locator('.evidence-line').allTextContents(),wanted);
+    assert.ok(await page.locator('.evidence-line').count()<=32);
+    await box.locator('ol').nth(1).locator('button').first().focus();await page.keyboard.press('Enter');
+    assert.equal(await page.locator('#detail').getAttribute('data-key'),g.side+':'+g.members[0]);
+   }
+   await page.locator('#group-search').fill('');await page.locator('#group-view').selectOption('groups');
+   const ids=[];
+   do {
+    ids.push(...await page.locator('#group-rows .group-row').evaluateAll(ns=>ns.map(n=>n.dataset.groupId)));
+    if(await page.locator('#group-next').isDisabled())break;
+    await page.locator('#group-next').click();
+   }while(true);
+   assert.deepEqual(ids,gc.groups.map(g=>g.id));
+   if(expected.length<=40)for(const g of gc.groups) {
+    await page.locator('#group-search').fill(g.id);
+    await page.locator('#group-rows button').first().click();
+    const text=await page.locator('#group-detail').innerText();
+    assert.ok(text.includes(g.status));if(g.reason)assert.ok(text.includes(g.reason));
+   }
+   await page.locator('#group-search').fill('nothing-matches-00000');
+   assert.equal(await page.locator('#group-rows .group-row').count(),0);
+   assert.ok(await page.locator('#group-bounds').isVisible());
+   await page.locator('#group-search').fill('');
+  } else assert.equal(await page.locator('#group-review').isVisible(),false);
   if(name==='review' && process.env.ATLAS_SCREENSHOT)await page.screenshot({path:process.env.ATLAS_SCREENSHOT,fullPage:true});
   await page.locator('#search').fill('no-such-commit-000000');
   assert.equal(await page.locator('#cards article').count(),0);
@@ -98,15 +162,15 @@ const visible = s => String(s).replace(/[\u0000-\u001f\u007f-\u009f\u2028-\u202e
    assert.equal(await page.locator('#detail').getAttribute('data-key'),expected[Math.min(1,expected.length-1)].side+':'+expected[Math.min(1,expected.length-1)].c.oid);
   }
   await page.setViewportSize({width:360,height:780});
-  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),name+' '+JSON.stringify(await page.evaluate(()=>[...document.querySelectorAll('*')].filter(n=>n.getBoundingClientRect().right>innerWidth).map(n=>({tag:n.tagName,id:n.id,cls:n.className,width:n.getBoundingClientRect().width})))));
   await page.locator('#search').focus();await page.keyboard.press('Tab');assert.equal(await page.locator('#status').evaluate(n=>document.activeElement===n),true);
   assert.equal(await page.evaluate(()=>globalThis.PWNED),undefined);
-  const peaks=await page.evaluate(()=>atlasPeaks);assert.ok(peaks.cards<=100);assert.ok(peaks.evidence<=32);
+  const peaks=await page.evaluate(()=>atlasPeaks);assert.ok(peaks.cards<=100);assert.ok(peaks.groupRows<=20);assert.ok(peaks.evidence<=32);
   assert.equal(await page.locator('img,iframe,object').count(),0);
-  measurements.push({name,observed_peak_cards:peaks.cards,observed_peak_evidence_lines:peaks.evidence,observed_peak_dom_nodes:peaks.nodes,html_bytes:fs.statSync(file).size,load_ms:load,commits:expected.length,dom_nodes:await page.locator('*').count(),mounted_cards:await page.locator('#cards article').count(),mounted_evidence_lines:await page.locator('.evidence-line').count()});
+  measurements.push({name,observed_peak_cards:peaks.cards,observed_peak_group_rows:peaks.groupRows,observed_peak_evidence_lines:peaks.evidence,observed_peak_dom_nodes:peaks.nodes,html_bytes:fs.statSync(file).size,load_ms:load,commits:expected.length,dom_nodes:await page.locator('*').count(),mounted_cards:await page.locator('#cards article').count(),mounted_evidence_lines:await page.locator('.evidence-line').count()});
   await page.setViewportSize({width:1200,height:900});
  }
  assert.deepEqual(requests,[]);assert.deepEqual(errors,[]);
- console.log(JSON.stringify({result:'passed',browser:await browser.version(),network:'offline context plus non-file route blocking; zero external requests',checks:['CLI JSON embedding parity','visible ordered statuses','exact duplicate group membership','candidate score and rank parity','evidence text and omission parity','filters retain warnings','keyboard selection, evidence and navigation','360px no horizontal overflow','hostile text inert'],measurements,limitations:['Chromium only','no screen-reader audit','browser load includes Playwright navigation overhead; warm local cache']},null,2));
+ console.log(JSON.stringify({result:'passed',browser:await browser.version(),network:'offline context plus non-file route blocking; zero external requests',checks:['CLI JSON embedding parity','visible ordered statuses','exact duplicate group membership','candidate score and rank parity','evidence text and omission parity','filters retain warnings','keyboard selection, evidence and navigation','360px no horizontal overflow','hostile text inert','group candidates, endpoints, ordered members, ambiguity and evidence match CLI JSON','all group exclusions inspectable; group filters retain notices','group evidence shares global 32-line bound'],measurements,limitations:['Chromium only','no screen-reader audit','browser load includes Playwright navigation overhead; warm local cache']},null,2));
  await browser.close();
 })().catch(e=>{console.error(e);process.exit(1);});

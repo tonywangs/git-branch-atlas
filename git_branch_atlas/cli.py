@@ -131,6 +131,10 @@ def parser() -> argparse.ArgumentParser:
                         help="patches/series: maximum report bytes (default: 2 MiB)")
     result.add_argument("--max-comparisons", type=int, default=10000, help="series: candidate pair limit (default: 10000)")
     result.add_argument("--threshold", type=int, default=5000, help="series: minimum score in basis points (default: 5000)")
+    result.add_argument("--groups", action="store_true", help="series: opt into schema 2 with singleton versus 2..4 commit endpoint candidates")
+    result.add_argument("--max-groups", type=int, help="--groups: total windows inspected (default: 600; maximum 6000)")
+    result.add_argument("--max-group-comparisons", type=int, help="--groups: additional comparison limit (default: 20000)")
+    result.add_argument("--max-group-candidates", type=int, help="--groups: exported candidate limit (default: 500; maximum 2000)")
     result.add_argument("--base", metavar="REV", help="revision used for branch ahead/behind counts")
     result.add_argument("--no-color", action="store_true", help="disable colored output")
     result.add_argument("--version", action="version", version="%(prog)s 0.2.0")
@@ -139,6 +143,10 @@ def parser() -> argparse.ArgumentParser:
 
 def main(argv: Sequence[str] | None = None) -> int:
     args = parser().parse_intermixed_args(argv)
+    if not args.groups and any(value is not None for value in (args.max_groups, args.max_group_comparisons, args.max_group_candidates)):
+        parser().error("group limits require --groups")
+    if args.groups and args.command != "series":
+        parser().error("--groups requires series")
     if args.html and (args.command != "series" or args.json):
         parser().error("--html requires series and cannot be combined with --json")
     if args.max_count < 1:
@@ -158,7 +166,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         if args.command == "series":
             report = series_compare(Path(args.repo).expanduser().absolute(), *args.revisions,
                                     args.max_count, args.max_diff_bytes, args.timeout,
-                                    args.max_comparisons, args.threshold)
+                                    args.max_comparisons, args.threshold, include_groups=args.groups,
+                                    max_groups=600 if args.max_groups is None else args.max_groups,
+                                    max_group_comparisons=20000 if args.max_group_comparisons is None else args.max_group_comparisons,
+                                    max_group_candidates=500 if args.max_group_candidates is None else args.max_group_candidates)
             print(format_series_html(report, args.max_output_bytes) if args.html else
                   format_series_report(report, args.json, args.max_output_bytes))
             return 0 if report["complete"] else 1

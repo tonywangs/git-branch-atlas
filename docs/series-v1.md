@@ -173,3 +173,5 @@ range-diff differences and measured workloads.
 The JSON schema and comparison algorithm are unchanged. See
 [HTML review](html-review.md) for controls, byte/DOM limits, confidentiality and
 reproducible browser checks. `--html` and `--json` are mutually exclusive.
+
+The opt-in `--groups` flag emits series schema 2 with the [group comparison extension](groups-v1.md). It preserves these individual results and default schema 1 behavior.

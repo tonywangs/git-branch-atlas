@@ -150,6 +150,35 @@ def main():
         embedded = re.search(r'<script id="report-data" type="application/json">(.*?)</script>', html, re.S)
         assert embedded and json.loads(embedded[1]) == series
         assert "default-src 'none'" in html and 'Inspect bounded evidence' in html
+        # Actual split and squash review through only the installed console.
+        repo = base / 'group-example'
+        repo.mkdir()
+        git('init','-b','main');git('config','user.name','Atlas Demo');git('config','user.email','demo@example.invalid')
+        git('commit','--allow-empty','-m','Root');git('branch','root')
+        git('checkout','-b','pieces')
+        (repo/'feature').write_text('alpha\n');git('add','feature');git('commit','-m','First piece')
+        first=git('rev-parse','HEAD')
+        (repo/'feature').write_text('alpha\nbeta\n');git('add','feature');git('commit','-m','Second piece')
+        second=git('rev-parse','HEAD')
+        git('checkout','-b','squashed','root');git('merge','--squash','pieces');git('commit','-m','Combined feature')
+        singleton=git('rev-parse','HEAD')
+        for left,right in [('pieces','squashed'),('squashed','pieces')]:
+            command=[atlas,'--repo',repo,'series','root',left,'root',right,'--groups']
+            result=json.loads(run([*command,'--json']))
+            assert result['complete'] and result['schema_version']==2
+            group=result['group_comparison'];assert len(group['candidates'])==1
+            candidate=group['candidates'][0]
+            assert candidate['single_oid']==singleton and candidate['normalized_patch_agreement']
+            assert group['groups'][0]['members']==[first,second]
+            assert group['groups'][0]['base_oid']==git('rev-parse','root')
+            assert group['groups'][0]['tip_oid']==second
+            assert candidate['score']==10000
+            assert all(not candidate['evidence'][k]['items'] for k in ['source_only','counterpart_only','paths_source_only','paths_counterpart_only'])
+            html=run([*command,'--html'])
+            embedded=re.search(r'<script id="report-data" type="application/json">(.*?)</script>',html,re.S)
+            assert json.loads(embedded[1])==result
+            assert 'Split and squash candidates' in html
+            assert 'normalized_patch_agreement=True' in run(command)
         print(json.dumps({'installed_version': run([atlas, '--version']),
                           'python': run([python, '--version']), 'git': git('--version'),
                           'checks': ['isolated installed import', 'console entry point', 'two branches',
@@ -157,7 +186,8 @@ def main():
                                      'comparison unique counts and merge base', 'legacy graph',
                                      'offline cherry-pick patch group JSON and terminal',
                                      'offline before/after rebase series: exact group and edited candidate, JSON and terminal',
-                                     'installed offline HTML embeds identical rebase JSON and bundled viewer'],
+                                     'installed offline HTML embeds identical rebase JSON and bundled viewer',
+                                     'actual git merge --squash: split and squash in both orientations, schema 2, exact endpoint evidence, terminal and HTML/JSON parity'],
                           'result': 'passed'}, indent=2))
 
 

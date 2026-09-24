@@ -96,13 +96,16 @@ def evidence(a, b):
 
 def series_compare(repo: Path, left_base: str, left_tip: str, right_base: str, right_tip: str,
                    max_count=30, max_bytes=32 * 1024 * 1024, seconds=30.0,
-                   max_comparisons=10000, threshold=5000):
+                   max_comparisons=10000, threshold=5000, *, include_groups=False,
+                   max_groups=600, max_group_comparisons=20000, max_group_candidates=500):
     if not 1 <= max_count <= 1000 or not 1 <= max_bytes <= 256 * 1024 * 1024:
         raise GitError('series limits require 1..1000 commits and 1..268435456 inspection bytes')
     if not math.isfinite(seconds) or not 0 < seconds <= 3600:
         raise GitError('series timeout must be finite, greater than 0, and at most 3600 seconds')
     if not 0 <= max_comparisons <= 100000 or not 1 <= threshold <= 10000:
         raise GitError('series requires 0..100000 comparisons and threshold 1..10000')
+    if not 0 <= max_groups <= 6000 or not 0 <= max_group_comparisons <= 100000 or not 0 <= max_group_candidates <= 2000:
+        raise GitError('group limits require 0..6000 groups, 0..100000 comparisons and 0..2000 candidates')
     budget = Budget(repo, seconds, max_bytes)
     budget.run(['rev-parse', '--git-dir'])
     graft = os.fsdecode(budget.run(['rev-parse', '--git-path', 'info/grafts']).rstrip(b'\n'))
@@ -233,6 +236,9 @@ def series_compare(repo: Path, left_base: str, left_tip: str, right_base: str, r
             item['candidates'].append(dict(oid=oid, score=value, rank=rank,
                                             evidence=evidence(feature_map[key], feature_map[other])))
     report['inspection_bytes_read'] = budget.bytes
+    if include_groups:
+        from .group_compare import compare_groups
+        compare_groups(report, budget, feature_map, max_groups, max_group_comparisons, max_group_candidates)
     return report
 
 
@@ -270,6 +276,18 @@ def format_series_report(report, as_json=False, max_output=2 * 1024 * 1024):
                         if sample['omitted_items']:
                             lines.append(f"          ... {sample['omitted_items']} distinct items omitted")
         lines.extend('Warning: ' + warning for warning in report['warnings'])
+        if 'group_comparison' in report:
+            g = report['group_comparison']
+            lines.extend(['Group search: ' + ('complete' if g['complete'] else 'INCOMPLETE'),
+                          f"Windows={g['structural_windows']} omitted={g['windows_omitted']}; comparisons={g['comparison_count']}/{g['comparisons_possible']}; candidates={g['candidate_count']} omitted={g['candidates_omitted']}"])
+            for group in g['groups']:
+                lines.append('  Group ' + group['id'] + ' ' + group['status'] + ' ' + group.get('reason', ''))
+                lines.append('    Members: ' + ', '.join(group['members']))
+                lines.append(f"    Endpoints: {group['base_oid']} ({group['base_kind']}) .. {group['tip_oid']}")
+            for candidate in g['candidates']:
+                lines.append(f"  {candidate['single_side']} {candidate['single_oid']} versus {candidate['group_id']}: score={candidate['score']}/10000 normalized_patch_agreement={candidate['normalized_patch_agreement']} ambiguous={candidate['ambiguous']}")
+                lines.append('    Evidence (source=single): ' + json.dumps(candidate['evidence'], ensure_ascii=True))
+            lines.extend('Group warning: ' + warning for warning in g['warnings'])
         output = '\n'.join(safe(line) for line in lines)
     if len((output + '\n').encode('utf-8')) > max_output:
         raise GitError('output byte limit; no report emitted (increase --max-output-bytes)')

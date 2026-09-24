@@ -1,4 +1,4 @@
-"""Self-contained, bounded HTML view of the unchanged series-v1 report."""
+"""Self-contained, bounded HTML view of series-v1 and opt-in series-v2 reports."""
 from __future__ import annotations
 
 import base64
@@ -13,8 +13,8 @@ STYLE = r'''
 header {border-bottom:3px solid #167361} h1 {font-size:2rem;margin:4px 0} h2 {font-size:1.2rem} h3 {font-size:1rem}
 p {margin:8px 0} .eyebrow {letter-spacing:.15em;font-size:.8rem;font-weight:700;color:#176653}
 .notice {background:#fff3ce;border-left:4px solid #846018;padding:12px;margin:12px 0;overflow-wrap:anywhere}
-.endpoints {display:grid;grid-template-columns:1fr 1fr;gap:16px} .endpoint, article, #detail {background:white;border:1px solid #bacbc4;border-radius:8px;padding:16px;min-width:0;overflow-wrap:anywhere}
-.toolbar {display:flex;flex-wrap:wrap;gap:12px;align-items:end;margin:20px 0} label {display:flex;flex-direction:column;gap:4px;font-size:.875rem;font-weight:600}
+.endpoints {display:grid;grid-template-columns:1fr 1fr;gap:16px} .endpoint, article, #detail, #group-detail {background:white;border:1px solid #bacbc4;border-radius:8px;padding:16px;min-width:0;overflow-wrap:anywhere}
+.toolbar {display:flex;flex-wrap:wrap;gap:12px;align-items:end;margin:20px 0} label {max-width:100%;min-width:0;display:flex;flex-direction:column;gap:4px;font-size:.875rem;font-weight:600}
 input,select,button {font:inherit;max-width:100%;padding:8px;border:1px solid #718a80;border-radius:4px;background:white;color:#172d38}
 button {cursor:pointer} button:hover {background:#e5f2ec} button:disabled {opacity:.5;cursor:default}
 :focus-visible {outline:3px solid #005cc5;outline-offset:3px} .layout {display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:start}
@@ -35,6 +35,20 @@ const $ = id => document.getElementById(id);
 function visible(value) {return String(value).replace(/[\u0000-\u001f\u007f-\u009f\u2028-\u202e\u2066-\u2069]/g,c=>'\\u'+c.charCodeAt(0).toString(16).padStart(4,'0'));}
 function el(tag,text,parent,cls) {const n=document.createElement(tag); if(text!==undefined)n.textContent=visible(text); if(cls)n.className=cls; if(parent)parent.append(n); return n;}
 function button(text,parent,action) {const b=el('button',text,parent);b.type='button';b.addEventListener('click',action);return b;}
+function evidencePanel(evidence,parent,label) {
+ const details=el('details',undefined,parent,'evidence-toggle');el('summary','Inspect bounded evidence',details);
+ details.addEventListener('toggle',()=>{
+  if(!details.open){const old=details.querySelector('.evidence');if(old)old.remove();return;}
+  for(const other of document.querySelectorAll('details.evidence-toggle'))if(other!==details){other.open=false;const old=other.querySelector('.evidence');if(old)old.remove();}
+  if(details.querySelector('.evidence'))return;
+  const body=el('div',undefined,details,'evidence');el('p',evidence.kind+' — '+label,body);
+  for(const category of ['source_only','counterpart_only','paths_source_only','paths_counterpart_only']) {
+   const sample=evidence[category];el('h3',category,body);
+   for(const item of sample.items)el('span',`${item.count} × ${item.text} [${item.bytes} bytes${item.truncated?'; TRUNCATED':''}]`,body,'evidence-line');
+   el('p',`${sample.items.length} shown; ${sample.omitted_items} distinct keys omitted`,body);
+  }
+ });
+}
 const entries=[];
 for(const side of ['left','right']) report[side].commits.forEach((commit,i)=>entries.push({side,commit,order:i+1,key:side+':'+commit.oid}));
 const byKey=new Map(entries.map(e=>[e.key,e]));
@@ -102,19 +116,7 @@ function select(key,focus=false) {
   el('h3',`Rank ${candidate.rank} · score ${candidate.score}/${report.score_scale} (not probability)`,row);
   el('p',candidate.oid,row,'mono');
   button('Go to counterpart',row,()=>jump((e.side==='left'?'right':'left')+':'+candidate.oid));
-  const details=el('details',undefined,row);el('summary','Inspect bounded evidence',details);
-  details.addEventListener('toggle',()=>{
-   if(!details.open){const old=details.querySelector('.evidence');if(old)old.remove();return;}
-   for(const other of box.querySelectorAll('details'))if(other!==details){other.open=false;const old=other.querySelector('.evidence');if(old)old.remove();}
-   if(details.querySelector('.evidence'))return;
-   const body=el('div',undefined,details,'evidence');
-   el('p',candidate.evidence.kind+' — source is selected commit',body);
-   for(const category of ['source_only','counterpart_only','paths_source_only','paths_counterpart_only']) {
-    const sample=candidate.evidence[category];el('h3',category,body);
-    for(const item of sample.items)el('span',`${item.count} × ${item.text} [${item.bytes} bytes${item.truncated?'; TRUNCATED':''}]`,body,'evidence-line');
-    el('p',`${sample.items.length} shown; ${sample.omitted_items} distinct keys omitted`,body);
-   }
-  });
+  evidencePanel(candidate.evidence,row,'source is selected commit');
  }
  $('selection-info').textContent=`Selected ${e.side} commit ${e.order}. Navigation follows full series order and clears filters.`;
  if(focus){box.focus();box.scrollIntoView({block:'nearest'});}
@@ -126,6 +128,60 @@ $('next-page').addEventListener('click',()=>{page++;renderCards();$('list-headin
 function step(delta) {if(!entries.length)return;let i=entries.findIndex(e=>e.key===selected);jump(entries[Math.max(0,Math.min(entries.length-1,i+delta))].key);}
 $('prev-commit').addEventListener('click',()=>step(-1));$('next-commit').addEventListener('click',()=>step(1));
 apply();if(entries.length)select(entries[0].key);
+// Group review is separate from the unchanged individual results. Twenty rows
+// and one inspected group are mounted; evidence remains globally one-at-a-time.
+const gc=report.group_comparison;
+if(gc) {
+ $('group-review').hidden=false;
+ const groupById=new Map(gc.groups.map(g=>[g.id,g]));
+ const singleById=new Map(gc.singles.map(s=>[s.side+':'+s.oid,s]));
+ const groupBounds=$('group-bounds');
+ groupBounds.textContent=visible(`${gc.complete?'Complete group search':'INCOMPLETE group search'} · ${gc.structural_windows} windows in sampled scope; ${gc.windows_omitted} windows omitted. ${gc.comparison_count}/${gc.comparisons_possible} eligible comparisons; ${gc.comparisons_unsearched} unsearched. ${gc.candidate_count} observed candidates; ${gc.candidates_omitted} omitted. Counts outside incomplete commit samples are unknown. Overlaps and competing candidates are retained, never assigned. Even one candidate is not proof. ${gc.warnings.join('; ')}`);
+ el('pre',JSON.stringify({scope:gc.scope,limits:gc.limits,sampled_scope:gc.sampled_scope,excluded_members:gc.excluded_members,inspection_bytes_read:gc.inspection_bytes_read},null,2),$('group-metadata'));
+ let gp=0,grows=[];
+ function endpoint(parent,side,base,kind,tip,members) {
+  el('p',`${side} endpoints: ${base} (${kind}) .. ${tip}`,parent,'mono');
+  const list=el('ol',undefined,parent);
+  for(const oid of members){const row=el('li',undefined,list);button(side+' '+oid,row,()=>jump(side+':'+oid));}
+ }
+ function inspectGroup(group,candidate,index) {
+  const box=$('group-detail');box.replaceChildren();box.dataset.groupId=group.id;
+  box.dataset.candidateIndex=candidate?String(index):'';
+  el('h3',candidate?'Singleton versus group candidate':'Inspected group',box);
+  el('p',group.id,box,'mono');el('p',group.status+(group.reason?' · '+group.reason:''),box);
+  el('p',`${group.candidate_count} observed counterpart candidates · ${group.overlapping_candidate_groups?'overlaps other candidate groups':'no observed candidate group overlap'}`,box);
+  if(candidate) {
+   const single=singleById.get(candidate.single_side+':'+candidate.single_oid);
+   el('p',`${candidate.ambiguous?'Ambiguous':'Uncertain candidate'} · score ${candidate.score}/${report.score_scale} (not probability) · normalized patch agreement: ${candidate.normalized_patch_agreement}`,box,'notice');
+   el('p',`${single.candidate_count} observed groups for this singleton. No historical or behavioral equivalence is established.`,box);
+   el('h3','Single commit (evidence source)',box);endpoint(box,single.side,single.base_oid,single.base_kind,single.tip_oid,[single.oid]);
+  }
+  el('h3','Ordered group members (evidence counterpart)',box);endpoint(box,group.side,group.base_oid,group.base_kind,group.tip_oid,group.members);
+  if(candidate)evidencePanel(candidate.evidence,box,'source is singleton; counterpart is endpoint aggregate');
+  box.focus();
+ }
+ function groupRows() {
+  const candidates=$('group-view').value==='candidates', query=$('group-search').value.toLowerCase();
+  grows=(candidates?gc.candidates.map((c,i)=>({g:groupById.get(c.group_id),c,i})):gc.groups.map(g=>({g})) ).filter(row=>visible(JSON.stringify(row)).toLowerCase().includes(query));
+  gp=0;renderGroupRows();
+ }
+ function renderGroupRows() {
+  const box=$('group-rows');box.replaceChildren();
+  for(const row of grows.slice(gp*20,gp*20+20)) {
+   const item=el('div',undefined,box,'group-row');
+   item.dataset.groupId=row.g.id;if(row.c)item.dataset.candidateIndex=String(row.i);
+   const label=row.c?`${row.c.single_side} ${row.c.single_oid.slice(0,12)} versus ${row.g.side} group (${row.g.members.length} commits) · ${row.c.score}/10000 · ${row.c.normalized_patch_agreement?'normalized patch agreement':'edited candidate'}${row.c.ambiguous?' · ambiguous':''}`:`${row.g.side} ${row.g.members[0].slice(0,12)}..${row.g.tip_oid.slice(0,12)} · ${row.g.members.length} commits · ${row.g.status}`;
+   button(label,item,()=>inspectGroup(row.g,row.c,row.i));
+  }
+  $('group-page-info').textContent=grows.length?`${gp*20+1}–${Math.min(gp*20+20,grows.length)} of ${grows.length} entries`:'No entries match';
+  $('group-prev').disabled=gp===0;$('group-next').disabled=(gp+1)*20>=grows.length;
+ }
+ $('group-view').addEventListener('change',groupRows);$('group-search').addEventListener('input',groupRows);
+ $('group-prev').addEventListener('click',()=>{gp--;renderGroupRows();$('group-list-heading').focus();});
+ $('group-next').addEventListener('click',()=>{gp++;renderGroupRows();$('group-list-heading').focus();});
+ groupRows();
+}
+
 '''
 
 TEMPLATE = '''<!doctype html>
@@ -143,8 +199,13 @@ TEMPLATE = '''<!doctype html>
 <label>Exact group<select id="group"><option value="">All groups and ungrouped</option></select></label></div>
 <div class="layout"><section aria-labelledby="list-heading"><h2 id="list-heading" tabindex="-1">Ordered commits</h2>
 <div class="toolbar"><button id="prev-page" type="button">Previous page</button><span id="page-info" role="status"></span><button id="next-page" type="button">Next page</button></div><div id="cards"></div></section>
-<section aria-label="Commit inspection"><div class="toolbar"><button id="prev-commit" type="button">Previous commit</button><button id="next-commit" type="button">Next commit</button></div><p id="selection-info" role="status"></p><div id="detail" tabindex="-1"><p>No commits to inspect.</p></div></section></div></main>
-<footer>Private by content: this file embeds repository identifiers, paths and normalized patch evidence. Review before sharing. No server or network required. Messages are not collected by series-v1. Search covers embedded commit fields; each page contains at most 100 commit cards.</footer>
+<section aria-label="Commit inspection"><div class="toolbar"><button id="prev-commit" type="button">Previous commit</button><button id="next-commit" type="button">Next commit</button></div><p id="selection-info" role="status"></p><div id="detail" tabindex="-1"><p>No commits to inspect.</p></div></section></div>
+<section id="group-review" hidden aria-labelledby="group-heading"><h2 id="group-heading">Split and squash candidates</h2>
+<p id="group-bounds" class="notice"></p><details id="group-metadata"><summary>Group scope, exclusions and limits</summary></details>
+<div class="toolbar"><label>Group view<select id="group-view"><option value="candidates">Observed candidates</option><option value="groups">All inspected groups, including exclusions</option></select></label><label>Search group data<input id="group-search" type="search" placeholder="OID, status or evidence"></label></div>
+<div class="layout"><section><h3 id="group-list-heading" tabindex="-1">Group entries</h3><div class="toolbar"><button id="group-prev" type="button">Previous group page</button><span id="group-page-info" role="status"></span><button id="group-next" type="button">Next group page</button></div><div id="group-rows"></div></section>
+<div id="group-detail" tabindex="-1"><p>Select an entry to inspect endpoints, ordered members and evidence.</p></div></div></section></main>
+<footer>Private by content: this file embeds repository identifiers, paths and normalized patch evidence. Review before sharing. No server or network required. Commit messages are not collected. Search covers embedded commit fields; each page contains at most 100 commit cards and 20 group entries.</footer>
 <script id="report-data" type="application/json">@DATA@</script><script>@SCRIPT@</script></body></html>'''
 
 

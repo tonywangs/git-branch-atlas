@@ -306,3 +306,21 @@ Open the self-contained file directly in your browser. Filter ordered commits,
 navigate duplicate patch-ID groups, and expand ranked candidate evidence. Incomplete
 searches and ambiguity remain explicit. The file embeds repository content; filters
 are not redaction. See [HTML review setup, controls, bounds and validation](docs/html-review.md).
+
+## Review possible splits and squashes
+
+Add `--groups` to a series comparison to compare a single commit with every
+eligible contiguous group of two to four commits in the searched ranges:
+
+```sh
+git-branch-atlas series old-base old-tip new-base new-tip --groups --json
+git-branch-atlas series old-base old-tip new-base new-tip --groups --html > review.html
+```
+
+This opts into series schema 2; the default schema and individual results stay
+unchanged. Group changes come from endpoint trees, with explicit exclusions,
+resource limits and omission counts. The offline viewer shows ordered members,
+endpoints, bounded evidence and competing/overlapping candidates. Normalized patch
+agreement is not behavioral equivalence or proof of a historical split/squash.
+See [schema, limits and examples](docs/groups-v1.md) and
+[reproducible validation and measurements](docs/groups-validation.md).

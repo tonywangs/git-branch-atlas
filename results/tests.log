@@ -3,6 +3,13 @@ test_empty_repository (test_cli.AtlasIntegrationTests.test_empty_repository) ...
 test_graph_branches_tags_unicode_and_counts (test_cli.AtlasIntegrationTests.test_graph_branches_tags_unicode_and_counts) ... ok
 test_merge_topology_is_rendered (test_cli.AtlasIntegrationTests.test_merge_topology_is_rendered) ... ok
 test_non_repository_and_invalid_options (test_cli.AtlasIntegrationTests.test_non_repository_and_invalid_options) ... ok
+test_200_seeded_endpoint_and_exhaustive_candidate_oracles (test_groups.GroupTests.test_200_seeded_endpoint_and_exhaustive_candidate_oracles) ... ok
+test_bounds_exhaustion_shallow_and_preservation (test_groups.GroupTests.test_bounds_exhaustion_shallow_and_preservation) ... ok
+test_cli_html_injection_evidence_bounds_and_shared_budget (test_groups.GroupTests.test_cli_html_injection_evidence_bounds_and_shared_budget) ... ok
+test_context_perfect_score_not_agreement_and_multiple_singletons (test_groups.GroupTests.test_context_perfect_score_not_agreement_and_multiple_singletons) ... ok
+test_dirty_repository_hostile_config_missing_intermediate_blob (test_groups.GroupTests.test_dirty_repository_hostile_config_missing_intermediate_blob) ... ok
+test_known_split_squash_edited_overlaps_duplicates_and_reverts (test_groups.GroupTests.test_known_split_squash_edited_overlaps_duplicates_and_reverts) ... ok
+test_unsupported_intermediate_histories_merges_roots_and_modes (test_groups.GroupTests.test_unsupported_intermediate_histories_merges_roots_and_modes) ... ok
 test_cli_parity_limits_and_repository_preservation (test_html.HtmlTests.test_cli_parity_limits_and_repository_preservation) ... ok
 test_lossless_embedding_and_hostile_data (test_html.HtmlTests.test_lossless_embedding_and_hostile_data) ... ok
 test_100_seeded_histories_with_independent_groups_plumbing_and_cherry (test_patches.PatchTests.test_100_seeded_histories_with_independent_groups_plumbing_and_cherry) ... ok
@@ -40,6 +47,6 @@ test_ties_top_five_threshold_evidence_and_limits (test_series.SeriesTests.test_t
 test_unusual_paths_hostile_config_terminal_escaping_and_unchanged_repository (test_series.SeriesTests.test_unusual_paths_hostile_config_terminal_escaping_and_unchanged_repository) ... ok
 
 ----------------------------------------------------------------------
-Ran 40 tests in 284.551s
+Ran 47 tests in 678.522s
 
 OK

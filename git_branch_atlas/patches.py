@@ -97,10 +97,11 @@ class Budget:
                 return bytes(streams[0])
 
 
-def inspect_patch(budget, oid, max_bytes):
+def inspect_patch(budget, oid, max_bytes, *, base=None):
     """Return exclusion or stable ID, canonical diff and raw changed paths."""
+    endpoints = [oid] if base is None else [base, oid]
     raw = budget.run(['diff-tree', '--root', '--no-commit-id', '-r', '--raw', '-z',
-                      '--no-renames', '--no-abbrev', '--ignore-submodules=none', oid, '--'],
+                      '--no-renames', '--no-abbrev', '--ignore-submodules=none', *endpoints, '--'],
                      inspection=True, cap=max_bytes)
     if not raw:
         return 'empty', None, None, None
@@ -125,7 +126,7 @@ def inspect_patch(budget, oid, max_bytes):
             break
     if reason:
         return reason, None, None, None
-    diff = budget.run(['diff-tree', '--root', '--no-commit-id', '-r', '-p', *DIFF, oid, '--'],
+    diff = budget.run(['diff-tree', '--root', '--no-commit-id', '-r', '-p', *DIFF, *endpoints, '--'],
                       inspection=True, cap=max_bytes)
     value = budget.run(['patch-id', '--stable'], data=diff).split()
     if len(value) != 2:

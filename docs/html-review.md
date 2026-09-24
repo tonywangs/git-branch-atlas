@@ -129,7 +129,7 @@ large-fixture commits, sampling two large-fixture candidate inspections.
 Validated browser: Chromium on Linux. Firefox, Safari, Windows/macOS file handling,
 screen readers, forced colors and a formal accessibility audit remain untested.
 The existing heuristic/exclusion and processing-deadline limitations described in
-[series-v1](series-v1.md) still apply. No split/squash inference is added.
+[series-v1](series-v1.md) still apply. The default view has no split/squash inference. The opt-in `--groups` extension is documented in [group review](groups-v1.md).
 
 ## Recorded measurements
 
