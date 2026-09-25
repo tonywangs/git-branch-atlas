@@ -1,0 +1,90 @@
+{
+  "result": "passed",
+  "adopted": false,
+  "production_behavior": "unchanged",
+  "measurements": 396,
+  "stress_histories": 200,
+  "limited_histories": 200,
+  "independent_endpoint_checks": 965,
+  "full_and_limited_reports_equal_across_three_implementations": true,
+  "repository_contents_index_refs_configuration_unchanged": true,
+  "unit_tests": {
+    "count": 66,
+    "seconds": 600.491,
+    "exit_code": 0,
+    "output_sha256": "1adf2ebfd77b4b8f7583ca4d6510fcd802d940154f12b90baac297b165d267ee"
+  },
+  "applications": {
+    "implementations": 2,
+    "isolated_installations": 2,
+    "offline_browser_fixtures": 28
+  },
+  "failed_performance_gates": [
+    {
+      "workload": "above-cap/packed",
+      "gate": "runtime"
+    },
+    {
+      "workload": "batch-overflow/packed",
+      "gate": "runtime"
+    }
+  ],
+  "observed_runtime_regressions": {
+    "batch-overflow/loose": 1.016305676778149,
+    "batch-overflow/packed": 1.0592112677994456,
+    "mixed/packed": 1.0015296620507002,
+    "repeated/loose": 1.0118912533560525,
+    "repeated/packed": 1.0196917113217112,
+    "singleton-tail/loose": 1.0487685966424265,
+    "singleton-tail/packed": 1.043101708419006
+  },
+  "commands": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/verify_singleton_bypass.py",
+        "--seeds",
+        "200",
+        "--stress",
+        "--output",
+        "results/singleton-bypass-parity.json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/verify_singleton_apps.py",
+        "--output-dir",
+        "/tmp/atlas-singleton-apps"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/measure_singleton_bypass.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_singleton_bypass.py"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

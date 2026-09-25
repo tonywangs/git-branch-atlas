@@ -1,0 +1,16 @@
+{
+  "catalog_tree": "469afb18741790e6382af7f713e76ca025eafe2a",
+  "protocol_sha256": "288cd355d7185f2fe7fd79242279c9d499ddeabcad960a1f7ce08d1aca97fd79",
+  "files": {
+    "__init__.py": "122a03a85a75d8cd2a8dde9c9eea25eb9c11d46c61b88784bd7d730af09f67ae",
+    "__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "batching.py": "d7d397db3e9b385384c56386550ce9f8132056d357e9e51d45c7051877a0de82",
+    "cli.py": "c8799dd30299067580a7d612e510fc3bbd738349a6946351f9fe1f41237bbea2",
+    "git.py": "3d904528589a171fe90e845057b9a7d69cf134d4e40e67ebdb7919940d85c0ef",
+    "group_compare.py": "856b58c1ed771c4fc8dc9f2b853462a646e3b4b338e8015eb2972112b0046ea7",
+    "html_report.py": "50905f4a5468235b8bca876711627e6ef6192dc5fa53282a8ada3bbe176d6e75",
+    "patches.py": "d34c130ceb0af4da2e0849173c3df882708c6557700f7d27ed94f2ff8d0d37b4",
+    "reports.py": "57282b81c2ac24c973267d49bd38e72d3a29c229d904a07ed88be65f6cbae3bb",
+    "series.py": "57ae0da1ff9df7ed1f790c1cb5b10c7045cc5a40f84aa55e995a55329095eb34"
+  }
+}

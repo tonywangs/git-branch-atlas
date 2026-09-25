@@ -7,6 +7,8 @@ Python 3.12.3 and Git 2.43.0 on Linux. It does not contact remotes.
 
 The [large-patch and packed-object experiment](docs/batching-limits.md) documents
 batching limits, reproducible workloads, and the measured tradeoffs.
+The [singleton-bypass experiment](docs/singleton-bypass.md) preserves a candidate
+that failed its frozen performance gates; production batching remains unchanged.
 
 ## Install and use
 

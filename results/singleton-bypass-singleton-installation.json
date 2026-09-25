@@ -1,0 +1,20 @@
+{
+  "installed_version": "git-branch-atlas 0.2.0",
+  "python": "Python 3.12.3",
+  "git": "git version 2.43.0",
+  "checks": [
+    "isolated installed import",
+    "console entry point",
+    "two branches",
+    "two worktrees",
+    "locked worktree",
+    "upstream +1/-1",
+    "comparison unique counts and merge base",
+    "legacy graph",
+    "offline cherry-pick patch group JSON and terminal",
+    "offline before/after rebase series: exact group and edited candidate, JSON and terminal",
+    "installed offline HTML embeds identical rebase JSON and bundled viewer",
+    "actual git merge --squash: split and squash in both orientations, schema 2, exact endpoint evidence, terminal and HTML/JSON parity"
+  ],
+  "result": "passed"
+}
